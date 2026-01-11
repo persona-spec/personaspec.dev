@@ -1,0 +1,309 @@
+/* PersonaSpec Home Page Styles */
+
+/* ========================================
+   Hero Section
+   ======================================== */
+
+.hero {
+  position: relative;
+  padding: calc(var(--space-24) + 60px) 0 var(--space-16);
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Aurora Background Effect */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%,
+      rgba(var(--accent-primary-rgb), 0.25), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 100% 50%,
+      rgba(var(--accent-secondary-rgb), 0.15), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 0% 80%,
+      rgba(var(--accent-success-rgb), 0.1), transparent 50%);
+  animation: aurora 20s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes aurora {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1.05) rotate(2deg);
+  }
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero__eyebrow {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-4);
+}
+
+.hero__title {
+  font-size: var(--text-5xl);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: var(--space-6);
+}
+
+.hero__subtitle {
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+  line-height: 1.6;
+}
+
+.hero__cta {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: calc(var(--space-16) + 60px) 0 var(--space-12);
+  }
+
+  .hero__title {
+    font-size: var(--text-4xl);
+  }
+
+  .hero__subtitle {
+    font-size: var(--text-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: var(--text-3xl);
+  }
+
+  .hero__cta {
+    flex-direction: column;
+  }
+}
+
+/* ========================================
+   Problem Section
+   ======================================== */
+
+.problem {
+  background: var(--bg-surface);
+}
+
+.problem__tagline {
+  text-align: center;
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  margin-top: var(--space-8);
+  color: var(--text-secondary);
+}
+
+.problem__tagline strong {
+  color: var(--accent-error);
+}
+
+/* ========================================
+   How It Works Section
+   ======================================== */
+
+.how-it-works__steps {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   Pillars Section
+   ======================================== */
+
+.pillars__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.pillar-card {
+  text-align: center;
+}
+
+.pillar-card__icon {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-5);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.15) 0%, rgba(var(--accent-secondary-rgb), 0.1) 100%);
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.2);
+}
+
+.pillar-card__icon i {
+  font-size: 1.5rem;
+  color: var(--accent-primary);
+}
+
+@media (max-width: 900px) {
+  .pillars__grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+
+/* ========================================
+   Personas Section
+   ======================================== */
+
+.personas {
+  background: var(--bg-surface);
+}
+
+.personas__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  max-width: 900px;
+  margin: 0 auto var(--space-8);
+}
+
+.personas__link {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .personas__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   Observations Section
+   ======================================== */
+
+.observations__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   Code Preview Section
+   ======================================== */
+
+.code-preview {
+  background: var(--bg-surface);
+}
+
+.code-preview__block {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   CTA Section
+   ======================================== */
+
+.cta-section {
+  position: relative;
+  text-align: center;
+  background: var(--bg-elevated);
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent-primary) 50%,
+    transparent 100%
+  );
+  box-shadow: 0 0 20px rgba(var(--accent-primary-rgb), 0.5);
+}
+
+.cta-section__title {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-6);
+}
+
+.cta-section__actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-8);
+}
+
+.cta-section__secondary {
+  display: flex;
+  gap: var(--space-6);
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.cta-section__secondary a {
+  color: var(--text-secondary);
+}
+
+.cta-section__secondary a:hover {
+  color: var(--accent-primary);
+}
+
+/* ========================================
+   Dotted Background Utility
+   ======================================== */
+
+.dotted-bg {
+  position: relative;
+}
+
+.dotted-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    var(--border-subtle) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.dotted-bg > * {
+  position: relative;
+  z-index: 1;
+}

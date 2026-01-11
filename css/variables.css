@@ -1,0 +1,83 @@
+/* PersonaSpec Design Tokens */
+
+:root {
+  /* Colors - Backgrounds */
+  --bg-base: #0D0F14;
+  --bg-surface: #161922;
+  --bg-elevated: #1E222D;
+  --bg-hover: #252A38;
+
+  /* Colors - Borders */
+  --border-subtle: #2A2F3C;
+  --border-default: #3D4455;
+
+  /* Colors - Text */
+  --text-primary: #F0F2F5;
+  --text-secondary: #9BA3B5;
+  --text-muted: #5C6478;
+
+  /* Colors - Accents */
+  --accent-primary: #7C5CFF;
+  --accent-primary-hover: #9B7FFF;
+  --accent-primary-rgb: 124, 92, 255;
+  --accent-secondary: #FF7C5C;
+  --accent-secondary-rgb: 255, 124, 92;
+  --accent-success: #5CFFB4;
+  --accent-success-rgb: 92, 255, 180;
+  --accent-warning: #FFC75C;
+  --accent-warning-rgb: 255, 199, 92;
+  --accent-error: #FF5C7C;
+  --accent-error-rgb: 255, 92, 124;
+
+  /* Typography - Fonts */
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+
+  /* Typography - Sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.5rem;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px rgba(var(--accent-primary-rgb), 0.3);
+  --shadow-glow-hover: 0 0 30px rgba(var(--accent-primary-rgb), 0.5);
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  /* Layout */
+  --container-max: 1140px;
+  --container-narrow: 720px;
+}
