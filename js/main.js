@@ -236,14 +236,15 @@
 
   if (personaTabs.length > 0 && personaSections.length > 0) {
     personaTabs.forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        var personaId = this.getAttribute('data-persona');
+      tab.addEventListener('click', function(event) {
+        var clickedTab = event.currentTarget;
+        var personaId = clickedTab.getAttribute('data-persona');
 
         // Update tab states
         personaTabs.forEach(function(t) {
           t.classList.remove('is-active');
         });
-        this.classList.add('is-active');
+        clickedTab.classList.add('is-active');
 
         // Update section visibility
         personaSections.forEach(function(section) {
