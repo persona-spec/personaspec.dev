@@ -145,6 +145,18 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
+  align-items: stretch;
+}
+
+/* Ensure cards stretch to fill grid cell height */
+.pillars__grid .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pillars__grid .card__description {
+  flex-grow: 1;
 }
 
 .pillar-card {

@@ -159,4 +159,72 @@
     observer.observe(section);
   });
 
+  // ========================================
+  // Methodology Sidebar Active State
+  // ========================================
+
+  const docsSidebar = document.querySelector('.docs-sidebar');
+
+  if (docsSidebar) {
+    const sidebarLinks = docsSidebar.querySelectorAll('.docs-sidebar__link');
+    const docsSections = document.querySelectorAll('.docs-section[id]');
+
+    if (sidebarLinks.length > 0 && docsSections.length > 0) {
+      // Create intersection observer for sections
+      const sectionObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            // Get the section ID
+            const sectionId = entry.target.getAttribute('id');
+
+            // Update sidebar links
+            sidebarLinks.forEach(function(link) {
+              const href = link.getAttribute('href');
+              if (href === '#' + sectionId) {
+                link.classList.add('is-active');
+              } else {
+                link.classList.remove('is-active');
+              }
+            });
+          }
+        });
+      }, {
+        rootMargin: '-100px 0px -50% 0px',
+        threshold: 0
+      });
+
+      // Observe each documentation section
+      docsSections.forEach(function(section) {
+        sectionObserver.observe(section);
+      });
+
+      // Set initial active state based on current scroll position
+      function setInitialActiveState() {
+        var activeSet = false;
+        docsSections.forEach(function(section) {
+          var rect = section.getBoundingClientRect();
+          if (!activeSet && rect.top <= 150 && rect.bottom > 100) {
+            var sectionId = section.getAttribute('id');
+            sidebarLinks.forEach(function(link) {
+              var href = link.getAttribute('href');
+              if (href === '#' + sectionId) {
+                link.classList.add('is-active');
+              } else {
+                link.classList.remove('is-active');
+              }
+            });
+            activeSet = true;
+          }
+        });
+
+        // If no section is active and we're at the top, activate the first one
+        if (!activeSet && window.scrollY < 200) {
+          sidebarLinks[0].classList.add('is-active');
+        }
+      }
+
+      setInitialActiveState();
+    }
+  }
+
 })();

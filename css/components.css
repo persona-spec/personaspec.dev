@@ -474,11 +474,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-6);
+  align-items: stretch;
 }
 
 .comparison-col {
   padding: var(--space-6);
   border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
 }
 
 .comparison-col--old {
@@ -513,6 +516,7 @@
   list-style: none;
   padding: 0;
   margin-bottom: var(--space-4);
+  flex-grow: 1;
 }
 
 .comparison-col__list li {
