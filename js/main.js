@@ -227,4 +227,51 @@
     }
   }
 
+  // ========================================
+  // Persona Tabs (Example Page)
+  // ========================================
+
+  const personaTabs = document.querySelectorAll('.persona-tab');
+  const personaSections = document.querySelectorAll('.persona-section');
+
+  if (personaTabs.length > 0 && personaSections.length > 0) {
+    personaTabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var personaId = this.getAttribute('data-persona');
+
+        // Update tab states
+        personaTabs.forEach(function(t) {
+          t.classList.remove('is-active');
+        });
+        this.classList.add('is-active');
+
+        // Update section visibility
+        personaSections.forEach(function(section) {
+          section.classList.remove('is-active');
+        });
+
+        var targetSection = document.getElementById('persona-' + personaId);
+        if (targetSection) {
+          targetSection.classList.add('is-active');
+        }
+      });
+    });
+  }
+
+  // ========================================
+  // JSON Output Toggle (Example Page)
+  // ========================================
+
+  const jsonOutput = document.getElementById('json-output');
+
+  if (jsonOutput) {
+    var toggle = jsonOutput.querySelector('.json-output__toggle');
+
+    if (toggle) {
+      toggle.addEventListener('click', function() {
+        jsonOutput.classList.toggle('is-open');
+      });
+    }
+  }
+
 })();
