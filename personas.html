@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Example personas for PersonaSpec - First-Time Visitor, Power User, Accessibility Auditor, Casual Browser, UI/UX Designer, and Journalist.">
+
+  <title>Personas - PersonaSpec</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/personas.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo gradient-text">PersonaSpec</a>
+
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav__toggle-icon"></span>
+      </button>
+
+      <ul class="nav__links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="methodology.html">Methodology</a></li>
+        <li><a href="personas.html" class="is-active">Personas</a></li>
+        <li><a href="getting-started.html">Get Started</a></li>
+      </ul>
+
+      <a href="https://github.com/persona-spec/personaspec.dev" class="button button-secondary nav__cta">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-header__title">Example <span class="gradient-text">Personas</span></h1>
+      <p class="page-header__subtitle">
+        Each persona catches different issues in your app. Use these as starting points for your own tests.
+      </p>
+    </div>
+  </header>
+
+  <!-- Quick Nav -->
+  <section class="persona-nav">
+    <div class="container">
+      <div class="persona-nav__grid">
+        <a href="#visitor" class="persona-nav__item">
+          <div class="persona-nav__avatar persona-nav__avatar--visitor">FV</div>
+          <div class="persona-nav__info">
+            <p class="persona-nav__name">First-Time Visitor</p>
+            <p class="persona-nav__role">New User</p>
+          </div>
+        </a>
+        <a href="#researcher" class="persona-nav__item">
+          <div class="persona-nav__avatar persona-nav__avatar--researcher">PR</div>
+          <div class="persona-nav__info">
+            <p class="persona-nav__name">Power User</p>
+            <p class="persona-nav__role">Researcher</p>
+          </div>
+        </a>
+        <a href="#auditor" class="persona-nav__item">
+          <div class="persona-nav__avatar persona-nav__avatar--auditor">AA</div>
+          <div class="persona-nav__info">
+            <p class="persona-nav__name">A11y Auditor</p>
+            <p class="persona-nav__role">Accessibility Tester</p>
+          </div>
+        </a>
+        <a href="#browser" class="persona-nav__item">
+          <div class="persona-nav__avatar persona-nav__avatar--browser">CB</div>
+          <div class="persona-nav__info">
+            <p class="persona-nav__name">Casual Browser</p>
+            <p class="persona-nav__role">Moderate Engagement</p>
+          </div>
+        </a>
+        <a href="#designer" class="persona-nav__item">
+          <div class="persona-nav__avatar persona-nav__avatar--designer">UX</div>
+          <div class="persona-nav__info">
+            <p class="persona-nav__name">UI/UX Designer</p>
+            <p class="persona-nav__role">Design Reviewer</p>
+          </div>
+        </a>
+        <a href="#journalist" class="persona-nav__item">
+          <div class="persona-nav__avatar persona-nav__avatar--journalist">JF</div>
+          <div class="persona-nav__info">
+            <p class="persona-nav__name">Journalist</p>
+            <p class="persona-nav__role">Fact-Checker</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persona 1: First-Time Visitor -->
+  <section class="persona-detail" id="visitor">
+    <div class="persona-detail__inner">
+      <div class="persona-detail__header">
+        <div class="persona-detail__avatar persona-detail__avatar--visitor">FV</div>
+        <div class="persona-detail__title-group">
+          <h2 class="persona-detail__name">First-Time Visitor</h2>
+          <p class="persona-detail__role">New User</p>
+          <p class="persona-detail__quote">"Is the site's purpose clear within 10 seconds?"</p>
+        </div>
+      </div>
+
+      <div class="persona-detail__grid">
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-user"></i> Background</p>
+          <p>New to the site with no prior context. May have arrived from a search engine, social media link, or word-of-mouth recommendation. Has limited patience for confusing experiences.</p>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <ul>
+            <li>Understand the site's purpose quickly</li>
+            <li>Find help or about information</li>
+            <li>Orient themselves in the navigation</li>
+            <li>Decide if the site is worth their time</li>
+          </ul>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <ul>
+            <li>Scans headlines and hero sections first</li>
+            <li>Looks for familiar navigation patterns</li>
+            <li>Clicks on things that look clickable</li>
+            <li>Leaves quickly if confused</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="persona-detail__bottom">
+        <div class="persona-tasks">
+          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
+          <ul class="persona-tasks__list">
+            <li>"Understand what this site does within 10 seconds"</li>
+            <li>"Find the About or Help page"</li>
+            <li>"Browse without a specific goal"</li>
+            <li>"Locate the main call-to-action"</li>
+          </ul>
+        </div>
+        <div class="persona-catches">
+          <p class="persona-catches__title"><i class="fa-solid fa-bug"></i> Issues This Persona Catches</p>
+          <ul class="persona-catches__list">
+            <li><i class="fa-solid fa-check"></i> Confusing onboarding flows</li>
+            <li><i class="fa-solid fa-check"></i> Unclear value propositions</li>
+            <li><i class="fa-solid fa-check"></i> Missing help documentation</li>
+            <li><i class="fa-solid fa-check"></i> Poor information hierarchy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persona 2: Power User / Researcher -->
+  <section class="persona-detail" id="researcher">
+    <div class="persona-detail__inner">
+      <div class="persona-detail__header">
+        <div class="persona-detail__avatar persona-detail__avatar--researcher">PR</div>
+        <div class="persona-detail__title-group">
+          <h2 class="persona-detail__name">Power User / Researcher</h2>
+          <p class="persona-detail__role">Researcher</p>
+          <p class="persona-detail__quote">"I need exact data, fast."</p>
+        </div>
+      </div>
+
+      <div class="persona-detail__grid">
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-user"></i> Background</p>
+          <p>Experienced user who knows exactly what they want. Comfortable with advanced features, filters, and keyboard shortcuts. Values efficiency over hand-holding.</p>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <ul>
+            <li>Execute complex searches quickly</li>
+            <li>Find specific records or data points</li>
+            <li>Filter and sort large datasets</li>
+            <li>Export data for external analysis</li>
+          </ul>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <ul>
+            <li>Uses advanced search operators</li>
+            <li>Expects keyboard navigation</li>
+            <li>Skips tutorials and onboarding</li>
+            <li>Gets frustrated by unnecessary steps</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="persona-detail__bottom">
+        <div class="persona-tasks">
+          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
+          <ul class="persona-tasks__list">
+            <li>"Find records matching multiple criteria"</li>
+            <li>"Filter results by date range"</li>
+            <li>"Export search results to CSV"</li>
+            <li>"Navigate entirely with keyboard"</li>
+            <li>"Find the API documentation"</li>
+          </ul>
+        </div>
+        <div class="persona-catches">
+          <p class="persona-catches__title"><i class="fa-solid fa-bug"></i> Issues This Persona Catches</p>
+          <ul class="persona-catches__list">
+            <li><i class="fa-solid fa-check"></i> Missing power features</li>
+            <li><i class="fa-solid fa-check"></i> Slow or inefficient workflows</li>
+            <li><i class="fa-solid fa-check"></i> Poor search functionality</li>
+            <li><i class="fa-solid fa-check"></i> Missing export options</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persona 3: Accessibility Auditor -->
+  <section class="persona-detail" id="auditor">
+    <div class="persona-detail__inner">
+      <div class="persona-detail__header">
+        <div class="persona-detail__avatar persona-detail__avatar--auditor">AA</div>
+        <div class="persona-detail__title-group">
+          <h2 class="persona-detail__name">Accessibility Auditor</h2>
+          <p class="persona-detail__role">Accessibility Tester</p>
+          <p class="persona-detail__quote">"Can I navigate using only a keyboard?"</p>
+        </div>
+      </div>
+
+      <div class="persona-detail__grid">
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-user"></i> Background</p>
+          <p>Tests WCAG compliance and assistive technology compatibility. May use screen readers, keyboard-only navigation, or other accessibility tools. Evaluates sites for legal compliance and inclusivity.</p>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <ul>
+            <li>Verify keyboard navigation works</li>
+            <li>Check screen reader compatibility</li>
+            <li>Verify focus states are visible</li>
+            <li>Assess color contrast ratios</li>
+          </ul>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <ul>
+            <li>Tabs through all interactive elements</li>
+            <li>Checks heading hierarchy with tools</li>
+            <li>Verifies form labels and ARIA attributes</li>
+            <li>Tests with browser zoom at 200%</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="persona-detail__bottom">
+        <div class="persona-tasks">
+          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
+          <ul class="persona-tasks__list">
+            <li>"Tab through entire page without mouse"</li>
+            <li>"Check heading hierarchy structure"</li>
+            <li>"Verify all images have alt text"</li>
+            <li>"Complete form using only keyboard"</li>
+            <li>"Check focus visibility on all elements"</li>
+          </ul>
+        </div>
+        <div class="persona-catches">
+          <p class="persona-catches__title"><i class="fa-solid fa-bug"></i> Issues This Persona Catches</p>
+          <ul class="persona-catches__list">
+            <li><i class="fa-solid fa-check"></i> Missing focus indicators</li>
+            <li><i class="fa-solid fa-check"></i> Poor heading hierarchy</li>
+            <li><i class="fa-solid fa-check"></i> Unlabeled form elements</li>
+            <li><i class="fa-solid fa-check"></i> Keyboard traps</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persona 4: Casual Browser -->
+  <section class="persona-detail" id="browser">
+    <div class="persona-detail__inner">
+      <div class="persona-detail__header">
+        <div class="persona-detail__avatar persona-detail__avatar--browser">CB</div>
+        <div class="persona-detail__title-group">
+          <h2 class="persona-detail__name">Casual Browser</h2>
+          <p class="persona-detail__role">Moderate Engagement</p>
+          <p class="persona-detail__quote">"I'm just looking around."</p>
+        </div>
+      </div>
+
+      <div class="persona-detail__grid">
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-user"></i> Background</p>
+          <p>Has moderate goals but isn't in a hurry. Willing to explore and click around. May be researching options or killing time. Represents the average user experience.</p>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <ul>
+            <li>Browse content without pressure</li>
+            <li>Filter to find interesting items</li>
+            <li>Scan summaries before diving deep</li>
+            <li>Follow links to related content</li>
+          </ul>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <ul>
+            <li>Scrolls and scans content</li>
+            <li>Uses filters when available</li>
+            <li>Clicks on interesting-looking items</li>
+            <li>Uses back button frequently</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="persona-detail__bottom">
+        <div class="persona-tasks">
+          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
+          <ul class="persona-tasks__list">
+            <li>"Browse categories without a specific goal"</li>
+            <li>"Use filters to narrow results"</li>
+            <li>"Find related or recommended content"</li>
+            <li>"Explore navigation structure"</li>
+          </ul>
+        </div>
+        <div class="persona-catches">
+          <p class="persona-catches__title"><i class="fa-solid fa-bug"></i> Issues This Persona Catches</p>
+          <ul class="persona-catches__list">
+            <li><i class="fa-solid fa-check"></i> Overwhelming content density</li>
+            <li><i class="fa-solid fa-check"></i> Poor filtering options</li>
+            <li><i class="fa-solid fa-check"></i> Dead ends in navigation</li>
+            <li><i class="fa-solid fa-check"></i> Missing breadcrumbs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persona 5: UI/UX Designer -->
+  <section class="persona-detail" id="designer">
+    <div class="persona-detail__inner">
+      <div class="persona-detail__header">
+        <div class="persona-detail__avatar persona-detail__avatar--designer">UX</div>
+        <div class="persona-detail__title-group">
+          <h2 class="persona-detail__name">UI/UX Designer</h2>
+          <p class="persona-detail__role">Design Reviewer</p>
+          <p class="persona-detail__quote">"Is this consistent and polished?"</p>
+        </div>
+      </div>
+
+      <div class="persona-detail__grid">
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-user"></i> Background</p>
+          <p>Evaluates design quality, consistency, and attention to detail. Notices subtle spacing issues, typography problems, and responsive bugs that others miss.</p>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <ul>
+            <li>Check visual hierarchy effectiveness</li>
+            <li>Verify spacing consistency</li>
+            <li>Test responsive breakpoints</li>
+            <li>Evaluate overall polish</li>
+          </ul>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <ul>
+            <li>Resizes browser to test responsiveness</li>
+            <li>Zooms in to check pixel details</li>
+            <li>Compares similar components</li>
+            <li>Takes screenshots for comparison</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="persona-detail__bottom">
+        <div class="persona-tasks">
+          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
+          <ul class="persona-tasks__list">
+            <li>"Evaluate typography consistency"</li>
+            <li>"Test at mobile, tablet, and desktop widths"</li>
+            <li>"Check spacing between similar elements"</li>
+            <li>"Verify button styles are consistent"</li>
+            <li>"Assess color usage across pages"</li>
+          </ul>
+        </div>
+        <div class="persona-catches">
+          <p class="persona-catches__title"><i class="fa-solid fa-bug"></i> Issues This Persona Catches</p>
+          <ul class="persona-catches__list">
+            <li><i class="fa-solid fa-check"></i> Inconsistent spacing</li>
+            <li><i class="fa-solid fa-check"></i> Responsive layout bugs</li>
+            <li><i class="fa-solid fa-check"></i> Visual hierarchy issues</li>
+            <li><i class="fa-solid fa-check"></i> Typography inconsistencies</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persona 6: Journalist / Fact-Checker -->
+  <section class="persona-detail" id="journalist">
+    <div class="persona-detail__inner">
+      <div class="persona-detail__header">
+        <div class="persona-detail__avatar persona-detail__avatar--journalist">JF</div>
+        <div class="persona-detail__title-group">
+          <h2 class="persona-detail__name">Journalist / Fact-Checker</h2>
+          <p class="persona-detail__role">Fact-Checker</p>
+          <p class="persona-detail__quote">"Can I verify this information?"</p>
+        </div>
+      </div>
+
+      <div class="persona-detail__grid">
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-user"></i> Background</p>
+          <p>Needs accurate, verifiable data with clear sources. Must be able to cite specific information and verify its authenticity. Values transparency and data provenance.</p>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <ul>
+            <li>Find exact quotes and citations</li>
+            <li>Verify dates and metadata</li>
+            <li>Cross-reference with external sources</li>
+            <li>Understand data provenance</li>
+          </ul>
+        </div>
+        <div class="persona-info-card">
+          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <ul>
+            <li>Uses exact phrase searches</li>
+            <li>Checks timestamps and attributions</li>
+            <li>Looks for primary sources</li>
+            <li>Copies data for external verification</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="persona-detail__bottom">
+        <div class="persona-tasks">
+          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
+          <ul class="persona-tasks__list">
+            <li>"Search for an exact phrase"</li>
+            <li>"Verify the date of a specific item"</li>
+            <li>"Find the original source of data"</li>
+            <li>"Check who created or modified content"</li>
+            <li>"Export citation information"</li>
+          </ul>
+        </div>
+        <div class="persona-catches">
+          <p class="persona-catches__title"><i class="fa-solid fa-bug"></i> Issues This Persona Catches</p>
+          <ul class="persona-catches__list">
+            <li><i class="fa-solid fa-check"></i> Missing source attribution</li>
+            <li><i class="fa-solid fa-check"></i> Unclear or missing dates</li>
+            <li><i class="fa-solid fa-check"></i> Unverifiable claims</li>
+            <li><i class="fa-solid fa-check"></i> Poor search precision</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Meta Example: Testing PersonaSpec with PersonaSpec -->
+  <section class="meta-example">
+    <div class="meta-example__inner">
+      <div class="meta-example__header">
+        <p class="meta-example__eyebrow">Meta Example</p>
+        <h2 class="meta-example__title">Testing PersonaSpec with PersonaSpec</h2>
+        <p class="meta-example__description">
+          We use our own methodology to test this site. Here are three personas that evaluate personaspec.dev itself.
+        </p>
+      </div>
+
+      <div class="meta-example__grid">
+        <div class="meta-persona-card">
+          <div class="meta-persona-card__avatar">DD</div>
+          <h3 class="meta-persona-card__name">Dev Dana</h3>
+          <p class="meta-persona-card__role">Developer Evaluating</p>
+          <p class="meta-persona-card__goal">"I have 15 minutes. Is this worth adopting?"</p>
+        </div>
+
+        <div class="meta-persona-card">
+          <div class="meta-persona-card__avatar">QQ</div>
+          <h3 class="meta-persona-card__name">QA Quinn</h3>
+          <p class="meta-persona-card__role">QA Lead Researching</p>
+          <p class="meta-persona-card__goal">"What does this catch that Cypress doesn't?"</p>
+        </div>
+
+        <div class="meta-persona-card">
+          <div class="meta-persona-card__avatar">HH</div>
+          <h3 class="meta-persona-card__name">HN Harper</h3>
+          <p class="meta-persona-card__role">First-Time Visitor</p>
+          <p class="meta-persona-card__goal">"Is this relevant to my work?"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="personas-cta">
+    <div class="container">
+      <h2 class="personas-cta__title">Create Your Own Personas</h2>
+      <p class="personas-cta__text">
+        These examples are starting points. The best personas are specific to your product and users.
+      </p>
+      <a href="getting-started.html" class="button button-primary">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <p class="footer__logo gradient-text">PersonaSpec</p>
+          <p class="footer__tagline">
+            A methodology for E2E testing that puts users first.
+          </p>
+          <p class="footer__license">MIT License</p>
+        </div>
+
+        <nav class="footer__nav">
+          <h4 class="footer__nav-title">Docs</h4>
+          <ul class="footer__nav-list">
+            <li><a href="methodology.html">Methodology</a></li>
+            <li><a href="personas.html">Personas</a></li>
+            <li><a href="getting-started.html">Get Started</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav">
+          <h4 class="footer__nav-title">GitHub</h4>
+          <ul class="footer__nav-list">
+            <li><a href="https://github.com/persona-spec/personaspec.dev">Repository</a></li>
+            <li><a href="https://github.com/persona-spec/personaspec.dev/issues">Issues</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

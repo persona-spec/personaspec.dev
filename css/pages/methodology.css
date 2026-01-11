@@ -1,0 +1,462 @@
+/* PersonaSpec Methodology Page Styles */
+
+/* ========================================
+   Page Header
+   ======================================== */
+
+.page-header {
+  padding: calc(var(--space-20) + 60px) 0 var(--space-12);
+  text-align: center;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.page-header__title {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+}
+
+.page-header__subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   Docs Layout
+   ======================================== */
+
+.docs-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: var(--space-12);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6);
+}
+
+/* ========================================
+   Sidebar
+   ======================================== */
+
+.docs-sidebar {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+.docs-sidebar__title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.docs-sidebar__nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.docs-sidebar__nav li {
+  margin-bottom: var(--space-1);
+}
+
+.docs-sidebar__link {
+  display: block;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.docs-sidebar__link:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.docs-sidebar__link.is-active {
+  color: var(--accent-primary);
+  background: rgba(var(--accent-primary-rgb), 0.1);
+}
+
+/* ========================================
+   Docs Content
+   ======================================== */
+
+.docs-content {
+  min-width: 0;
+}
+
+.docs-section {
+  margin-bottom: var(--space-16);
+  scroll-margin-top: 100px;
+}
+
+.docs-section:last-child {
+  margin-bottom: 0;
+}
+
+.docs-section__title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.docs-section p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.docs-section h4 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-4);
+  color: var(--text-primary);
+}
+
+/* ========================================
+   Callout Boxes
+   ======================================== */
+
+.callout {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  margin: var(--space-6) 0;
+}
+
+.callout--info {
+  background: rgba(var(--accent-primary-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.2);
+}
+
+.callout--tip {
+  background: rgba(var(--accent-success-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-success-rgb), 0.2);
+}
+
+.callout--warning {
+  background: rgba(var(--accent-warning-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-warning-rgb), 0.2);
+}
+
+.callout__title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.callout--info .callout__title {
+  color: var(--accent-primary);
+}
+
+.callout--tip .callout__title {
+  color: var(--accent-success);
+}
+
+.callout--warning .callout__title {
+  color: var(--accent-warning);
+}
+
+.callout p {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+/* ========================================
+   Attribute List
+   ======================================== */
+
+.attribute-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0;
+  display: grid;
+  gap: var(--space-4);
+}
+
+.attribute-list__item {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+}
+
+.attribute-list__number {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.attribute-list__content h5 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.attribute-list__content p {
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+/* ========================================
+   Step List (for patterns)
+   ======================================== */
+
+.step-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0;
+  counter-reset: step;
+}
+
+.step-list li {
+  position: relative;
+  padding-left: var(--space-10);
+  margin-bottom: var(--space-4);
+  counter-increment: step;
+}
+
+.step-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   Feature List
+   ======================================== */
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+}
+
+.feature-list li i {
+  color: var(--accent-success);
+  margin-top: 2px;
+}
+
+/* ========================================
+   Tables
+   ======================================== */
+
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: var(--text-sm);
+}
+
+.docs-table th,
+.docs-table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.docs-table th {
+  background: var(--bg-surface);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.docs-table td {
+  color: var(--text-secondary);
+}
+
+.docs-table tr:hover td {
+  background: var(--bg-surface);
+}
+
+/* ========================================
+   Code in Docs
+   ======================================== */
+
+.docs-content code {
+  background: var(--bg-elevated);
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius-sm);
+  font-size: 0.85em;
+}
+
+.docs-content .code-block {
+  margin: var(--space-6) 0;
+}
+
+/* ========================================
+   Use Case Lists
+   ======================================== */
+
+.use-case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin: var(--space-6) 0;
+}
+
+.use-case-list {
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+}
+
+.use-case-list--good {
+  background: rgba(var(--accent-success-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-success-rgb), 0.2);
+}
+
+.use-case-list--bad {
+  background: rgba(var(--accent-error-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-error-rgb), 0.2);
+}
+
+.use-case-list__title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.use-case-list--good .use-case-list__title {
+  color: var(--accent-success);
+}
+
+.use-case-list--bad .use-case-list__title {
+  color: var(--accent-error);
+}
+
+.use-case-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.use-case-list li {
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+.use-case-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+
+.use-case-list--good li::before {
+  background: var(--accent-success);
+}
+
+.use-case-list--bad li::before {
+  background: var(--accent-error);
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 900px) {
+  .docs-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .docs-sidebar {
+    position: relative;
+    top: 0;
+    max-height: none;
+    padding: var(--space-4);
+    background: var(--bg-surface);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+  }
+
+  .docs-sidebar__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .docs-sidebar__nav li {
+    margin-bottom: 0;
+  }
+
+  .use-case-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header {
+    padding: calc(var(--space-16) + 60px) 0 var(--space-8);
+  }
+
+  .page-header__title {
+    font-size: var(--text-3xl);
+  }
+}
+
+@media (max-width: 600px) {
+  .attribute-list__item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .attribute-list__number {
+    margin: 0 auto;
+  }
+}

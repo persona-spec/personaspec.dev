@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The PersonaSpec Methodology - Learn how to write persona-driven E2E tests that validate user journeys with AI vision analysis.">
+
+  <title>Methodology - PersonaSpec</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/methodology.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo gradient-text">PersonaSpec</a>
+
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav__toggle-icon"></span>
+      </button>
+
+      <ul class="nav__links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="methodology.html" class="is-active">Methodology</a></li>
+        <li><a href="personas.html">Personas</a></li>
+        <li><a href="getting-started.html">Get Started</a></li>
+      </ul>
+
+      <a href="https://github.com/persona-spec/personaspec.dev" class="button button-secondary nav__cta">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-header__title">The <span class="gradient-text">Methodology</span></h1>
+      <p class="page-header__subtitle">
+        A complete guide to writing persona-driven E2E tests that validate user journeys with AI vision analysis.
+      </p>
+    </div>
+  </header>
+
+  <!-- Docs Layout -->
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <p class="docs-sidebar__title">On This Page</p>
+      <ul class="docs-sidebar__nav">
+        <li><a href="#core-idea" class="docs-sidebar__link">The Core Idea</a></li>
+        <li><a href="#persona-definition" class="docs-sidebar__link">Persona Definition</a></li>
+        <li><a href="#test-structure" class="docs-sidebar__link">Test Structure</a></li>
+        <li><a href="#task-tests" class="docs-sidebar__link">Task Tests</a></li>
+        <li><a href="#free-exploration" class="docs-sidebar__link">Free Exploration</a></li>
+        <li><a href="#observation-collector" class="docs-sidebar__link">Observation Collector</a></li>
+        <li><a href="#observation-types" class="docs-sidebar__link">Observation Types</a></li>
+        <li><a href="#vision-analysis" class="docs-sidebar__link">Vision Model Analysis</a></li>
+        <li><a href="#implementation" class="docs-sidebar__link">Implementation Details</a></li>
+        <li><a href="#analyzing-results" class="docs-sidebar__link">Analyzing Results</a></li>
+        <li><a href="#when-to-use" class="docs-sidebar__link">When to Use</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+      <!-- The Core Idea -->
+      <section class="docs-section" id="core-idea">
+        <h2 class="docs-section__title">The Core Idea</h2>
+        <p>
+          Traditional E2E tests ask: <strong>"Does feature X work?"</strong><br>
+          Persona-driven tests ask: <strong>"Can user type Y accomplish their goal?"</strong>
+        </p>
+        <p>
+          Instead of testing isolated features, you validate entire user workflows from different perspectives. Each persona represents a distinct user archetype who would use your application differently.
+        </p>
+        <div class="callout callout--info">
+          <p class="callout__title"><i class="fa-solid fa-lightbulb"></i> Key Innovation</p>
+          <p>
+            Capture screenshots throughout the journey, then use a vision-capable AI model to analyze them for UX issues, accessibility problems, and design feedback that automated tests cannot detect.
+          </p>
+        </div>
+      </section>
+
+      <!-- Persona Definition -->
+      <section class="docs-section" id="persona-definition">
+        <h2 class="docs-section__title">The Persona Definition</h2>
+        <p>Every persona has four essential attributes:</p>
+
+        <ul class="attribute-list">
+          <li class="attribute-list__item">
+            <span class="attribute-list__number">1</span>
+            <div class="attribute-list__content">
+              <h5>Name and Role</h5>
+              <p>A memorable identifier (e.g., "Alex - Trial Evaluator")</p>
+            </div>
+          </li>
+          <li class="attribute-list__item">
+            <span class="attribute-list__number">2</span>
+            <div class="attribute-list__content">
+              <h5>Background</h5>
+              <p>Who they are, their context, and experience level</p>
+            </div>
+          </li>
+          <li class="attribute-list__item">
+            <span class="attribute-list__number">3</span>
+            <div class="attribute-list__content">
+              <h5>Goals</h5>
+              <p>What they're specifically trying to accomplish on your site</p>
+            </div>
+          </li>
+          <li class="attribute-list__item">
+            <span class="attribute-list__number">4</span>
+            <div class="attribute-list__content">
+              <h5>Behaviors</h5>
+              <p>How they typically interact with software (heavy searcher, skimmer, keyboard user, etc.)</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Test Structure -->
+      <section class="docs-section" id="test-structure">
+        <h2 class="docs-section__title">Test Structure</h2>
+
+        <h4>File Organization</h4>
+        <p>
+          Create one test file per persona in a dedicated <code>personas/</code> directory within your tests folder. Also create a shared utility for collecting observations and metrics.
+        </p>
+
+        <h4>Test File Anatomy</h4>
+        <p>Each persona test file contains:</p>
+
+        <ol class="step-list">
+          <li><strong>Persona definition</strong> at the top as a JSDoc comment and exported object</li>
+          <li><strong>A serial test suite</strong> (tests run in order, simulating a continuous session)</li>
+          <li><strong>Shared observation collector</strong> instantiated once for all tests</li>
+          <li><strong>Lifecycle hooks:</strong>
+            <ul style="margin-top: var(--space-2); padding-left: var(--space-4);">
+              <li><code>beforeAll</code>: Start the observation session</li>
+              <li><code>beforeEach</code>: Attach console error listeners</li>
+              <li><code>afterAll</code>: End session and save observations</li>
+            </ul>
+          </li>
+          <li><strong>4-6 task-based tests</strong> representing realistic user goals</li>
+          <li><strong>One free exploration test</strong> at the end simulating open-ended browsing</li>
+        </ol>
+      </section>
+
+      <!-- Task Tests -->
+      <section class="docs-section" id="task-tests">
+        <h2 class="docs-section__title">Task Tests</h2>
+        <p>Each task test follows this pattern:</p>
+
+        <ol class="step-list">
+          <li><strong>Track start time</strong> for duration measurement</li>
+          <li><strong>Initialize success flag</strong> as false (prove success, don't assume it)</li>
+          <li><strong>Navigate to starting point</strong> and capture a screenshot</li>
+          <li><strong>Attempt the task</strong> as the persona would naturally try it</li>
+          <li><strong>Evaluate outcomes:</strong>
+            <ul style="margin-top: var(--space-2); padding-left: var(--space-4);">
+              <li>Goal achieved: mark success, note what worked</li>
+              <li>Partially achieved: mark success with friction observations</li>
+              <li>Blocked: keep failure, add frustration observation</li>
+            </ul>
+          </li>
+          <li><strong>Capture result screenshot</strong> with context</li>
+          <li><strong>Record the task</strong> with success/failure, duration, and notes</li>
+        </ol>
+
+        <div class="callout callout--tip">
+          <p class="callout__title"><i class="fa-solid fa-check"></i> Good Task Examples</p>
+          <p>
+            Tasks should represent things users actually want to do: "Find how to export my data",
+            "Understand the pricing within 30 seconds", "Navigate the checkout using only keyboard",
+            "Find customer support contact info".
+          </p>
+        </div>
+      </section>
+
+      <!-- Free Exploration -->
+      <section class="docs-section" id="free-exploration">
+        <h2 class="docs-section__title">Free Exploration Tests</h2>
+        <p>
+          Every persona ends with a free exploration test that simulates realistic browsing without a specific goal. This catches issues that task-focused tests miss.
+        </p>
+
+        <h4>Structure</h4>
+        <ol class="step-list">
+          <li>Start on the main page</li>
+          <li>Define actions the persona would naturally take (scroll, click interesting things, try different sections)</li>
+          <li>Execute each action with error handling so one failure doesn't stop exploration</li>
+          <li>Capture screenshots at interesting moments</li>
+          <li>Always mark as successful (observations matter more than pass/fail)</li>
+        </ol>
+      </section>
+
+      <!-- Observation Collector -->
+      <section class="docs-section" id="observation-collector">
+        <h2 class="docs-section__title">The Observation Collector</h2>
+        <p>A shared utility class that captures everything during test execution:</p>
+
+        <h4>Session Metrics</h4>
+        <ul class="feature-list">
+          <li><i class="fa-solid fa-check"></i> Start and end timestamps</li>
+          <li><i class="fa-solid fa-check"></i> Page load count</li>
+          <li><i class="fa-solid fa-check"></i> Click and search counts</li>
+          <li><i class="fa-solid fa-check"></i> Back navigation count (high numbers indicate confusion)</li>
+          <li><i class="fa-solid fa-check"></i> Console errors captured automatically</li>
+        </ul>
+
+        <h4>Screenshots</h4>
+        <ul class="feature-list">
+          <li><i class="fa-solid fa-check"></i> PNG files saved to disk</li>
+          <li><i class="fa-solid fa-check"></i> Base64 encoding for vision model analysis</li>
+          <li><i class="fa-solid fa-check"></i> Associated URL, page title, name, and context description</li>
+        </ul>
+
+        <h4>Task Results</h4>
+        <ul class="feature-list">
+          <li><i class="fa-solid fa-check"></i> Task name and success boolean</li>
+          <li><i class="fa-solid fa-check"></i> Duration in milliseconds</li>
+          <li><i class="fa-solid fa-check"></i> Free-form notes about what happened</li>
+        </ul>
+
+        <h4>Output</h4>
+        <p>
+          The collector saves a JSON file per persona containing all metrics, task results,
+          observations categorized by type, and screenshots with metadata and base64 data.
+        </p>
+      </section>
+
+      <!-- Observation Types -->
+      <section class="docs-section" id="observation-types">
+        <h2 class="docs-section__title">Observation Types</h2>
+        <p>Use these consistently across all tests:</p>
+
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>When to Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="observation-badge observation-badge--success">success</span></td>
+              <td>Goal achieved smoothly, good UX discovered</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--note">note</span></td>
+              <td>Neutral observation, suggestion for improvement</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--confusion">confusion</span></td>
+              <td>Unclear what to do next, feedback ambiguous</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--frustration">frustration</span></td>
+              <td>Goal blocked, feature missing, error encountered</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Vision Model Analysis -->
+      <section class="docs-section" id="vision-analysis">
+        <h2 class="docs-section__title">Vision Model Analysis</h2>
+        <p>
+          The most powerful aspect of this methodology is using a vision-capable AI model (like Claude) to analyze the captured screenshots.
+        </p>
+
+        <h4>How It Works</h4>
+        <p>After tests complete, feed the observations.json file (which contains base64 screenshots) to a vision model along with:</p>
+        <ul class="feature-list">
+          <li><i class="fa-solid fa-check"></i> The persona definition (background, goals, behaviors)</li>
+          <li><i class="fa-solid fa-check"></i> The task being attempted when each screenshot was taken</li>
+          <li><i class="fa-solid fa-check"></i> Context description for each screenshot</li>
+          <li><i class="fa-solid fa-check"></i> Observations already recorded by the test</li>
+        </ul>
+
+        <h4>What the Vision Model Can Identify</h4>
+
+        <div class="callout callout--info">
+          <p class="callout__title"><i class="fa-solid fa-eye"></i> UX Issues</p>
+          <p>
+            Confusing layouts, missing CTAs, form fields without labels, unclear navigation paths, overwhelming information density.
+          </p>
+        </div>
+
+        <div class="callout callout--warning">
+          <p class="callout__title"><i class="fa-solid fa-universal-access"></i> Accessibility Problems</p>
+          <p>
+            Insufficient color contrast, small text, missing focus indicators, poor heading structure, icons without labels.
+          </p>
+        </div>
+
+        <div class="callout callout--tip">
+          <p class="callout__title"><i class="fa-solid fa-palette"></i> Design Feedback</p>
+          <p>
+            Inconsistent spacing, typography issues, color palette problems, mobile responsiveness issues, visual clutter.
+          </p>
+        </div>
+
+        <h4>Prompting the Vision Model</h4>
+        <p>When asking a vision model to analyze screenshots, provide context:</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">Example Prompt</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code>"Here are screenshots from a user journey test.
+The persona is [name], who [background].
+Their goal was to [goal].
+They typically [behaviors].
+
+Analyze each screenshot and identify:
+1. UX issues that would frustrate this specific persona
+2. Accessibility problems visible in the interface
+3. Design inconsistencies
+4. Whether the user's goal appears achievable
+5. Specific recommendations for improvement"</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Implementation Details -->
+      <section class="docs-section" id="implementation">
+        <h2 class="docs-section__title">Key Implementation Details</h2>
+
+        <h4>Serial Execution</h4>
+        <p>
+          Tests must run in serial order (not parallel) to simulate a continuous user session where state carries over.
+        </p>
+
+        <h4>Screenshot Strategy</h4>
+        <p>Capture screenshots at:</p>
+        <ul class="feature-list">
+          <li><i class="fa-solid fa-camera"></i> Start of each task</li>
+          <li><i class="fa-solid fa-camera"></i> Key decision points</li>
+          <li><i class="fa-solid fa-camera"></i> Results/outcomes</li>
+          <li><i class="fa-solid fa-camera"></i> Anything confusing or problematic</li>
+        </ul>
+
+        <h4>Base64 Encoding</h4>
+        <p>
+          Screenshots are saved both as PNG files on disk and as base64-encoded strings in the JSON output. The base64 format allows the observations file to be self-contained and directly processable by vision models.
+        </p>
+
+        <h4>Flexible Selectors</h4>
+        <p>
+          Use realistic selectors that a user would conceptually understand. If searching for a "Votes" section, look for headings containing "Vote" rather than test IDs that users can't see.
+        </p>
+
+        <h4>Graceful Failures</h4>
+        <p>
+          Wrap actions in try/catch so one failure doesn't cascade. Record what went wrong and continue the exploration.
+        </p>
+
+        <h4>Realistic Timing</h4>
+        <p>
+          Use realistic timeouts. If a user would give up after 3 seconds of waiting, set that as your timeout. This catches performance issues that pass/fail tests miss.
+        </p>
+      </section>
+
+      <!-- Analyzing Results -->
+      <section class="docs-section" id="analyzing-results">
+        <h2 class="docs-section__title">Analyzing Results</h2>
+
+        <h4>Automated Analysis</h4>
+        <p>Review the observations.json files for each persona. Look for these patterns:</p>
+
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Pattern</th>
+              <th>Indicates</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>High back navigation count</td>
+              <td>Users getting lost</td>
+            </tr>
+            <tr>
+              <td>Multiple frustration observations</td>
+              <td>Critical UX problems</td>
+            </tr>
+            <tr>
+              <td>Multiple confusion observations</td>
+              <td>Information architecture issues</td>
+            </tr>
+            <tr>
+              <td>Failed tasks</td>
+              <td>Broken critical paths</td>
+            </tr>
+            <tr>
+              <td>Long task durations</td>
+              <td>Performance or complexity issues</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout callout--info">
+          <p class="callout__title"><i class="fa-solid fa-lightbulb"></i> Pro Tip</p>
+          <p>
+            The qualitative observations from both automated tests and vision model analysis are often more valuable than pass/fail results. A test might "pass" while recording significant friction that only becomes apparent when a vision model sees the actual interface.
+          </p>
+        </div>
+      </section>
+
+      <!-- When to Use -->
+      <section class="docs-section" id="when-to-use">
+        <h2 class="docs-section__title">When to Use This Approach</h2>
+
+        <div class="use-case-grid">
+          <div class="use-case-list use-case-list--good">
+            <p class="use-case-list__title"><i class="fa-solid fa-check-circle"></i> Best For</p>
+            <ul>
+              <li>Public-facing websites and applications</li>
+              <li>Products with multiple distinct user types</li>
+              <li>UX-focused teams wanting to surface usability issues</li>
+              <li>Validating that changes don't break user workflows</li>
+              <li>Getting design feedback without manual review</li>
+              <li>Supplementing traditional feature-based E2E tests</li>
+            </ul>
+          </div>
+
+          <div class="use-case-list use-case-list--bad">
+            <p class="use-case-list__title"><i class="fa-solid fa-times-circle"></i> Less Suited For</p>
+            <ul>
+              <li>API testing</li>
+              <li>Unit/integration testing</li>
+              <li>Very simple single-purpose applications</li>
+              <li>Performance benchmarking (use dedicated tools)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next Steps CTA -->
+      <div class="callout callout--info" style="margin-top: var(--space-12);">
+        <p class="callout__title"><i class="fa-solid fa-rocket"></i> Ready to Get Started?</p>
+        <p style="margin-bottom: var(--space-4);">
+          Check out the step-by-step guide to run your first persona test in 10 minutes.
+        </p>
+        <a href="getting-started.html" class="button button-primary">Get Started</a>
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <p class="footer__logo gradient-text">PersonaSpec</p>
+          <p class="footer__tagline">
+            A methodology for E2E testing that puts users first.
+          </p>
+          <p class="footer__license">MIT License</p>
+        </div>
+
+        <nav class="footer__nav">
+          <h4 class="footer__nav-title">Docs</h4>
+          <ul class="footer__nav-list">
+            <li><a href="methodology.html">Methodology</a></li>
+            <li><a href="personas.html">Personas</a></li>
+            <li><a href="getting-started.html">Get Started</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav">
+          <h4 class="footer__nav-title">GitHub</h4>
+          <ul class="footer__nav-list">
+            <li><a href="https://github.com/persona-spec/personaspec.dev">Repository</a></li>
+            <li><a href="https://github.com/persona-spec/personaspec.dev/issues">Issues</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

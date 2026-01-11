@@ -1,0 +1,339 @@
+/* PersonaSpec Getting Started Page Styles */
+
+/* ========================================
+   Page Header (shared)
+   ======================================== */
+
+.page-header {
+  padding: calc(var(--space-20) + 60px) 0 var(--space-12);
+  text-align: center;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.page-header__title {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+}
+
+.page-header__subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   Guide Container
+   ======================================== */
+
+.guide {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6);
+}
+
+/* ========================================
+   Prerequisites
+   ======================================== */
+
+.prerequisites {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.prerequisites__title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.prerequisites__title i {
+  color: var(--accent-warning);
+}
+
+.prerequisites__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.prerequisites__list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+}
+
+.prerequisites__list li i {
+  color: var(--accent-success);
+}
+
+.prerequisites__list li code {
+  background: var(--bg-base);
+  padding: 0.2em 0.5em;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+}
+
+.prerequisites__note {
+  margin-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ========================================
+   Guide Steps
+   ======================================== */
+
+.guide-step {
+  margin-bottom: var(--space-16);
+  position: relative;
+}
+
+.guide-step:last-of-type {
+  margin-bottom: 0;
+}
+
+.guide-step__header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.guide-step__number {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  color: white;
+  font-size: var(--text-xl);
+  font-weight: 800;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.guide-step__title-group {
+  padding-top: var(--space-2);
+}
+
+.guide-step__title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.guide-step__subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.guide-step__content {
+  padding-left: calc(48px + var(--space-4));
+}
+
+.guide-step__content p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.guide-step__content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   Code Blocks in Guide
+   ======================================== */
+
+.guide-step .code-block {
+  margin: var(--space-6) 0;
+}
+
+.guide-step .code-block__content {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* ========================================
+   Tip Boxes
+   ======================================== */
+
+.tip-box {
+  background: rgba(var(--accent-success-rgb), 0.08);
+  border: 1px solid rgba(var(--accent-success-rgb), 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin: var(--space-6) 0;
+}
+
+.tip-box__title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--accent-success);
+  margin-bottom: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tip-box p {
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+/* ========================================
+   Sample Output
+   ======================================== */
+
+.sample-output {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin: var(--space-6) 0;
+}
+
+.sample-output__title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.sample-output__title i {
+  color: var(--accent-primary);
+}
+
+/* ========================================
+   Pattern List
+   ======================================== */
+
+.pattern-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-6) 0;
+}
+
+.pattern-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.pattern-list li:last-child {
+  border-bottom: none;
+}
+
+.pattern-list__number {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.pattern-list__content strong {
+  color: var(--text-primary);
+}
+
+/* ========================================
+   Next Steps Section
+   ======================================== */
+
+.next-steps {
+  background: linear-gradient(135deg, rgba(var(--accent-primary-rgb), 0.1) 0%, rgba(var(--accent-secondary-rgb), 0.05) 100%);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  margin-top: var(--space-12);
+  text-align: center;
+}
+
+.next-steps__title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.next-steps__links {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ========================================
+   Inline Code
+   ======================================== */
+
+.guide-step__content code {
+  background: var(--bg-elevated);
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius-sm);
+  font-size: 0.85em;
+}
+
+/* ========================================
+   Responsive
+   ======================================== */
+
+@media (max-width: 768px) {
+  .guide-step__content {
+    padding-left: 0;
+  }
+
+  .guide-step__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .guide-step__number {
+    width: 40px;
+    height: 40px;
+    font-size: var(--text-lg);
+  }
+
+  .guide-step__title-group {
+    padding-top: 0;
+  }
+
+  .page-header {
+    padding: calc(var(--space-16) + 60px) 0 var(--space-8);
+  }
+
+  .page-header__title {
+    font-size: var(--text-3xl);
+  }
+
+  .next-steps__links {
+    flex-direction: column;
+    align-items: center;
+  }
+}
