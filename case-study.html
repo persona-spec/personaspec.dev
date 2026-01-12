@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Real-world case study: 6 personas tested openaccesspolicies.org - a compliance policy template site. See actual test results, observations, and discoveries.">
+
+  <title>Case Study - PersonaSpec</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/example.css?v=3">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo gradient-text">PersonaSpec</a>
+
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span class="nav__toggle-icon"></span>
+      </button>
+
+      <ul class="nav__links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="methodology.html">Methodology</a></li>
+        <li><a href="personas.html">Personas</a></li>
+        <li><a href="example.html">Example</a></li>
+        <li><a href="case-study.html" class="is-active">Case Study</a></li>
+        <li><a href="getting-started.html">Get Started</a></li>
+      </ul>
+
+      <a href="https://github.com/persona-spec/personaspec.dev" class="button button-secondary nav__cta">GitHub</a>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-header__title">
+        <span class="gradient-text">Case Study</span>
+      </h1>
+      <p class="page-header__subtitle">
+        6 personas tested Open Access Policies - a real compliance template site
+      </p>
+    </div>
+  </header>
+
+  <!-- Intro Section -->
+  <section class="section">
+    <div class="container">
+      <div class="example-intro">
+        <p class="example-intro__text">
+          We tested <a href="https://openaccesspolicies.org" target="_blank" rel="noopener">openaccesspolicies.org</a> - a site offering free security policy templates for SOC2, HIPAA, and HITRUST compliance.
+          Six domain-specific personas, each with distinct goals, tested the site simultaneously.
+        </p>
+      </div>
+
+      <!-- Summary Stats -->
+      <div class="session-stats" style="justify-content: center; margin-bottom: var(--space-12);">
+        <div class="session-stats__item">
+          <div class="session-stats__icon"><i class="fa-solid fa-users"></i></div>
+          <div>
+            <div class="session-stats__label">Personas Tested</div>
+            <div class="session-stats__value">6</div>
+          </div>
+        </div>
+        <div class="session-stats__item">
+          <div class="session-stats__icon"><i class="fa-solid fa-eye"></i></div>
+          <div>
+            <div class="session-stats__label">Total Observations</div>
+            <div class="session-stats__value">58</div>
+          </div>
+        </div>
+        <div class="session-stats__item">
+          <div class="session-stats__icon"><i class="fa-solid fa-check-circle"></i></div>
+          <div>
+            <div class="session-stats__label">Success Rate</div>
+            <div class="session-stats__value">71%</div>
+          </div>
+        </div>
+        <div class="session-stats__item">
+          <div class="session-stats__icon"><i class="fa-solid fa-camera"></i></div>
+          <div>
+            <div class="session-stats__label">Screenshots</div>
+            <div class="session-stats__value">47</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Persona Tabs -->
+      <div class="persona-tabs">
+        <button class="persona-tab is-active" data-persona="carlos">
+          <span class="persona-tab__avatar" style="background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);">CC</span>
+          <span>Carlos</span>
+        </button>
+        <button class="persona-tab" data-persona="priya">
+          <span class="persona-tab__avatar" style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);">PK</span>
+          <span>Priya</span>
+        </button>
+        <button class="persona-tab" data-persona="michael">
+          <span class="persona-tab__avatar" style="background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);">MR</span>
+          <span>Michael</span>
+        </button>
+        <button class="persona-tab" data-persona="sarah">
+          <span class="persona-tab__avatar" style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);">ST</span>
+          <span>Sarah</span>
+        </button>
+        <button class="persona-tab" data-persona="david">
+          <span class="persona-tab__avatar" style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);">DV</span>
+          <span>David</span>
+        </button>
+      </div>
+
+      <!-- Persona 1: Carlos - Startup CTO -->
+      <div class="persona-section is-active" id="persona-carlos">
+        <div class="persona-showcase">
+          <div class="persona-showcase__header">
+            <div class="persona-showcase__avatar" style="background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);">CC</div>
+            <div class="persona-showcase__info">
+              <h2 class="persona-showcase__name">Carlos</h2>
+              <p class="persona-showcase__role">Startup CTO</p>
+              <p class="persona-showcase__background">
+                Series A startup just landed an enterprise deal requiring SOC2. Has 3 weeks to show compliance progress. Technical but not a compliance expert.
+              </p>
+            </div>
+          </div>
+          <div class="persona-showcase__details">
+            <div class="persona-showcase__goals">
+              <h4>Goals</h4>
+              <ul>
+                <li>Find the right policy set for SOC2 quickly</li>
+                <li>Get to the GitHub repo to assess templates</li>
+                <li>Determine customization effort required</li>
+              </ul>
+            </div>
+            <div class="persona-showcase__behaviors">
+              <h4>Behaviors</h4>
+              <ul>
+                <li>Skips marketing copy, looks for technical details</li>
+                <li>Checks GitHub activity and stars for credibility</li>
+                <li>Impatient with slow or unclear navigation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-stats">
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-file"></i></div>
+            <div>
+              <div class="session-stats__label">Pages Visited</div>
+              <div class="session-stats__value">5</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-eye"></i></div>
+            <div>
+              <div class="session-stats__label">Observations</div>
+              <div class="session-stats__value">10</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-camera"></i></div>
+            <div>
+              <div class="session-stats__label">Screenshots</div>
+              <div class="session-stats__value">9</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Tasks Completed</h3>
+        <table class="tasks-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Result</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Find SOC2 policies from homepage</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Clear navigation to policies page</td>
+            </tr>
+            <tr>
+              <td>Get to GitHub repo quickly</td>
+              <td class="tasks-table__success">Success</td>
+              <td>GitHub links prominent in navigation</td>
+            </tr>
+            <tr>
+              <td>Assess customization effort</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Getting started guide explains process</td>
+            </tr>
+            <tr>
+              <td>Evaluate template quality</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Found quality indicators on about page</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Screenshots</h3>
+        <div class="screenshot-gallery">
+          <div class="screenshot-item">
+            <a href="assets/screenshots/carlos-1.png" target="_blank">
+              <img src="assets/screenshots/carlos-1.png" alt="Carlos lands on site, scanning for relevance to SOC2" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Landing page scan</p>
+          </div>
+          <div class="screenshot-item">
+            <a href="assets/screenshots/carlos-2.png" target="_blank">
+              <img src="assets/screenshots/carlos-2.png" alt="After searching for SOC2 policies" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">SOC2 policies</p>
+          </div>
+          <div class="screenshot-item">
+            <a href="assets/screenshots/carlos-3.png" target="_blank">
+              <img src="assets/screenshots/carlos-3.png" alt="End of CTO exploration" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Exploration end</p>
+          </div>
+        </div>
+
+        <div class="findings-section">
+          <h3 class="findings-section__title"><i class="fa-solid fa-circle-check"></i> Key Observations</h3>
+          <div class="findings-list">
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>SOC2 option clearly visible in navigation</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>GitHub links prominent and easy to find</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Clear getting started instructions with step-by-step guide</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--note">note</span>
+              <span>Could show estimated time to implement</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="persona-insight">
+          <div class="persona-insight__icon"><i class="fa-solid fa-lightbulb"></i></div>
+          <div class="persona-insight__content">
+            <strong>Carlos's Verdict:</strong> "I can get my team started on this today." His impatience was satisfied - the fast path from landing page to GitHub repo took under 60 seconds.
+          </div>
+        </div>
+      </div>
+
+      <!-- Persona 2: Priya - Healthcare Compliance -->
+      <div class="persona-section" id="persona-priya">
+        <div class="persona-showcase">
+          <div class="persona-showcase__header">
+            <div class="persona-showcase__avatar" style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);">PK</div>
+            <div class="persona-showcase__info">
+              <h2 class="persona-showcase__name">Priya</h2>
+              <p class="persona-showcase__role">Healthcare Compliance Officer</p>
+              <p class="persona-showcase__background">
+                Works at a regional hospital system evaluating compliance options. Needs to present HIPAA vs HITRUST comparison to leadership. Has compliance background but not deeply technical.
+              </p>
+            </div>
+          </div>
+          <div class="persona-showcase__details">
+            <div class="persona-showcase__goals">
+              <h4>Goals</h4>
+              <ul>
+                <li>Understand the difference between HIPAA and HITRUST offerings</li>
+                <li>Find control mapping documents for audit preparation</li>
+                <li>Assess if templates are audit-ready</li>
+                <li>Find contact information for questions</li>
+              </ul>
+            </div>
+            <div class="persona-showcase__behaviors">
+              <h4>Behaviors</h4>
+              <ul>
+                <li>Reads carefully before making decisions</li>
+                <li>Looks for authoritative signals (credentials, experience)</li>
+                <li>Compares options side-by-side</li>
+                <li>Downloads documentation for offline review</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-stats">
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-file"></i></div>
+            <div>
+              <div class="session-stats__label">Pages Visited</div>
+              <div class="session-stats__value">6</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-eye"></i></div>
+            <div>
+              <div class="session-stats__label">Observations</div>
+              <div class="session-stats__value">11</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-camera"></i></div>
+            <div>
+              <div class="session-stats__label">Screenshots</div>
+              <div class="session-stats__value">10</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Tasks Completed</h3>
+        <table class="tasks-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Result</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Find healthcare-specific policy options</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Healthcare/HIPAA content visible from homepage</td>
+            </tr>
+            <tr>
+              <td>Understand HIPAA vs HITRUST difference</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Both options presented on policies page</td>
+            </tr>
+            <tr>
+              <td>Find control mapping documents</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Control mapping information available on auditors page</td>
+            </tr>
+            <tr>
+              <td>Assess audit-readiness of templates</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Multiple credibility signals found</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Screenshots</h3>
+        <div class="screenshot-gallery">
+          <div class="screenshot-item">
+            <a href="assets/screenshots/priya-1.png" target="_blank">
+              <img src="assets/screenshots/priya-1.png" alt="Priya lands on homepage looking for healthcare compliance" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Healthcare search</p>
+          </div>
+          <div class="screenshot-item">
+            <a href="assets/screenshots/priya-2.png" target="_blank">
+              <img src="assets/screenshots/priya-2.png" alt="Exploring healthcare policy options" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">HIPAA vs HITRUST</p>
+          </div>
+          <div class="screenshot-item">
+            <a href="assets/screenshots/priya-3.png" target="_blank">
+              <img src="assets/screenshots/priya-3.png" alt="End of compliance officer exploration" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Credibility check</p>
+          </div>
+        </div>
+
+        <div class="findings-section">
+          <h3 class="findings-section__title"><i class="fa-solid fa-lightbulb"></i> Key Observations</h3>
+          <div class="findings-list">
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Healthcare/HIPAA content visible from homepage</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Both HIPAA and HITRUST options are presented</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Author has security credentials - builds trust</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--note">note</span>
+              <span>Would benefit from side-by-side comparison table</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="persona-insight">
+          <div class="persona-insight__icon"><i class="fa-solid fa-lightbulb"></i></div>
+          <div class="persona-insight__content">
+            <strong>Priya's Verdict:</strong> "I have enough to present to leadership." Found the healthcare options she needed, though a HIPAA vs HITRUST comparison table would make her presentation easier.
+          </div>
+        </div>
+      </div>
+
+      <!-- Persona 3: Michael - External Auditor -->
+      <div class="persona-section" id="persona-michael">
+        <div class="persona-showcase">
+          <div class="persona-showcase__header">
+            <div class="persona-showcase__avatar" style="background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);">MR</div>
+            <div class="persona-showcase__info">
+              <h2 class="persona-showcase__name">Michael</h2>
+              <p class="persona-showcase__role">External SOC2 Auditor</p>
+              <p class="persona-showcase__background">
+                Senior auditor at a CPA firm. Client is using these open-source templates and Michael needs to evaluate if they meet audit requirements. Skeptical of free resources.
+              </p>
+            </div>
+          </div>
+          <div class="persona-showcase__details">
+            <div class="persona-showcase__goals">
+              <h4>Goals</h4>
+              <ul>
+                <li>Verify control coverage claims are accurate</li>
+                <li>Find control mapping documentation</li>
+                <li>Assess template quality and completeness</li>
+                <li>Check maintenance and version history</li>
+              </ul>
+            </div>
+            <div class="persona-showcase__behaviors">
+              <h4>Behaviors</h4>
+              <ul>
+                <li>Highly skeptical of marketing claims</li>
+                <li>Looks for evidence and documentation</li>
+                <li>Checks dates, versions, and update frequency</li>
+                <li>Examines methodology and sources</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-stats">
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-file"></i></div>
+            <div>
+              <div class="session-stats__label">Pages Visited</div>
+              <div class="session-stats__value">4</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-eye"></i></div>
+            <div>
+              <div class="session-stats__label">Observations</div>
+              <div class="session-stats__value">10</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-camera"></i></div>
+            <div>
+              <div class="session-stats__label">Screenshots</div>
+              <div class="session-stats__value">7</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Tasks Completed</h3>
+        <table class="tasks-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Result</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Verify SOC2 control coverage claims</td>
+              <td class="tasks-table__success">Success</td>
+              <td>TSC coverage details visible</td>
+            </tr>
+            <tr>
+              <td>Find control mapping documentation</td>
+              <td class="tasks-table__success">Success</td>
+              <td>GitHub links present for mappings</td>
+            </tr>
+            <tr>
+              <td>Assess template quality indicators</td>
+              <td class="tasks-table__success">Success</td>
+              <td>CISO credentials, production use mentioned</td>
+            </tr>
+            <tr>
+              <td>Check maintenance and version history</td>
+              <td class="tasks-table__success">Success</td>
+              <td>GitHub available for version history verification</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Screenshots</h3>
+        <div class="screenshot-gallery">
+          <div class="screenshot-item">
+            <a href="assets/screenshots/michael-1.png" target="_blank">
+              <img src="assets/screenshots/michael-1.png" alt="Michael reviewing site for audit preparation" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Audit evaluation</p>
+          </div>
+          <div class="screenshot-item">
+            <a href="assets/screenshots/michael-2.png" target="_blank">
+              <img src="assets/screenshots/michael-2.png" alt="Checking control coverage details" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Control coverage</p>
+          </div>
+          <div class="screenshot-item">
+            <a href="assets/screenshots/michael-3.png" target="_blank">
+              <img src="assets/screenshots/michael-3.png" alt="End of auditor assessment" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Quality check</p>
+          </div>
+        </div>
+
+        <div class="findings-section">
+          <h3 class="findings-section__title"><i class="fa-solid fa-lightbulb"></i> Key Observations</h3>
+          <div class="findings-list">
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Detailed TSC coverage information visible</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>GitHub links available for version history verification</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Strong quality indicators: CISO credentials, production use</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--note">note</span>
+              <span>No testimonials - harder to verify real-world use</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="persona-insight">
+          <div class="persona-insight__icon"><i class="fa-solid fa-lightbulb"></i></div>
+          <div class="persona-insight__content">
+            <strong>Michael's Verdict:</strong> "The templates meet our baseline requirements." His skepticism was addressed by the author's CISO credentials and detailed control mappings. He'd still verify via GitHub commit history.
+          </div>
+        </div>
+      </div>
+
+      <!-- Persona 4: Sarah - Security Engineer -->
+      <div class="persona-section" id="persona-sarah">
+        <div class="persona-showcase">
+          <div class="persona-showcase__header">
+            <div class="persona-showcase__avatar" style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);">ST</div>
+            <div class="persona-showcase__info">
+              <h2 class="persona-showcase__name">Sarah</h2>
+              <p class="persona-showcase__role">Security Engineer</p>
+              <p class="persona-showcase__background">
+                Mid-level security engineer tasked with implementing the compliance program. Comfortable with Git and documentation. Wants to understand the repo structure before diving in.
+              </p>
+            </div>
+          </div>
+          <div class="persona-showcase__details">
+            <div class="persona-showcase__goals">
+              <h4>Goals</h4>
+              <ul>
+                <li>Get to the GitHub repo quickly</li>
+                <li>Understand the file/folder structure</li>
+                <li>Find customization guidance</li>
+                <li>Verify the license allows modification</li>
+              </ul>
+            </div>
+            <div class="persona-showcase__behaviors">
+              <h4>Behaviors</h4>
+              <ul>
+                <li>Jumps to GitHub immediately</li>
+                <li>Reads READMEs before anything else</li>
+                <li>Checks commit history for activity</li>
+                <li>Prefers CLI/code over UI navigation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-stats">
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-file"></i></div>
+            <div>
+              <div class="session-stats__label">Pages Visited</div>
+              <div class="session-stats__value">5</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-eye"></i></div>
+            <div>
+              <div class="session-stats__label">Observations</div>
+              <div class="session-stats__value">11</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-camera"></i></div>
+            <div>
+              <div class="session-stats__label">Screenshots</div>
+              <div class="session-stats__value">8</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Tasks Completed</h3>
+        <table class="tasks-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Result</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Find GitHub link from homepage</td>
+              <td class="tasks-table__success">Success</td>
+              <td>GitHub link in navigation - easy access</td>
+            </tr>
+            <tr>
+              <td>Navigate to specific policy repo</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Policy repo links found on policies page</td>
+            </tr>
+            <tr>
+              <td>Find getting started / setup instructions</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Good dev instructions with code blocks</td>
+            </tr>
+            <tr>
+              <td>Verify license for modification</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Open license visible in footer</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Screenshots</h3>
+        <div class="screenshot-gallery">
+          <div class="screenshot-item">
+            <a href="assets/screenshots/sarah-1.png" target="_blank">
+              <img src="assets/screenshots/sarah-1.png" alt="Sarah looking for GitHub link" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">GitHub search</p>
+          </div>
+          <div class="screenshot-item">
+            <a href="assets/screenshots/sarah-2.png" target="_blank">
+              <img src="assets/screenshots/sarah-2.png" alt="Reviewing setup instructions" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Setup docs</p>
+          </div>
+          <div class="screenshot-item">
+            <a href="assets/screenshots/sarah-3.png" target="_blank">
+              <img src="assets/screenshots/sarah-3.png" alt="End of developer exploration" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">License check</p>
+          </div>
+        </div>
+
+        <div class="findings-section">
+          <h3 class="findings-section__title"><i class="fa-solid fa-lightbulb"></i> Key Observations</h3>
+          <div class="findings-list">
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>GitHub link in navigation - easy access</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Good dev instructions: clone, fork, step-by-step</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Code blocks with examples on getting started page</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--frustration">frustration</span>
+              <span>No search functionality - developers might expect Cmd+K</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="persona-insight persona-insight--warning">
+          <div class="persona-insight__icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="persona-insight__content">
+            <strong>Sarah's Verdict:</strong> "Good dev experience, but where's the search?" The only frustration across all 58 observations - she expected Cmd+K search that modern docs sites have. A real improvement opportunity.
+          </div>
+        </div>
+      </div>
+
+      <!-- Persona 5: David - VP Operations (Mobile) -->
+      <div class="persona-section" id="persona-david">
+        <div class="persona-showcase">
+          <div class="persona-showcase__header">
+            <div class="persona-showcase__avatar" style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);">DV</div>
+            <div class="persona-showcase__info">
+              <h2 class="persona-showcase__name">David</h2>
+              <p class="persona-showcase__role">VP of Operations (Mobile)</p>
+              <p class="persona-showcase__background">
+                Executive at a growing SaaS company. Heard from sales team that prospects are asking about SOC2. Browsing on phone during commute to understand options.
+              </p>
+            </div>
+          </div>
+          <div class="persona-showcase__details">
+            <div class="persona-showcase__goals">
+              <h4>Goals</h4>
+              <ul>
+                <li>Quickly understand what this site offers</li>
+                <li>Determine if it looks legitimate</li>
+                <li>Decide if worth deeper investigation later</li>
+                <li>Maybe bookmark for team to review</li>
+              </ul>
+            </div>
+            <div class="persona-showcase__behaviors">
+              <h4>Behaviors</h4>
+              <ul>
+                <li>Scrolls quickly through content</li>
+                <li>Reads only headlines and key points</li>
+                <li>Taps around to explore structure</li>
+                <li>Low patience for poor mobile experience</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-stats">
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-mobile-screen"></i></div>
+            <div>
+              <div class="session-stats__label">Viewport</div>
+              <div class="session-stats__value">393x851</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-eye"></i></div>
+            <div>
+              <div class="session-stats__label">Observations</div>
+              <div class="session-stats__value">8</div>
+            </div>
+          </div>
+          <div class="session-stats__item">
+            <div class="session-stats__icon"><i class="fa-solid fa-camera"></i></div>
+            <div>
+              <div class="session-stats__label">Screenshots</div>
+              <div class="session-stats__value">7</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Tasks Completed</h3>
+        <table class="tasks-table">
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th>Result</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Page loads and is readable on mobile</td>
+              <td class="tasks-table__success">Success</td>
+              <td>No horizontal scrolling required, headline readable</td>
+            </tr>
+            <tr>
+              <td>Navigation is accessible</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Navigation links visible on mobile</td>
+            </tr>
+            <tr>
+              <td>Can scroll and read key content</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Content readable while scrolling</td>
+            </tr>
+            <tr>
+              <td>Quick assessment of legitimacy</td>
+              <td class="tasks-table__success">Success</td>
+              <td>Site appears legitimate - open source, free, GitHub</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="section__title" style="margin-bottom: var(--space-4);">Screenshots</h3>
+        <div class="screenshot-gallery screenshot-gallery--mobile">
+          <div class="screenshot-item screenshot-item--mobile">
+            <a href="assets/screenshots/david-1.png" target="_blank">
+              <img src="assets/screenshots/david-1.png" alt="David views site on mobile during commute" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Mobile landing</p>
+          </div>
+          <div class="screenshot-item screenshot-item--mobile">
+            <a href="assets/screenshots/david-2.png" target="_blank">
+              <img src="assets/screenshots/david-2.png" alt="Scrolling on mobile" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Scrolling</p>
+          </div>
+          <div class="screenshot-item screenshot-item--mobile">
+            <a href="assets/screenshots/david-3.png" target="_blank">
+              <img src="assets/screenshots/david-3.png" alt="End of mobile exploration" loading="lazy">
+            </a>
+            <p class="screenshot-item__caption">Footer check</p>
+          </div>
+        </div>
+
+        <div class="findings-section">
+          <h3 class="findings-section__title"><i class="fa-solid fa-mobile-screen"></i> Mobile-Specific Observations</h3>
+          <div class="findings-list">
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>No horizontal scrolling required - mobile-friendly layout</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Headline readable on mobile - good font sizing</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+              <span>Site appears legitimate on quick mobile scan</span>
+            </div>
+            <div class="finding-item">
+              <span class="finding-item__badge observation-badge observation-badge--note">note</span>
+              <span>Some tap targets may be small for mobile touch</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="persona-insight">
+          <div class="persona-insight__icon"><i class="fa-solid fa-lightbulb"></i></div>
+          <div class="persona-insight__content">
+            <strong>David's Verdict:</strong> "Looks legit, bookmarking for the team." Quick mobile scan during his commute showed a professional site with clear trust signals. Good enough to share with his team for deeper evaluation.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- View Tests Link -->
+  <section class="section" style="background: var(--bg-surface);">
+    <div class="container" style="text-align: center;">
+      <h3 style="margin-bottom: var(--space-4);">View the Actual Test Code</h3>
+      <p style="color: var(--text-secondary); margin-bottom: var(--space-6); max-width: 600px; margin-left: auto; margin-right: auto;">
+        All 6 persona tests are open source. See how we defined each persona and structured the tests.
+      </p>
+      <a href="https://github.com/open-access-policies/open-access-policies.github.io/tree/main/tests/personas"
+         target="_blank"
+         rel="noopener"
+         class="button button-secondary">
+        <i class="fa-brands fa-github"></i> View on GitHub
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section example-cta">
+    <div class="container">
+      <h2 class="example-cta__title">Ready to test your site with personas?</h2>
+      <div class="example-cta__buttons">
+        <a href="getting-started.html" class="button button-primary">Get Started</a>
+        <a href="personas.html" class="button button-secondary">Browse Persona Templates</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <p class="footer__logo gradient-text">PersonaSpec</p>
+          <p class="footer__tagline">
+            A methodology for E2E testing that puts users first.
+          </p>
+          <p class="footer__license">MIT License</p>
+        </div>
+
+        <nav class="footer__nav">
+          <h4 class="footer__nav-title">Docs</h4>
+          <ul class="footer__nav-list">
+            <li><a href="methodology.html">Methodology</a></li>
+            <li><a href="personas.html">Personas</a></li>
+            <li><a href="example.html">Example</a></li>
+            <li><a href="case-study.html">Case Study</a></li>
+            <li><a href="getting-started.html">Get Started</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer__nav">
+          <h4 class="footer__nav-title">GitHub</h4>
+          <ul class="footer__nav-list">
+            <li><a href="https://github.com/persona-spec/personaspec.dev">Repository</a></li>
+            <li><a href="https://github.com/persona-spec/personaspec.dev/issues">Issues</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

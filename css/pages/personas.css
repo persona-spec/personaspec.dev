@@ -486,7 +486,26 @@
 
 .personas-cta__text {
   color: var(--text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.personas-cta__note {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
   margin-bottom: var(--space-6);
+}
+
+.personas-cta__note code {
+  background: var(--bg-surface);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent-primary);
+}
+
+.personas-cta__note .link {
+  margin-left: var(--space-2);
 }
 
 /* ========================================
