@@ -1,6 +1,30 @@
 /* PersonaSpec Example Page Styles */
 
 /* ========================================
+   Page Header
+   ======================================== */
+
+.page-header {
+  padding: calc(var(--space-20) + 60px) 0 var(--space-12);
+  text-align: center;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.page-header__title {
+  font-size: var(--text-4xl);
+  font-weight: 800;
+  margin-bottom: var(--space-4);
+}
+
+.page-header__subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ========================================
    Intro Section
    ======================================== */
 
@@ -613,4 +637,18 @@
   gap: var(--space-4);
   justify-content: center;
   flex-wrap: wrap;
+}
+
+/* ========================================
+   Responsive Styles
+   ======================================== */
+
+@media (max-width: 768px) {
+  .page-header {
+    padding: calc(var(--space-16) + 60px) 0 var(--space-8);
+  }
+
+  .page-header__title {
+    font-size: var(--text-3xl);
+  }
 }
