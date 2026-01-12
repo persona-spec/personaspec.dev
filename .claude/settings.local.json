@@ -6,7 +6,22 @@
       "Bash(open:*)",
       "Bash(gh repo create:*)",
       "Bash(git init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(eza:*)",
+      "Bash(git push:*)",
+      "mcp__playwright__browser_navigate",
+      "Bash(curl:*)",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_evaluate",
+      "mcp__playwright__browser_close",
+      "Bash(pkill:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:fontawesome.com)",
+      "Bash(grep:*)",
+      "Bash(git pull:*)",
+      "mcp__playwright__browser_click"
     ]
   }
 }
