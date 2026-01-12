@@ -317,6 +317,42 @@ Results are saved as JSON:
 }
 ```
 
+## Real-World Example
+
+See PersonaSpec in action on [Open Access Policies](https://github.com/open-access-policies/open-access-policies.github.io) - a compliance policy template website.
+
+The repo includes 5 custom personas tailored for testing a compliance documentation site:
+
+| Persona | Role | Tests |
+|---------|------|-------|
+| **Carlos** | Startup CTO | Speed to find SOC2 templates, GitHub access, customization effort |
+| **Priya** | Healthcare Compliance | HIPAA vs HITRUST decision, control mappings, audit-readiness |
+| **Michael** | External Auditor | Control coverage verification, quality assessment, licensing |
+| **Sarah** | Security Engineer | Developer experience, repo navigation, documentation quality |
+| **David** | VP Operations (Mobile) | Mobile usability, quick legitimacy assessment |
+
+Example of a domain-specific persona definition:
+
+```typescript
+const persona = definePersona({
+  name: 'Carlos',
+  role: 'Startup CTO',
+  background: 'Series A startup just landed enterprise deal requiring SOC2. Has 3 weeks to show compliance progress.',
+  goals: [
+    'Find the right policy set for SOC2 quickly',
+    'Get to the GitHub repo to assess templates',
+    'Determine customization effort required',
+  ],
+  behaviors: [
+    'Skips marketing copy, looks for technical details',
+    'Checks GitHub activity and stars for credibility',
+    'Impatient with slow or unclear navigation',
+  ],
+});
+```
+
+View the full test files: [tests/personas/](https://github.com/open-access-policies/open-access-policies.github.io/tree/main/tests/personas)
+
 ## Learn More
 
 - [PersonaSpec Methodology](https://personaspec.dev/methodology) - Full specification
