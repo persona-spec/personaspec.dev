@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Get started with PersonaSpec - Run your first persona-driven E2E test in 10 minutes with Playwright and AI vision analysis.">
+  <meta name="description" content="Get started with PersonaSpec - Install the npm package, run your first test, and explore the full API reference.">
 
   <title>Get Started - PersonaSpec</title>
 
@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/methodology.css">
   <link rel="stylesheet" href="css/pages/getting-started.css">
 
   <!-- Favicon -->
@@ -40,6 +41,7 @@
         <li><a href="methodology.html">Methodology</a></li>
         <li><a href="personas.html">Personas</a></li>
         <li><a href="example.html">Example</a></li>
+        <li><a href="case-study.html">Case Study</a></li>
         <li><a href="getting-started.html" class="is-active">Get Started</a></li>
       </ul>
 
@@ -52,166 +54,97 @@
     <div class="container">
       <h1 class="page-header__title"><span class="gradient-text">Get Started</span></h1>
       <p class="page-header__subtitle">
-        Run your first persona-driven E2E test in 10 minutes.
+        Install the npm package, run your first test, and explore the full API reference.
       </p>
     </div>
   </header>
 
-  <!-- Guide Content -->
-  <div class="guide">
-    <!-- Prerequisites -->
-    <div class="prerequisites">
-      <h2 class="prerequisites__title"><i class="fa-solid fa-circle-check"></i> Prerequisites</h2>
-      <ul class="prerequisites__list">
-        <li>
-          <i class="fa-solid fa-check"></i>
-          <span>Node.js 18+ installed</span>
-        </li>
-        <li>
-          <i class="fa-solid fa-check"></i>
-          <span>Playwright installed: <code>npm init playwright@latest</code></span>
-        </li>
-        <li>
-          <i class="fa-solid fa-check"></i>
-          <span>A website to test (we'll use personaspec.dev as an example)</span>
-        </li>
+  <!-- Docs Layout -->
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <p class="docs-sidebar__title">On This Page</p>
+      <ul class="docs-sidebar__nav">
+        <li><a href="#quick-start" class="docs-sidebar__link">Quick Start</a></li>
+        <li><a href="#writing-tests" class="docs-sidebar__link">Writing Tests</a></li>
+        <li><a href="#cli-reference" class="docs-sidebar__link">CLI Reference</a></li>
+        <li><a href="#api-reference" class="docs-sidebar__link">API Reference</a></li>
+        <li><a href="#persona-templates" class="docs-sidebar__link">Persona Templates</a></li>
+        <li><a href="#output-format" class="docs-sidebar__link">Output Format</a></li>
       </ul>
-      <p class="prerequisites__note">TypeScript is recommended but not required. Examples below use TypeScript.</p>
-    </div>
+    </aside>
 
-    <!-- Step 1: Create Observation Collector -->
-    <section class="guide-step">
-      <div class="guide-step__header">
-        <span class="guide-step__number">1</span>
-        <div class="guide-step__title-group">
-          <h2 class="guide-step__title">Create the Observation Collector</h2>
-          <p class="guide-step__subtitle">A utility class to capture screenshots and observations</p>
-        </div>
-      </div>
-      <div class="guide-step__content">
-        <p>
-          Create a file at <code>tests/utils/ObservationCollector.ts</code> that will track everything during test execution.
-        </p>
+    <!-- Main Content -->
+    <main class="docs-content">
+      <!-- Quick Start -->
+      <section class="docs-section" id="quick-start">
+        <h2 class="docs-section__title">Quick Start</h2>
+        <p>Get your first persona test running in under 5 minutes.</p>
 
+        <h4>1. Install the package</h4>
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">tests/utils/ObservationCollector.ts</span>
-            <span class="code-block__language">TypeScript</span>
+            <span class="code-block__filename">Terminal</span>
+            <span class="code-block__language">bash</span>
           </div>
           <div class="code-block__content">
-            <pre><code><span class="token-keyword">import</span> { Page } <span class="token-keyword">from</span> <span class="token-string">'@playwright/test'</span>;
-<span class="token-keyword">import</span> * <span class="token-keyword">as</span> fs <span class="token-keyword">from</span> <span class="token-string">'fs'</span>;
-<span class="token-keyword">import</span> * <span class="token-keyword">as</span> path <span class="token-keyword">from</span> <span class="token-string">'path'</span>;
-
-<span class="token-keyword">type</span> ObservationType = <span class="token-string">'success'</span> | <span class="token-string">'note'</span> | <span class="token-string">'confusion'</span> | <span class="token-string">'frustration'</span>;
-
-<span class="token-keyword">interface</span> Observation {
-  type: ObservationType;
-  description: <span class="token-keyword">string</span>;
-  location?: <span class="token-keyword">string</span>;
-  timestamp: <span class="token-keyword">string</span>;
-}
-
-<span class="token-keyword">interface</span> Screenshot {
-  name: <span class="token-keyword">string</span>;
-  context: <span class="token-keyword">string</span>;
-  url: <span class="token-keyword">string</span>;
-  base64: <span class="token-keyword">string</span>;
-}
-
-<span class="token-keyword">interface</span> TaskResult {
-  name: <span class="token-keyword">string</span>;
-  success: <span class="token-keyword">boolean</span>;
-  duration: <span class="token-keyword">number</span>;
-  notes?: <span class="token-keyword">string</span>;
-}
-
-<span class="token-keyword">export class</span> <span class="token-function">ObservationCollector</span> {
-  <span class="token-keyword">private</span> persona: <span class="token-keyword">string</span>;
-  <span class="token-keyword">private</span> outputDir: <span class="token-keyword">string</span>;
-  <span class="token-keyword">private</span> observations: Observation[] = [];
-  <span class="token-keyword">private</span> screenshots: Screenshot[] = [];
-  <span class="token-keyword">private</span> tasks: TaskResult[] = [];
-  <span class="token-keyword">private</span> startTime: Date;
-  <span class="token-keyword">private</span> metrics = { pageLoads: <span class="token-number">0</span>, clicks: <span class="token-number">0</span>, backNavs: <span class="token-number">0</span> };
-
-  <span class="token-keyword">constructor</span>(persona: <span class="token-keyword">string</span>, outputDir = <span class="token-string">'./test-results/personas'</span>) {
-    <span class="token-keyword">this</span>.persona = persona;
-    <span class="token-keyword">this</span>.outputDir = outputDir;
-    <span class="token-keyword">this</span>.startTime = <span class="token-keyword">new</span> Date();
-  }
-
-  <span class="token-keyword">async</span> <span class="token-function">screenshot</span>(page: Page, name: <span class="token-keyword">string</span>, context: <span class="token-keyword">string</span>) {
-    <span class="token-keyword">const</span> buffer = <span class="token-keyword">await</span> page.<span class="token-function">screenshot</span>();
-    <span class="token-keyword">this</span>.screenshots.<span class="token-function">push</span>({
-      name,
-      context,
-      url: page.<span class="token-function">url</span>(),
-      base64: buffer.<span class="token-function">toString</span>(<span class="token-string">'base64'</span>)
-    });
-  }
-
-  <span class="token-function">observe</span>(type: ObservationType, description: <span class="token-keyword">string</span>, location?: <span class="token-keyword">string</span>) {
-    <span class="token-keyword">this</span>.observations.<span class="token-function">push</span>({
-      type,
-      description,
-      location,
-      timestamp: <span class="token-keyword">new</span> Date().<span class="token-function">toISOString</span>()
-    });
-  }
-
-  <span class="token-function">recordTask</span>(name: <span class="token-keyword">string</span>, success: <span class="token-keyword">boolean</span>, duration: <span class="token-keyword">number</span>, notes?: <span class="token-keyword">string</span>) {
-    <span class="token-keyword">this</span>.tasks.<span class="token-function">push</span>({ name, success, duration, notes });
-  }
-
-  <span class="token-function">trackPageLoad</span>() { <span class="token-keyword">this</span>.metrics.pageLoads++; }
-  <span class="token-function">trackClick</span>() { <span class="token-keyword">this</span>.metrics.clicks++; }
-  <span class="token-function">trackBackNav</span>() { <span class="token-keyword">this</span>.metrics.backNavs++; }
-
-  <span class="token-keyword">async</span> <span class="token-function">save</span>() {
-    <span class="token-keyword">const</span> data = {
-      persona: <span class="token-keyword">this</span>.persona,
-      session: {
-        startTime: <span class="token-keyword">this</span>.startTime.<span class="token-function">toISOString</span>(),
-        endTime: <span class="token-keyword">new</span> Date().<span class="token-function">toISOString</span>(),
-        ...<span class="token-keyword">this</span>.metrics
-      },
-      tasks: <span class="token-keyword">this</span>.tasks,
-      observations: <span class="token-keyword">this</span>.observations,
-      screenshots: <span class="token-keyword">this</span>.screenshots
-    };
-
-    fs.<span class="token-function">mkdirSync</span>(<span class="token-keyword">this</span>.outputDir, { recursive: <span class="token-keyword">true</span> });
-    <span class="token-keyword">const</span> filename = <span class="token-string">`</span>${<span class="token-keyword">this</span>.persona.<span class="token-function">toLowerCase</span>().<span class="token-function">replace</span>(<span class="token-string">/\s+/g</span>, <span class="token-string">'-'</span>)}<span class="token-string">.json`</span>;
-    fs.<span class="token-function">writeFileSync</span>(
-      path.<span class="token-function">join</span>(<span class="token-keyword">this</span>.outputDir, filename),
-      JSON.<span class="token-function">stringify</span>(data, <span class="token-keyword">null</span>, <span class="token-number">2</span>)
-    );
-  }
-}</code></pre>
+            <pre><code>npm install personaspec @playwright/test
+npx playwright install chromium</code></pre>
           </div>
         </div>
 
-        <div class="tip-box">
-          <p class="tip-box__title"><i class="fa-solid fa-lightbulb"></i> Tip</p>
-          <p>The base64 screenshots are embedded in the JSON output so you can send the entire file to a vision model for analysis without managing separate image files.</p>
+        <h4>2. Initialize your project</h4>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">Terminal</span>
+            <span class="code-block__language">bash</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code>npx personaspec init</code></pre>
+          </div>
         </div>
-      </div>
-    </section>
+        <p>This creates a <code>playwright.config.ts</code> and an example test file in <code>tests/personas/</code>.</p>
 
-    <!-- Step 2: Define Your Persona -->
-    <section class="guide-step">
-      <div class="guide-step__header">
-        <span class="guide-step__number">2</span>
-        <div class="guide-step__title-group">
-          <h2 class="guide-step__title">Define Your First Persona</h2>
-          <p class="guide-step__subtitle">Create a fictional user with specific goals and behaviors</p>
+        <h4>3. Run your first test</h4>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">Terminal</span>
+            <span class="code-block__language">bash</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code>npx playwright test</code></pre>
+          </div>
         </div>
-      </div>
-      <div class="guide-step__content">
-        <p>
-          Create a test file at <code>tests/personas/dev-dana.spec.ts</code>. We'll use "Dev Dana" - a developer evaluating PersonaSpec.
-        </p>
+
+        <h4>4. Generate a report</h4>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">Terminal</span>
+            <span class="code-block__language">bash</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code>npx personaspec report test-results/alex-observations.json</code></pre>
+          </div>
+        </div>
+
+        <div class="callout callout--tip">
+          <p class="callout__title"><i class="fa-solid fa-sparkles"></i> AI Analysis (Optional)</p>
+          <p>Get AI-powered UX insights by running:</p>
+          <div class="code-block" style="margin-top: var(--space-3); margin-bottom: 0;">
+            <div class="code-block__content">
+              <pre><code>ANTHROPIC_API_KEY=sk-ant-... npx personaspec analyze test-results/alex-observations.json</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Writing Tests -->
+      <section class="docs-section" id="writing-tests">
+        <h2 class="docs-section__title">Writing Tests</h2>
+        <p>PersonaSpec tests follow a structured pattern that captures meaningful user journey data.</p>
+
+        <h4>Define Your Persona</h4>
+        <p>Start by defining who is using your site. Use <code>definePersona()</code> or one of the built-in templates:</p>
 
         <div class="code-block">
           <div class="code-block__header">
@@ -220,60 +153,42 @@
           </div>
           <div class="code-block__content">
             <pre><code><span class="token-keyword">import</span> { test } <span class="token-keyword">from</span> <span class="token-string">'@playwright/test'</span>;
-<span class="token-keyword">import</span> { ObservationCollector } <span class="token-keyword">from</span> <span class="token-string">'../utils/ObservationCollector'</span>;
+<span class="token-keyword">import</span> { ObservationCollector, definePersona } <span class="token-keyword">from</span> <span class="token-string">'personaspec'</span>;
 
-<span class="token-comment">/**
- * Persona: Dev Dana - Developer Evaluating
- *
- * Background: Senior frontend developer at a Series B startup.
- *             Skeptical of new testing approaches, has 15 minutes
- *             between meetings to evaluate if this is worth adopting.
- *
- * Goals:
- *   - Understand if PersonaSpec is worth the learning curve
- *   - Find concrete, runnable code examples
- *   - Assess implementation effort for their team
- *
- * Behaviors:
- *   - Skims headings, jumps to code blocks
- *   - Looks for "getting started" or quickstart guides
- *   - Evaluates based on first impressions
- */</span>
+<span class="token-keyword">const</span> persona = <span class="token-function">definePersona</span>({
+  name: <span class="token-string">'Dana'</span>,
+  role: <span class="token-string">'Developer Evaluating'</span>,
+  background: <span class="token-string">'Senior frontend dev, skeptical of new tools, has 15 minutes'</span>,
+  goals: [
+    <span class="token-string">'Understand if worth the learning curve'</span>,
+    <span class="token-string">'Find runnable code examples'</span>,
+    <span class="token-string">'Assess implementation effort'</span>,
+  ],
+  behaviors: [
+    <span class="token-string">'Skims headings, jumps to code'</span>,
+    <span class="token-string">'Looks for quickstart guides'</span>,
+  ],
+});
 
-<span class="token-keyword">const</span> collector = <span class="token-keyword">new</span> <span class="token-function">ObservationCollector</span>(<span class="token-string">'Dev Dana - Developer Evaluating'</span>);
-
-<span class="token-comment">// Tests run in serial order (like a real user session)</span>
-test.<span class="token-function">describe</span>.<span class="token-function">serial</span>(<span class="token-string">'Dev Dana evaluates PersonaSpec'</span>, () => {
-
-  test.<span class="token-function">afterAll</span>(<span class="token-keyword">async</span> () => {
-    <span class="token-keyword">await</span> collector.<span class="token-function">save</span>();
-  });
-
-  <span class="token-comment">// Tasks defined in next step...</span>
+<span class="token-keyword">const</span> collector = <span class="token-keyword">new</span> <span class="token-function">ObservationCollector</span>({
+  outputDir: <span class="token-string">'./test-results'</span>,
+  persona,
 });</code></pre>
           </div>
         </div>
 
-        <div class="tip-box">
-          <p class="tip-box__title"><i class="fa-solid fa-lightbulb"></i> Good Persona Design</p>
-          <p>Make personas specific enough to guide test design. "A user" is too vague. "A skeptical senior developer with 15 minutes" tells you exactly how to structure the tests.</p>
-        </div>
-      </div>
-    </section>
+        <h4>Write Task Tests</h4>
+        <p>Each task test follows the 7-step pattern:</p>
 
-    <!-- Step 3: Write Task Tests -->
-    <section class="guide-step">
-      <div class="guide-step__header">
-        <span class="guide-step__number">3</span>
-        <div class="guide-step__title-group">
-          <h2 class="guide-step__title">Write Task Tests</h2>
-          <p class="guide-step__subtitle">Each task represents something the persona wants to accomplish</p>
-        </div>
-      </div>
-      <div class="guide-step__content">
-        <p>
-          Add task tests inside the <code>describe.serial</code> block. Each follows the 7-step pattern.
-        </p>
+        <ol class="step-list">
+          <li><strong>Start task timing</strong> with <code>collector.startTask()</code></li>
+          <li><strong>Initialize success as false</strong> (prove success, don't assume)</li>
+          <li><strong>Navigate and screenshot</strong> the starting point</li>
+          <li><strong>Attempt the task</strong> as the persona would</li>
+          <li><strong>Evaluate and observe</strong> outcomes</li>
+          <li><strong>Capture result screenshot</strong> with context</li>
+          <li><strong>Record the task</strong> with <code>collector.recordTask()</code></li>
+        </ol>
 
         <div class="code-block">
           <div class="code-block__header">
@@ -281,104 +196,51 @@ test.<span class="token-function">describe</span>.<span class="token-function">s
             <span class="code-block__language">TypeScript</span>
           </div>
           <div class="code-block__content">
-            <pre><code>test(<span class="token-string">'understand the core concept within 60 seconds'</span>, <span class="token-keyword">async</span> ({ page }) => {
-  <span class="token-comment">// 1. Track start time</span>
-  <span class="token-keyword">const</span> startTime = Date.<span class="token-function">now</span>();
+            <pre><code>test.<span class="token-function">describe</span>.<span class="token-function">configure</span>({ mode: <span class="token-string">'serial'</span> });
 
-  <span class="token-comment">// 2. Initialize success as false (prove it, don't assume)</span>
-  <span class="token-keyword">let</span> success = <span class="token-keyword">false</span>;
-  <span class="token-keyword">let</span> notes = <span class="token-string">''</span>;
+test.<span class="token-function">describe</span>(<span class="token-string">`${persona.name} - ${persona.role}`</span>, () => {
+  test.<span class="token-function">afterAll</span>(<span class="token-keyword">async</span> () => {
+    <span class="token-keyword">await</span> collector.<span class="token-function">save</span>();
+  });
 
-  <span class="token-comment">// 3. Navigate and screenshot</span>
-  <span class="token-keyword">await</span> page.<span class="token-function">goto</span>(<span class="token-string">'https://personaspec.dev'</span>);
-  collector.<span class="token-function">trackPageLoad</span>();
-  <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'landing-first-look'</span>,
-    <span class="token-string">'Dev Dana lands on homepage, scanning for value prop'</span>);
+  test(<span class="token-string">'find code examples quickly'</span>, <span class="token-keyword">async</span> ({ page }) => {
+    <span class="token-comment">// 1. Start timing</span>
+    collector.<span class="token-function">startTask</span>();
 
-  <span class="token-comment">// 4. Attempt the task as persona would</span>
-  <span class="token-keyword">const</span> heroText = <span class="token-keyword">await</span> page.<span class="token-function">locator</span>(<span class="token-string">'.hero'</span>).<span class="token-function">textContent</span>();
+    <span class="token-comment">// 2. Initialize success as false</span>
+    <span class="token-keyword">let</span> success = <span class="token-keyword">false</span>;
 
-  <span class="token-comment">// 5. Evaluate outcome</span>
-  <span class="token-keyword">if</span> (heroText?.<span class="token-function">includes</span>(<span class="token-string">'persona'</span>) && heroText?.<span class="token-function">includes</span>(<span class="token-string">'test'</span>)) {
-    success = <span class="token-keyword">true</span>;
-    notes = <span class="token-string">'Hero clearly mentions persona-driven testing'</span>;
-    collector.<span class="token-function">observe</span>(<span class="token-string">'success'</span>, <span class="token-string">'Value prop clear in hero section'</span>, <span class="token-string">'Homepage'</span>);
-  } <span class="token-keyword">else</span> {
-    notes = <span class="token-string">'Could not quickly understand the core concept'</span>;
-    collector.<span class="token-function">observe</span>(<span class="token-string">'confusion'</span>, <span class="token-string">'Value prop not immediately clear'</span>, <span class="token-string">'Homepage'</span>);
-  }
-
-  <span class="token-comment">// 6. Capture result screenshot</span>
-  <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'landing-after-scan'</span>,
-    <span class="token-string">'After scanning hero section for core concept'</span>);
-
-  <span class="token-comment">// 7. Record the task</span>
-  <span class="token-keyword">const</span> duration = Date.<span class="token-function">now</span>() - startTime;
-  collector.<span class="token-function">recordTask</span>(<span class="token-string">'Understand core concept within 60 seconds'</span>, success, duration, notes);
-});
-
-test(<span class="token-string">'find a runnable code example'</span>, <span class="token-keyword">async</span> ({ page }) => {
-  <span class="token-keyword">const</span> startTime = Date.<span class="token-function">now</span>();
-  <span class="token-keyword">let</span> success = <span class="token-keyword">false</span>;
-  <span class="token-keyword">let</span> notes = <span class="token-string">''</span>;
-
-  <span class="token-comment">// Look for "Get Started" link (developer instinct)</span>
-  <span class="token-keyword">const</span> getStarted = page.<span class="token-function">getByRole</span>(<span class="token-string">'link'</span>, { name: <span class="token-string">/get started/i</span> });
-
-  <span class="token-keyword">if</span> (<span class="token-keyword">await</span> getStarted.<span class="token-function">isVisible</span>({ timeout: <span class="token-number">3000</span> })) {
-    <span class="token-keyword">await</span> getStarted.<span class="token-function">click</span>();
-    collector.<span class="token-function">trackClick</span>();
+    <span class="token-comment">// 3. Navigate and screenshot</span>
+    <span class="token-keyword">await</span> page.<span class="token-function">goto</span>(<span class="token-string">'https://example.com'</span>);
     collector.<span class="token-function">trackPageLoad</span>();
-    <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'getting-started-page'</span>,
-      <span class="token-string">'Navigated to Get Started, looking for code'</span>);
+    <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'homepage'</span>,
+      <span class="token-string">'Dana lands on homepage, scanning for code'</span>);
 
-    <span class="token-comment">// Look for code blocks</span>
-    <span class="token-keyword">const</span> codeBlocks = page.<span class="token-function">locator</span>(<span class="token-string">'.code-block'</span>);
-    <span class="token-keyword">if</span> (<span class="token-keyword">await</span> codeBlocks.<span class="token-function">count</span>() > <span class="token-number">0</span>) {
+    <span class="token-comment">// 4. Attempt the task</span>
+    <span class="token-keyword">const</span> codeBlock = page.<span class="token-function">locator</span>(<span class="token-string">'pre code'</span>).<span class="token-function">first</span>();
+
+    <span class="token-comment">// 5. Evaluate and observe</span>
+    <span class="token-keyword">if</span> (<span class="token-keyword">await</span> codeBlock.<span class="token-function">isVisible</span>({ timeout: <span class="token-number">5000</span> })) {
       success = <span class="token-keyword">true</span>;
-      notes = <span class="token-string">`Found </span>${<span class="token-keyword">await</span> codeBlocks.<span class="token-function">count</span>()}<span class="token-string"> code examples`</span>;
-      collector.<span class="token-function">observe</span>(<span class="token-string">'success'</span>, <span class="token-string">'Code examples found on Get Started page'</span>);
+      collector.<span class="token-function">observe</span>(<span class="token-string">'success'</span>, <span class="token-string">'Code visible on homepage'</span>, <span class="token-string">'Homepage'</span>);
+    } <span class="token-keyword">else</span> {
+      collector.<span class="token-function">observe</span>(<span class="token-string">'frustration'</span>, <span class="token-string">'No code examples found'</span>, <span class="token-string">'Homepage'</span>);
     }
-  } <span class="token-keyword">else</span> {
-    notes = <span class="token-string">'Could not find Get Started link quickly'</span>;
-    collector.<span class="token-function">observe</span>(<span class="token-string">'frustration'</span>, <span class="token-string">'No obvious path to code examples'</span>);
-  }
 
-  <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'code-search-result'</span>,
-    <span class="token-string">'Final state after searching for code examples'</span>);
+    <span class="token-comment">// 6. Result screenshot</span>
+    <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'code-search-result'</span>,
+      <span class="token-string">'After searching for code examples'</span>);
 
-  collector.<span class="token-function">recordTask</span>(<span class="token-string">'Find a runnable code example'</span>, success,
-    Date.<span class="token-function">now</span>() - startTime, notes);
+    <span class="token-comment">// 7. Record the task</span>
+    collector.<span class="token-function">recordTask</span>(<span class="token-string">'find code examples quickly'</span>, success,
+      success ? <span class="token-string">'Found on homepage'</span> : <span class="token-string">'Code not visible'</span>);
+  });
 });</code></pre>
           </div>
         </div>
 
-        <p>The 7-step pattern ensures consistent, measurable results:</p>
-        <ul class="pattern-list">
-          <li><span class="pattern-list__number">1</span> <span class="pattern-list__content"><strong>Track start time</strong> for duration measurement</span></li>
-          <li><span class="pattern-list__number">2</span> <span class="pattern-list__content"><strong>Initialize success as false</strong> - prove success, don't assume it</span></li>
-          <li><span class="pattern-list__number">3</span> <span class="pattern-list__content"><strong>Navigate and screenshot</strong> the starting point</span></li>
-          <li><span class="pattern-list__number">4</span> <span class="pattern-list__content"><strong>Attempt the task</strong> as the persona would naturally try it</span></li>
-          <li><span class="pattern-list__number">5</span> <span class="pattern-list__content"><strong>Evaluate outcome</strong> and record observations</span></li>
-          <li><span class="pattern-list__number">6</span> <span class="pattern-list__content"><strong>Capture result screenshot</strong> with context</span></li>
-          <li><span class="pattern-list__number">7</span> <span class="pattern-list__content"><strong>Record the task</strong> with success, duration, notes</span></li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Step 4: Add Free Exploration -->
-    <section class="guide-step">
-      <div class="guide-step__header">
-        <span class="guide-step__number">4</span>
-        <div class="guide-step__title-group">
-          <h2 class="guide-step__title">Add Free Exploration</h2>
-          <p class="guide-step__subtitle">Simulate browsing without a specific goal</p>
-        </div>
-      </div>
-      <div class="guide-step__content">
-        <p>
-          End each persona file with an exploration test that catches issues task-focused tests miss.
-        </p>
+        <h4>Add Free Exploration</h4>
+        <p>End each persona with an exploration test that catches issues task-focused tests miss:</p>
 
         <div class="code-block">
           <div class="code-block__header">
@@ -386,68 +248,40 @@ test(<span class="token-string">'find a runnable code example'</span>, <span cla
             <span class="code-block__language">TypeScript</span>
           </div>
           <div class="code-block__content">
-            <pre><code>test(<span class="token-string">'free exploration - browse like a curious developer'</span>, <span class="token-keyword">async</span> ({ page }) => {
-  <span class="token-keyword">const</span> startTime = Date.<span class="token-function">now</span>();
+            <pre><code>test(<span class="token-string">'free exploration'</span>, <span class="token-keyword">async</span> ({ page }) => {
+  collector.<span class="token-function">startTask</span>();
 
-  <span class="token-comment">// Start on homepage</span>
-  <span class="token-keyword">await</span> page.<span class="token-function">goto</span>(<span class="token-string">'https://personaspec.dev'</span>);
+  <span class="token-keyword">await</span> page.<span class="token-function">goto</span>(<span class="token-string">'https://example.com'</span>);
   collector.<span class="token-function">trackPageLoad</span>();
 
-  <span class="token-comment">// Define exploration actions</span>
-  <span class="token-keyword">const</span> actions = [
-    <span class="token-keyword">async</span> () => {
-      <span class="token-keyword">await</span> page.<span class="token-function">locator</span>(<span class="token-string">'a[href*="methodology"]'</span>).<span class="token-function">first</span>().<span class="token-function">click</span>();
-      collector.<span class="token-function">trackClick</span>();
-      <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'explore-methodology'</span>,
-        <span class="token-string">'Clicked methodology link to see details'</span>);
-    },
-    <span class="token-keyword">async</span> () => {
-      <span class="token-keyword">await</span> page.<span class="token-function">goBack</span>();
-      collector.<span class="token-function">trackBackNav</span>();
-    },
-    <span class="token-keyword">async</span> () => {
-      <span class="token-keyword">await</span> page.<span class="token-function">locator</span>(<span class="token-string">'a[href*="personas"]'</span>).<span class="token-function">first</span>().<span class="token-function">click</span>();
-      collector.<span class="token-function">trackClick</span>();
-      <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'explore-personas'</span>,
-        <span class="token-string">'Checking out example personas'</span>);
-    },
-    <span class="token-keyword">async</span> () => {
-      <span class="token-keyword">await</span> page.<span class="token-function">evaluate</span>(() => window.<span class="token-function">scrollTo</span>(<span class="token-number">0</span>, document.body.scrollHeight));
-      <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'explore-scroll-bottom'</span>,
-        <span class="token-string">'Scrolled to bottom to see all content'</span>);
-    }
-  ];
-
-  <span class="token-comment">// Execute each action with error handling</span>
-  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> action <span class="token-keyword">of</span> actions) {
+  <span class="token-comment">// Browse naturally based on persona behaviors</span>
+  <span class="token-keyword">const</span> links = <span class="token-keyword">await</span> page.<span class="token-function">locator</span>(<span class="token-string">'nav a'</span>).<span class="token-function">all</span>();
+  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> link <span class="token-keyword">of</span> links.<span class="token-function">slice</span>(<span class="token-number">0</span>, <span class="token-number">3</span>)) {
     <span class="token-keyword">try</span> {
-      <span class="token-keyword">await</span> <span class="token-function">action</span>();
-      <span class="token-keyword">await</span> page.<span class="token-function">waitForTimeout</span>(<span class="token-number">500</span>); <span class="token-comment">// Simulate human pace</span>
-    } <span class="token-keyword">catch</span> (error) {
-      collector.<span class="token-function">observe</span>(<span class="token-string">'note'</span>, <span class="token-string">`Exploration action failed: </span>${error}<span class="token-string">`</span>);
+      <span class="token-keyword">await</span> link.<span class="token-function">click</span>();
+      collector.<span class="token-function">trackClick</span>();
+      collector.<span class="token-function">trackPageLoad</span>();
+      <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">`explore-${<span class="token-keyword">await</span> link.<span class="token-function">textContent</span>()}`</span>,
+        <span class="token-string">'Exploring navigation'</span>);
+    } <span class="token-keyword">catch</span> (e) {
+      collector.<span class="token-function">observe</span>(<span class="token-string">'note'</span>, <span class="token-string">'Navigation click failed'</span>, page.<span class="token-function">url</span>());
     }
   }
 
   <span class="token-comment">// Free exploration always "succeeds" - observations are the value</span>
-  collector.<span class="token-function">recordTask</span>(<span class="token-string">'Free exploration'</span>, <span class="token-keyword">true</span>,
-    Date.<span class="token-function">now</span>() - startTime, <span class="token-string">'Browsed homepage, methodology, and personas'</span>);
+  collector.<span class="token-function">recordTask</span>(<span class="token-string">'free exploration'</span>, <span class="token-keyword">true</span>, <span class="token-string">'Browsed site naturally'</span>);
 });</code></pre>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Step 5: Run and Analyze -->
-    <section class="guide-step">
-      <div class="guide-step__header">
-        <span class="guide-step__number">5</span>
-        <div class="guide-step__title-group">
-          <h2 class="guide-step__title">Run and Analyze</h2>
-          <p class="guide-step__subtitle">Execute tests and feed results to a vision model</p>
-        </div>
-      </div>
-      <div class="guide-step__content">
-        <p>Run your persona tests:</p>
+      <!-- CLI Reference -->
+      <section class="docs-section" id="cli-reference">
+        <h2 class="docs-section__title">CLI Reference</h2>
+        <p>PersonaSpec includes three CLI commands for scaffolding, reporting, and AI analysis.</p>
+
+        <h4><code>personaspec init</code></h4>
+        <p>Scaffold a new PersonaSpec project with example files.</p>
 
         <div class="code-block">
           <div class="code-block__header">
@@ -455,104 +289,332 @@ test(<span class="token-string">'find a runnable code example'</span>, <span cla
             <span class="code-block__language">bash</span>
           </div>
           <div class="code-block__content">
-            <pre><code>npx playwright test tests/personas/dev-dana.spec.ts</code></pre>
+            <pre><code>npx personaspec init [options]
+
+<span class="token-comment"># Options:</span>
+  --force    Overwrite existing files</code></pre>
           </div>
         </div>
 
-        <p>This generates a JSON file at <code>test-results/personas/dev-dana---developer-evaluating.json</code>:</p>
+        <p><strong>Creates:</strong></p>
+        <ul class="feature-list">
+          <li><i class="fa-solid fa-check"></i> <code>playwright.config.ts</code> - Configured for serial persona tests</li>
+          <li><i class="fa-solid fa-check"></i> <code>tests/personas/first-visitor.spec.ts</code> - Example test file</li>
+          <li><i class="fa-solid fa-check"></i> <code>tests/utils/observation-collector.ts</code> - Re-export wrapper</li>
+        </ul>
 
-        <div class="sample-output">
-          <p class="sample-output__title"><i class="fa-solid fa-file-code"></i> Sample Output</p>
-          <div class="code-block">
-            <div class="code-block__header">
-              <span class="code-block__filename">dev-dana---developer-evaluating.json</span>
-              <span class="code-block__language">JSON</span>
-            </div>
+        <h4><code>personaspec report</code></h4>
+        <p>Generate an HTML report from test results.</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">Terminal</span>
+            <span class="code-block__language">bash</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code>npx personaspec report &lt;results.json&gt; [options]
+
+<span class="token-comment"># Options:</span>
+  --output &lt;file&gt;    Output filename (default: persona-report.html)</code></pre>
+          </div>
+        </div>
+
+        <h4><code>personaspec analyze</code></h4>
+        <p>Send results to Claude for AI-powered UX analysis with vision.</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">Terminal</span>
+            <span class="code-block__language">bash</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code>npx personaspec analyze &lt;results.json&gt; [options]
+
+<span class="token-comment"># Options:</span>
+  --api-key &lt;key&gt;          Anthropic API key (or set ANTHROPIC_API_KEY env var)
+  --output &lt;file&gt;          Output filename (default: analysis-report.md)
+  --model &lt;model&gt;          Claude model (default: claude-sonnet-4-20250514)
+  --max-screenshots &lt;n&gt;    Max screenshots to analyze (default: 10)</code></pre>
+          </div>
+        </div>
+
+        <div class="callout callout--info">
+          <p class="callout__title"><i class="fa-solid fa-key"></i> API Key Setup</p>
+          <p>Set your Anthropic API key as an environment variable to avoid passing it each time:</p>
+          <div class="code-block" style="margin-top: var(--space-3); margin-bottom: 0;">
             <div class="code-block__content">
-              <pre><code>{
-  <span class="token-string">"persona"</span>: <span class="token-string">"Dev Dana - Developer Evaluating"</span>,
+              <pre><code>export ANTHROPIC_API_KEY=sk-ant-...</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Reference -->
+      <section class="docs-section" id="api-reference">
+        <h2 class="docs-section__title">API Reference</h2>
+
+        <h4><code>ObservationCollector</code></h4>
+        <p>The main class for collecting test data during persona-driven tests.</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">Constructor</span>
+            <span class="code-block__language">TypeScript</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code><span class="token-keyword">new</span> <span class="token-function">ObservationCollector</span>({
+  outputDir: <span class="token-keyword">string</span>,           <span class="token-comment">// Where to save results</span>
+  persona: PersonaDefinition,   <span class="token-comment">// From definePersona()</span>
+  includeBase64?: <span class="token-keyword">boolean</span>,     <span class="token-comment">// Include base64 screenshots (default: true)</span>
+  screenshotFormat?: <span class="token-string">'png'</span> | <span class="token-string">'jpeg'</span>,  <span class="token-comment">// Screenshot format (default: 'png')</span>
+})</code></pre>
+          </div>
+        </div>
+
+        <h5>Methods</h5>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>screenshot(page, name, context)</code></td>
+              <td>Capture screenshot with context for AI analysis</td>
+            </tr>
+            <tr>
+              <td><code>observe(type, description, location)</code></td>
+              <td>Record an observation (success, note, confusion, frustration)</td>
+            </tr>
+            <tr>
+              <td><code>startTask()</code></td>
+              <td>Start timing a task (call at beginning of each task test)</td>
+            </tr>
+            <tr>
+              <td><code>recordTask(name, success, notes)</code></td>
+              <td>Record task completion with results</td>
+            </tr>
+            <tr>
+              <td><code>trackPageLoad()</code></td>
+              <td>Track a page navigation event</td>
+            </tr>
+            <tr>
+              <td><code>trackClick()</code></td>
+              <td>Track a click interaction</td>
+            </tr>
+            <tr>
+              <td><code>trackSearch()</code></td>
+              <td>Track a search action</td>
+            </tr>
+            <tr>
+              <td><code>trackBackNav()</code></td>
+              <td>Track back navigation (high counts indicate confusion)</td>
+            </tr>
+            <tr>
+              <td><code>addConsoleError(message)</code></td>
+              <td>Log a console error from the page</td>
+            </tr>
+            <tr>
+              <td><code>save()</code></td>
+              <td>Save all collected data to JSON file</td>
+            </tr>
+            <tr>
+              <td><code>reset()</code></td>
+              <td>Clear collected data (keeps persona)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4><code>definePersona(config)</code></h4>
+        <p>Create a validated persona definition.</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">Signature</span>
+            <span class="code-block__language">TypeScript</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code><span class="token-function">definePersona</span>({
+  name: <span class="token-keyword">string</span>,        <span class="token-comment">// Required - persona name</span>
+  role: <span class="token-keyword">string</span>,        <span class="token-comment">// Required - user role/type</span>
+  background: <span class="token-keyword">string</span>,  <span class="token-comment">// Required - context and experience</span>
+  goals: <span class="token-keyword">string</span>[],     <span class="token-comment">// Required - at least one goal</span>
+  behaviors: <span class="token-keyword">string</span>[], <span class="token-comment">// Required - at least one behavior</span>
+}): PersonaDefinition</code></pre>
+          </div>
+        </div>
+
+        <h4>Observation Types</h4>
+        <p>Use these consistently across all tests:</p>
+
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>When to Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="observation-badge observation-badge--success">success</span></td>
+              <td>Goal achieved smoothly, good UX discovered</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--note">note</span></td>
+              <td>Neutral observation, suggestion for improvement</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--confusion">confusion</span></td>
+              <td>Unclear what to do next, feedback ambiguous</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--frustration">frustration</span></td>
+              <td>Goal blocked, feature missing, error encountered</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Persona Templates -->
+      <section class="docs-section" id="persona-templates">
+        <h2 class="docs-section__title">Persona Templates</h2>
+        <p>Pre-built personas you can use directly or customize:</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">Using Templates</span>
+            <span class="code-block__language">TypeScript</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code><span class="token-keyword">import</span> { personaTemplates } <span class="token-keyword">from</span> <span class="token-string">'personaspec'</span>;
+
+<span class="token-comment">// Use default template</span>
+<span class="token-keyword">const</span> visitor = personaTemplates.<span class="token-function">firstTimeVisitor</span>();
+
+<span class="token-comment">// Customize the template</span>
+<span class="token-keyword">const</span> custom = personaTemplates.<span class="token-function">firstTimeVisitor</span>({
+  name: <span class="token-string">'Jordan'</span>,
+  goals: [<span class="token-string">'Find pricing'</span>, <span class="token-string">'Compare with competitors'</span>],
+});</code></pre>
+          </div>
+        </div>
+
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Template</th>
+              <th>Default Name</th>
+              <th>Focus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>firstTimeVisitor()</code></td>
+              <td>Alex</td>
+              <td>New user evaluating the site</td>
+            </tr>
+            <tr>
+              <td><code>powerUser()</code></td>
+              <td>Sam</td>
+              <td>Experienced user valuing efficiency</td>
+            </tr>
+            <tr>
+              <td><code>accessibilityAuditor()</code></td>
+              <td>Jordan</td>
+              <td>Testing WCAG compliance</td>
+            </tr>
+            <tr>
+              <td><code>designReviewer()</code></td>
+              <td>Casey</td>
+              <td>Checking visual consistency</td>
+            </tr>
+            <tr>
+              <td><code>skepticalEvaluator()</code></td>
+              <td>Morgan</td>
+              <td>Needs proof before committing</td>
+            </tr>
+            <tr>
+              <td><code>supportSeeker()</code></td>
+              <td>Riley</td>
+              <td>Looking for help with an issue</td>
+            </tr>
+            <tr>
+              <td><code>mobileUser()</code></td>
+              <td>Taylor</td>
+              <td>Mobile-first, limited patience</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p style="margin-top: var(--space-4);">
+          See the <a href="personas.html">Personas page</a> for detailed descriptions of each template.
+        </p>
+      </section>
+
+      <!-- Output Format -->
+      <section class="docs-section" id="output-format">
+        <h2 class="docs-section__title">Output Format</h2>
+        <p>Test results are saved as JSON with this structure:</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__filename">alex-observations.json</span>
+            <span class="code-block__language">JSON</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code>{
+  <span class="token-string">"persona"</span>: <span class="token-string">"Alex - First-Time Visitor"</span>,
+  <span class="token-string">"background"</span>: <span class="token-string">"New to the site with no prior context..."</span>,
+  <span class="token-string">"goals"</span>: [<span class="token-string">"Understand what this does within 10 seconds"</span>],
+  <span class="token-string">"behaviors"</span>: [<span class="token-string">"Skims headings before reading"</span>],
   <span class="token-string">"session"</span>: {
     <span class="token-string">"startTime"</span>: <span class="token-string">"2024-01-15T10:30:00Z"</span>,
     <span class="token-string">"endTime"</span>: <span class="token-string">"2024-01-15T10:32:45Z"</span>,
-    <span class="token-string">"pageLoads"</span>: <span class="token-number">4</span>,
-    <span class="token-string">"clicks"</span>: <span class="token-number">5</span>,
-    <span class="token-string">"backNavs"</span>: <span class="token-number">1</span>
+    <span class="token-string">"pagesVisited"</span>: <span class="token-number">4</span>,
+    <span class="token-string">"clickCount"</span>: <span class="token-number">5</span>,
+    <span class="token-string">"backNavCount"</span>: <span class="token-number">1</span>,
+    <span class="token-string">"consoleErrors"</span>: []
   },
   <span class="token-string">"tasks"</span>: [
     {
-      <span class="token-string">"name"</span>: <span class="token-string">"Understand core concept within 60 seconds"</span>,
+      <span class="token-string">"name"</span>: <span class="token-string">"understand site purpose"</span>,
       <span class="token-string">"success"</span>: <span class="token-keyword">true</span>,
       <span class="token-string">"duration"</span>: <span class="token-number">4500</span>,
-      <span class="token-string">"notes"</span>: <span class="token-string">"Hero clearly mentions persona-driven testing"</span>
-    },
-    {
-      <span class="token-string">"name"</span>: <span class="token-string">"Find a runnable code example"</span>,
-      <span class="token-string">"success"</span>: <span class="token-keyword">true</span>,
-      <span class="token-string">"duration"</span>: <span class="token-number">8200</span>,
-      <span class="token-string">"notes"</span>: <span class="token-string">"Found 6 code examples"</span>
+      <span class="token-string">"notes"</span>: <span class="token-string">"Clear headline"</span>
     }
   ],
   <span class="token-string">"observations"</span>: [
     {
       <span class="token-string">"type"</span>: <span class="token-string">"success"</span>,
-      <span class="token-string">"description"</span>: <span class="token-string">"Value prop clear in hero section"</span>,
-      <span class="token-string">"location"</span>: <span class="token-string">"Homepage"</span>
-    },
-    {
-      <span class="token-string">"type"</span>: <span class="token-string">"success"</span>,
-      <span class="token-string">"description"</span>: <span class="token-string">"Code examples found on Get Started page"</span>
+      <span class="token-string">"description"</span>: <span class="token-string">"Value prop clear in hero"</span>,
+      <span class="token-string">"location"</span>: <span class="token-string">"Homepage hero"</span>,
+      <span class="token-string">"timestamp"</span>: <span class="token-string">"2024-01-15T10:30:15Z"</span>
     }
   ],
   <span class="token-string">"screenshots"</span>: [
     {
-      <span class="token-string">"name"</span>: <span class="token-string">"landing-first-look"</span>,
-      <span class="token-string">"context"</span>: <span class="token-string">"Dev Dana lands on homepage, scanning for value prop"</span>,
-      <span class="token-string">"url"</span>: <span class="token-string">"https://personaspec.dev/"</span>,
-      <span class="token-string">"base64"</span>: <span class="token-string">"iVBORw0KGgoAAAANSUhEUgAA..."</span>
+      <span class="token-string">"name"</span>: <span class="token-string">"homepage-initial"</span>,
+      <span class="token-string">"context"</span>: <span class="token-string">"First view of homepage"</span>,
+      <span class="token-string">"url"</span>: <span class="token-string">"https://example.com/"</span>,
+      <span class="token-string">"base64"</span>: <span class="token-string">"iVBORw0KGgo..."</span>
     }
   ]
 }</code></pre>
-            </div>
           </div>
         </div>
+      </section>
 
-        <h4 style="margin-top: var(--space-8);">Vision Model Analysis</h4>
-        <p>Feed the JSON file to Claude or another vision model with this prompt:</p>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__filename">Vision Model Prompt</span>
-          </div>
-          <div class="code-block__content">
-            <pre><code>Here are screenshots and observations from a persona-driven test.
-
-The persona is "Dev Dana - Developer Evaluating":
-- Background: Senior frontend dev, skeptical of new approaches, 15 minutes to evaluate
-- Goals: Understand if worth adopting, find code examples, assess implementation effort
-- Behaviors: Skims headings, jumps to code blocks, looks for quickstart guides
-
-Analyze each screenshot in context of this persona and their tasks.
-Identify:
-1. UX issues that would frustrate this specific developer
-2. Accessibility problems visible in the screenshots
-3. Design inconsistencies
-4. Whether their goals appear achievable
-5. Specific recommendations for improvement
-
-The observations.json file is attached.</code></pre>
-          </div>
-        </div>
+      <!-- CTA -->
+      <div class="callout callout--info" style="margin-top: var(--space-12);">
+        <p class="callout__title"><i class="fa-solid fa-eye"></i> See It In Action</p>
+        <p style="margin-bottom: var(--space-4);">
+          View real test results from 6 personas tested against a live site.
+        </p>
+        <a href="case-study.html" class="button button-primary">View Case Study</a>
       </div>
-    </section>
-
-    <!-- Next Steps -->
-    <div class="next-steps">
-      <h2 class="next-steps__title">Next Steps</h2>
-      <div class="next-steps__links">
-        <a href="methodology.html" class="button button-secondary">Read Full Methodology</a>
-        <a href="personas.html" class="button button-secondary">Browse Example Personas</a>
-      </div>
-    </div>
+    </main>
   </div>
 
   <!-- Footer -->
@@ -573,6 +635,7 @@ The observations.json file is attached.</code></pre>
             <li><a href="methodology.html">Methodology</a></li>
             <li><a href="personas.html">Personas</a></li>
             <li><a href="example.html">Example</a></li>
+            <li><a href="case-study.html">Case Study</a></li>
             <li><a href="getting-started.html">Get Started</a></li>
           </ul>
         </nav>

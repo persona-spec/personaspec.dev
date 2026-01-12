@@ -83,6 +83,27 @@
   flex-wrap: wrap;
 }
 
+.hero__quickstart {
+  margin-top: var(--space-6);
+}
+
+.hero__command {
+  display: inline-block;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--accent-primary);
+  letter-spacing: 0.02em;
+}
+
+.hero__command::before {
+  content: '$ ';
+  color: var(--text-muted);
+}
+
 @media (max-width: 768px) {
   .hero {
     min-height: auto;
