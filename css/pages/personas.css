@@ -114,6 +114,23 @@
   background: linear-gradient(135deg, #5C8AFF 0%, #5CFFB4 100%);
 }
 
+.persona-nav__avatar--mobile {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+}
+
+.persona-nav__avatar--skeptic {
+  background: linear-gradient(135deg, #E63946 0%, #FF6B6B 100%);
+}
+
+.persona-nav__avatar--support {
+  background: linear-gradient(135deg, #FFBE0B 0%, #FB5607 100%);
+  color: #0D0F14;
+}
+
+.persona-nav__avatar--privacy {
+  background: linear-gradient(135deg, #3A0CA3 0%, #4361EE 100%);
+}
+
 /* ========================================
    Persona Detail Sections
    ======================================== */
@@ -179,6 +196,23 @@
 
 .persona-detail__avatar--journalist {
   background: linear-gradient(135deg, #5C8AFF 0%, #5CFFB4 100%);
+}
+
+.persona-detail__avatar--mobile {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+}
+
+.persona-detail__avatar--skeptic {
+  background: linear-gradient(135deg, #E63946 0%, #FF6B6B 100%);
+}
+
+.persona-detail__avatar--support {
+  background: linear-gradient(135deg, #FFBE0B 0%, #FB5607 100%);
+  color: #0D0F14;
+}
+
+.persona-detail__avatar--privacy {
+  background: linear-gradient(135deg, #3A0CA3 0%, #4361EE 100%);
 }
 
 .persona-detail__title-group {
