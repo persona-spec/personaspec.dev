@@ -21,7 +21,8 @@
       "WebFetch(domain:fontawesome.com)",
       "Bash(grep:*)",
       "Bash(git pull:*)",
-      "mcp__playwright__browser_click"
+      "mcp__playwright__browser_click",
+      "Bash(git merge:*)"
     ]
   }
 }
