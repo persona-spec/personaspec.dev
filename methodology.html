@@ -7,59 +7,40 @@
 
   <title>Methodology - PersonaSpec</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
   <!-- Styles -->
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages/methodology.css">
+  <link rel="stylesheet" href="css/v3/core.css">
+  <link rel="stylesheet" href="css/v3/components.css">
+  <link rel="stylesheet" href="css/v3/docs.css">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="index.html" class="nav__logo gradient-text">PersonaSpec</a>
-
-      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">personaspec</a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation">
         <span class="nav__toggle-icon"></span>
       </button>
-
       <ul class="nav__links" id="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="methodology.html" class="is-active">Methodology</a></li>
-        <li><a href="personas.html">Personas</a></li>
-        <li><a href="case-study.html">Case Study</a></li>
-        <li><a href="getting-started.html">Get Started</a></li>
+        <li><a href="methodology.html" class="is-active">methodology</a></li>
+        <li><a href="personas.html">personas</a></li>
+        <li><a href="case-study.html">case study</a></li>
+        <li><a href="getting-started.html">get started</a></li>
+        <li><a href="https://github.com/persona-spec/personaspec.dev">github</a></li>
       </ul>
-
-      <a href="https://github.com/persona-spec/personaspec.dev" class="button button-secondary nav__cta">GitHub</a>
     </div>
   </nav>
 
-  <!-- Page Header -->
   <header class="page-header">
-    <div class="container">
-      <h1 class="page-header__title">The <span class="gradient-text">Methodology</span></h1>
-      <p class="page-header__subtitle">
-        A complete guide to writing persona-driven E2E tests that validate user journeys with AI vision analysis.
-      </p>
-    </div>
+    <h1 class="page-header__title">The Methodology</h1>
+    <p class="page-header__subtitle">
+      A complete guide to writing persona-driven E2E tests that validate user journeys with AI vision analysis.
+    </p>
   </header>
 
-  <!-- Docs Layout -->
   <div class="docs-layout">
-    <!-- Sidebar -->
     <aside class="docs-sidebar">
       <p class="docs-sidebar__title">On This Page</p>
       <ul class="docs-sidebar__nav">
@@ -77,7 +58,6 @@
       </ul>
     </aside>
 
-    <!-- Main Content -->
     <main class="docs-content">
       <!-- The Core Idea -->
       <section class="docs-section" id="core-idea">
@@ -89,8 +69,8 @@
         <p>
           Instead of testing isolated features, you validate entire user workflows from different perspectives. Each persona represents a distinct user archetype who would use your application differently.
         </p>
-        <div class="callout callout--info">
-          <p class="callout__title"><i class="fa-solid fa-lightbulb"></i> Key Innovation</p>
+        <div class="callout">
+          <p class="callout__title">Key Innovation</p>
           <p>
             Capture screenshots throughout the journey, then use a vision-capable AI model to analyze them for UX issues, accessibility problems, and design feedback that automated tests cannot detect.
           </p>
@@ -151,7 +131,7 @@
           <li><strong>A serial test suite</strong> (tests run in order, simulating a continuous session)</li>
           <li><strong>Shared observation collector</strong> instantiated once for all tests</li>
           <li><strong>Lifecycle hooks:</strong>
-            <ul style="margin-top: var(--space-2); padding-left: var(--space-4);">
+            <ul style="margin-top: 8px; padding-left: 24px;">
               <li><code>beforeAll</code>: Start the observation session</li>
               <li><code>beforeEach</code>: Attach console error listeners</li>
               <li><code>afterAll</code>: End session and save observations</li>
@@ -173,7 +153,7 @@
           <li><strong>Navigate to starting point</strong> and capture a screenshot</li>
           <li><strong>Attempt the task</strong> as the persona would naturally try it</li>
           <li><strong>Evaluate outcomes:</strong>
-            <ul style="margin-top: var(--space-2); padding-left: var(--space-4);">
+            <ul style="margin-top: 8px; padding-left: 24px;">
               <li>Goal achieved: mark success, note what worked</li>
               <li>Partially achieved: mark success with friction observations</li>
               <li>Blocked: keep failure, add frustration observation</li>
@@ -184,7 +164,7 @@
         </ol>
 
         <div class="callout callout--tip">
-          <p class="callout__title"><i class="fa-solid fa-check"></i> Good Task Examples</p>
+          <p class="callout__title">Good Task Examples</p>
           <p>
             Tasks should represent things users actually want to do: "Find how to export my data",
             "Understand the pricing within 30 seconds", "Navigate the checkout using only keyboard",
@@ -217,25 +197,25 @@
 
         <h4>Session Metrics</h4>
         <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> Start and end timestamps</li>
-          <li><i class="fa-solid fa-check"></i> Page load count</li>
-          <li><i class="fa-solid fa-check"></i> Click and search counts</li>
-          <li><i class="fa-solid fa-check"></i> Back navigation count (high numbers indicate confusion)</li>
-          <li><i class="fa-solid fa-check"></i> Console errors captured automatically</li>
+          <li>Start and end timestamps</li>
+          <li>Page load count</li>
+          <li>Click and search counts</li>
+          <li>Back navigation count (high numbers indicate confusion)</li>
+          <li>Console errors captured automatically</li>
         </ul>
 
         <h4>Screenshots</h4>
         <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> PNG files saved to disk</li>
-          <li><i class="fa-solid fa-check"></i> Base64 encoding for vision model analysis</li>
-          <li><i class="fa-solid fa-check"></i> Associated URL, page title, name, and context description</li>
+          <li>PNG files saved to disk</li>
+          <li>Base64 encoding for vision model analysis</li>
+          <li>Associated URL, page title, name, and context description</li>
         </ul>
 
         <h4>Task Results</h4>
         <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> Task name and success boolean</li>
-          <li><i class="fa-solid fa-check"></i> Duration in milliseconds</li>
-          <li><i class="fa-solid fa-check"></i> Free-form notes about what happened</li>
+          <li>Task name and success boolean</li>
+          <li>Duration in milliseconds</li>
+          <li>Free-form notes about what happened</li>
         </ul>
 
         <h4>Output</h4>
@@ -288,30 +268,30 @@
         <h4>How It Works</h4>
         <p>After tests complete, feed the observations.json file (which contains base64 screenshots) to a vision model along with:</p>
         <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> The persona definition (background, goals, behaviors)</li>
-          <li><i class="fa-solid fa-check"></i> The task being attempted when each screenshot was taken</li>
-          <li><i class="fa-solid fa-check"></i> Context description for each screenshot</li>
-          <li><i class="fa-solid fa-check"></i> Observations already recorded by the test</li>
+          <li>The persona definition (background, goals, behaviors)</li>
+          <li>The task being attempted when each screenshot was taken</li>
+          <li>Context description for each screenshot</li>
+          <li>Observations already recorded by the test</li>
         </ul>
 
         <h4>What the Vision Model Can Identify</h4>
 
-        <div class="callout callout--info">
-          <p class="callout__title"><i class="fa-solid fa-eye"></i> UX Issues</p>
+        <div class="callout">
+          <p class="callout__title">UX Issues</p>
           <p>
             Confusing layouts, missing CTAs, form fields without labels, unclear navigation paths, overwhelming information density.
           </p>
         </div>
 
         <div class="callout callout--warning">
-          <p class="callout__title"><i class="fa-solid fa-universal-access"></i> Accessibility Problems</p>
+          <p class="callout__title">Accessibility Problems</p>
           <p>
             Insufficient color contrast, small text, missing focus indicators, poor heading structure, icons without labels.
           </p>
         </div>
 
         <div class="callout callout--tip">
-          <p class="callout__title"><i class="fa-solid fa-palette"></i> Design Feedback</p>
+          <p class="callout__title">Design Feedback</p>
           <p>
             Inconsistent spacing, typography issues, color palette problems, mobile responsiveness issues, visual clutter.
           </p>
@@ -322,7 +302,7 @@
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Example Prompt</span>
+            <span>Example Prompt</span>
           </div>
           <div class="code-block__content">
             <pre><code>"Here are screenshots from a user journey test.
@@ -352,10 +332,10 @@ Analyze each screenshot and identify:
         <h4>Screenshot Strategy</h4>
         <p>Capture screenshots at:</p>
         <ul class="feature-list">
-          <li><i class="fa-solid fa-camera"></i> Start of each task</li>
-          <li><i class="fa-solid fa-camera"></i> Key decision points</li>
-          <li><i class="fa-solid fa-camera"></i> Results/outcomes</li>
-          <li><i class="fa-solid fa-camera"></i> Anything confusing or problematic</li>
+          <li>Start of each task</li>
+          <li>Key decision points</li>
+          <li>Results/outcomes</li>
+          <li>Anything confusing or problematic</li>
         </ul>
 
         <h4>Base64 Encoding</h4>
@@ -417,8 +397,8 @@ Analyze each screenshot and identify:
           </tbody>
         </table>
 
-        <div class="callout callout--info">
-          <p class="callout__title"><i class="fa-solid fa-lightbulb"></i> Pro Tip</p>
+        <div class="callout">
+          <p class="callout__title">Pro Tip</p>
           <p>
             The qualitative observations from both automated tests and vision model analysis are often more valuable than pass/fail results. A test might "pass" while recording significant friction that only becomes apparent when a vision model sees the actual interface.
           </p>
@@ -431,7 +411,7 @@ Analyze each screenshot and identify:
 
         <div class="use-case-grid">
           <div class="use-case-list use-case-list--good">
-            <p class="use-case-list__title"><i class="fa-solid fa-check-circle"></i> Best For</p>
+            <p class="use-case-list__title">Best For</p>
             <ul>
               <li>Public-facing websites and applications</li>
               <li>Products with multiple distinct user types</li>
@@ -443,7 +423,7 @@ Analyze each screenshot and identify:
           </div>
 
           <div class="use-case-list use-case-list--bad">
-            <p class="use-case-list__title"><i class="fa-solid fa-times-circle"></i> Less Suited For</p>
+            <p class="use-case-list__title">Less Suited For</p>
             <ul>
               <li>API testing</li>
               <li>Unit/integration testing</li>
@@ -455,51 +435,55 @@ Analyze each screenshot and identify:
       </section>
 
       <!-- Next Steps CTA -->
-      <div class="callout callout--info" style="margin-top: var(--space-12);">
-        <p class="callout__title"><i class="fa-solid fa-rocket"></i> Ready to Get Started?</p>
-        <p style="margin-bottom: var(--space-4);">
+      <div class="callout" style="margin-top: 64px;">
+        <p class="callout__title">Ready to Get Started?</p>
+        <p style="margin-bottom: 16px;">
           Check out the step-by-step guide to run your first persona test in 10 minutes.
         </p>
-        <a href="getting-started.html" class="button button-primary">Get Started</a>
+        <a href="getting-started.html" class="btn btn--primary">Get Started</a>
       </div>
     </main>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <p class="footer__logo gradient-text">PersonaSpec</p>
-          <p class="footer__tagline">
-            A methodology for E2E testing that puts users first.
-          </p>
-          <p class="footer__license">MIT License</p>
-        </div>
-
-        <nav class="footer__nav">
-          <h4 class="footer__nav-title">Docs</h4>
-          <ul class="footer__nav-list">
-            <li><a href="methodology.html">Methodology</a></li>
-            <li><a href="personas.html">Personas</a></li>
-            <li><a href="case-study.html">Case Study</a></li>
-            <li><a href="getting-started.html">Get Started</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__nav">
-          <h4 class="footer__nav-title">GitHub</h4>
-          <ul class="footer__nav-list">
-            <li><a href="https://github.com/persona-spec/personaspec.dev">Repository</a></li>
-            <li><a href="https://github.com/persona-spec/personaspec.dev/issues">Issues</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+    personaspec is MIT licensed
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/main.js"></script>
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        links.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', links.classList.contains('is-open'));
+      });
+    }
+
+    // Highlight active sidebar link based on scroll
+    const sidebarLinks = document.querySelectorAll('.docs-sidebar__link');
+    const sections = document.querySelectorAll('.docs-section');
+
+    function updateActiveLink() {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (scrollY >= sectionTop - 150) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      sidebarLinks.forEach(link => {
+        link.classList.remove('is-active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('is-active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink();
+  </script>
 
 </body>
 </html>

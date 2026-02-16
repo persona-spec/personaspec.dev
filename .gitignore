@@ -1,0 +1,14 @@
+# Chatwoot test instance
+chatwoot/
+
+# Node modules
+node_modules/
+
+# OS files
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

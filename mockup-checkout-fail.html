@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Acme Pro</title>
+  <style>
+    /* Post-checkout page with NO confirmation - the trust problem */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F8FAFC;
+      color: #1E293B;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Top nav */
+    .nav {
+      background: white;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav__logo {
+      font-weight: 600;
+      font-size: 16px;
+      color: #6366F1;
+    }
+
+    .nav__steps {
+      display: flex;
+      gap: 24px;
+      font-size: 12px;
+      color: #94A3B8;
+    }
+
+    .nav__step {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav__step-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .nav__step--done .nav__step-num {
+      background: #22C55E;
+      color: white;
+    }
+
+    .nav__step--active {
+      color: #1E293B;
+    }
+
+    .nav__step--active .nav__step-num {
+      background: #6366F1;
+      color: white;
+    }
+
+    /* Main layout */
+    .layout {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 48px;
+    }
+
+    /* Payment form section - looks submitted but unclear */
+    .payment {
+      background: white;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .payment__header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #E2E8F0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .payment__title {
+      font-weight: 600;
+    }
+
+    .payment__secure {
+      font-size: 11px;
+      color: #22C55E;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .payment__body {
+      padding: 24px 20px;
+    }
+
+    /* Form fields - disabled/processing state */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748B;
+      margin-bottom: 6px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #E2E8F0;
+      border-radius: 6px;
+      font-size: 14px;
+      background: #F8FAFC;
+      color: #94A3B8;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* The problem: Button shows "Processing..." indefinitely */
+    .btn {
+      width: 100%;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn--processing {
+      background: #94A3B8;
+      color: white;
+      cursor: wait;
+    }
+
+    /* Spinner that never stops */
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Order summary sidebar */
+    .summary {
+      background: white;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      padding: 20px;
+      height: fit-content;
+    }
+
+    .summary__title {
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    .summary__item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+
+    .summary__item-name {
+      color: #64748B;
+    }
+
+    .summary__total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid #E2E8F0;
+      font-weight: 600;
+    }
+
+    /* Subtle status that's easy to miss */
+    .status-bar {
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 8px 16px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* No confirmation message, no order number, no receipt */
+    /* Just an ambiguous processing state */
+  </style>
+</head>
+<body>
+
+  <div class="status-bar">
+    <span>&#9888;</span>
+    Please do not refresh or close this page...
+  </div>
+
+  <nav class="nav">
+    <div class="nav__logo">Acme Pro</div>
+    <div class="nav__steps">
+      <div class="nav__step nav__step--done">
+        <span class="nav__step-num">&#10003;</span>
+        <span>Plan</span>
+      </div>
+      <div class="nav__step nav__step--done">
+        <span class="nav__step-num">&#10003;</span>
+        <span>Account</span>
+      </div>
+      <div class="nav__step nav__step--active">
+        <span class="nav__step-num">3</span>
+        <span>Payment</span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="layout">
+    <div class="payment">
+      <div class="payment__header">
+        <span class="payment__title">Payment Details</span>
+        <span class="payment__secure">&#128274; Secure checkout</span>
+      </div>
+      <div class="payment__body">
+        <div class="form-group">
+          <label class="form-label">Card Number</label>
+          <input type="text" class="form-input" value="•••• •••• •••• 4242" disabled>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Expiry</label>
+            <input type="text" class="form-input" value="12/26" disabled>
+          </div>
+          <div class="form-group">
+            <label class="form-label">CVC</label>
+            <input type="text" class="form-input" value="•••" disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Name on Card</label>
+          <input type="text" class="form-input" value="Jordan Torres" disabled>
+        </div>
+
+        <button class="btn btn--processing" disabled>
+          <span class="spinner"></span>
+          Processing payment...
+        </button>
+      </div>
+    </div>
+
+    <div class="summary">
+      <div class="summary__title">Order Summary</div>
+      <div class="summary__item">
+        <span class="summary__item-name">Pro Plan (Annual)</span>
+        <span>$288.00</span>
+      </div>
+      <div class="summary__item">
+        <span class="summary__item-name">Tax</span>
+        <span>$26.12</span>
+      </div>
+      <div class="summary__total">
+        <span>Total</span>
+        <span>$314.12</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

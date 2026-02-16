@@ -1,0 +1,470 @@
+/* ========================================
+   V3 COMPONENTS: Reusable UI Elements
+   PersonaSpec - Dark/Terminal Aesthetic
+   ======================================== */
+
+/* ----------------------------------------
+   Code Blocks
+   ---------------------------------------- */
+.code-block {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.code-block__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.code-block__content {
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.code-block pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-base);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.code-block code {
+  background: transparent;
+  padding: 0;
+}
+
+/* Syntax highlighting */
+.code-block .comment,
+.token-comment { color: var(--syntax-comment); }
+.code-block .keyword,
+.token-keyword { color: var(--syntax-keyword); }
+.code-block .string,
+.token-string { color: var(--syntax-string); }
+.code-block .function,
+.token-function { color: var(--syntax-function); }
+.token-number { color: var(--amber); }
+
+/* ----------------------------------------
+   Terminal Preview
+   ---------------------------------------- */
+.terminal {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  line-height: 1.7;
+}
+
+.terminal__bar {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+}
+
+.terminal__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.terminal__content {
+  padding: 16px 20px;
+  color: var(--text-muted);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.terminal .cmd { color: var(--text); }
+.terminal .success { color: var(--success); }
+.terminal .warn { color: var(--warning); }
+.terminal .error { color: var(--error); }
+.terminal .dim { color: #525252; }
+.terminal .path { color: #60A5FA; }
+.terminal .label { color: var(--amber); }
+
+/* Blinking cursor */
+.terminal__cursor {
+  display: inline-block;
+  width: 8px;
+  height: 14px;
+  background: var(--amber);
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ----------------------------------------
+   Feedback Table
+   ---------------------------------------- */
+.feedback-table {
+  max-width: 720px;
+  border: 1px solid var(--border);
+  border-collapse: collapse;
+  font-size: var(--text-base);
+  width: 100%;
+}
+
+.feedback-table th {
+  background: var(--bg-raised);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.feedback-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.feedback-table tr:last-child td {
+  border-bottom: none;
+}
+
+.feedback-table__type {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.feedback-table__type--success { color: var(--success); }
+.feedback-table__type--note { color: var(--note); }
+.feedback-table__type--confusion { color: var(--warning); }
+.feedback-table__type--frustration { color: var(--error); }
+
+.feedback-table__meaning {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.feedback-table__example {
+  color: var(--text);
+}
+
+/* ----------------------------------------
+   Observation Badges
+   ---------------------------------------- */
+.observation-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  padding: 4px 8px;
+  border: 1px solid currentColor;
+  text-transform: lowercase;
+}
+
+.observation-badge--success {
+  color: var(--success);
+  border-color: var(--success);
+}
+
+.observation-badge--note {
+  color: var(--note);
+  border-color: var(--note);
+}
+
+.observation-badge--confusion {
+  color: var(--warning);
+  border-color: var(--warning);
+}
+
+.observation-badge--frustration {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+/* ----------------------------------------
+   AI Output Block
+   ---------------------------------------- */
+.ai-output {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-sm);
+  line-height: 1.9;
+}
+
+.ai-output__header {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-output__header::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--amber);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.ai-output__content {
+  padding: 16px;
+}
+
+.ai-output__line {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.ai-output__line:last-child {
+  margin-bottom: 0;
+}
+
+.ai-output__icon {
+  flex-shrink: 0;
+  width: 16px;
+  text-align: center;
+}
+
+.ai-output__icon--warn { color: var(--warning); }
+.ai-output__icon--note { color: var(--note); }
+.ai-output__icon--error { color: var(--error); }
+.ai-output__icon--success { color: var(--success); }
+
+.ai-output__text {
+  color: var(--text-muted);
+}
+
+/* ----------------------------------------
+   Callouts
+   ---------------------------------------- */
+.callout {
+  padding: 20px 24px;
+  border-left: 3px solid var(--amber);
+  background: var(--bg-raised);
+  margin-bottom: 1.5rem;
+}
+
+.callout__title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.callout p:last-child {
+  margin-bottom: 0;
+}
+
+.callout--tip {
+  border-left-color: var(--success);
+}
+
+.callout--warning {
+  border-left-color: var(--warning);
+}
+
+.callout--error {
+  border-left-color: var(--error);
+}
+
+/* ----------------------------------------
+   Cards
+   ---------------------------------------- */
+.card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  padding: 24px;
+  transition: border-color 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--amber);
+}
+
+.card__title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.card__description {
+  color: var(--text-muted);
+  font-size: var(--text-md);
+  margin-bottom: 16px;
+}
+
+.card__meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  color: var(--amber);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ----------------------------------------
+   Tables (General)
+   ---------------------------------------- */
+.table {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-collapse: collapse;
+  font-size: var(--text-md);
+}
+
+.table th {
+  background: var(--bg-raised);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table code {
+  font-size: var(--text-sm);
+}
+
+/* ----------------------------------------
+   Stats Cards
+   ---------------------------------------- */
+.stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  padding: 20px 24px;
+  min-width: 140px;
+}
+
+.stat__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.stat__value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ----------------------------------------
+   Trait Badges
+   ---------------------------------------- */
+.trait {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+/* ----------------------------------------
+   Screenshot Gallery
+   ---------------------------------------- */
+.screenshot-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 2rem;
+}
+
+.screenshot-item {
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.screenshot-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.screenshot-item__caption {
+  padding: 8px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  background: var(--bg-raised);
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ----------------------------------------
+   Responsive Components
+   ---------------------------------------- */
+@media (max-width: 1000px) {
+  .feedback-table {
+    font-size: var(--text-sm);
+  }
+
+  .feedback-table th,
+  .feedback-table td {
+    padding: 10px 12px;
+  }
+
+  .stats {
+    gap: 12px;
+  }
+
+  .stat {
+    min-width: 100px;
+    padding: 16px;
+  }
+}

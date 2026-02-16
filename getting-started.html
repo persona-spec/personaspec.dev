@@ -7,64 +7,44 @@
 
   <title>Get Started - PersonaSpec</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
   <!-- Styles -->
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages/methodology.css">
-  <link rel="stylesheet" href="css/pages/getting-started.css">
+  <link rel="stylesheet" href="css/v3/core.css">
+  <link rel="stylesheet" href="css/v3/components.css">
+  <link rel="stylesheet" href="css/v3/docs.css">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="index.html" class="nav__logo gradient-text">PersonaSpec</a>
-
-      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">personaspec</a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation">
         <span class="nav__toggle-icon"></span>
       </button>
-
       <ul class="nav__links" id="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="methodology.html">Methodology</a></li>
-        <li><a href="personas.html">Personas</a></li>
-        <li><a href="case-study.html">Case Study</a></li>
-        <li><a href="getting-started.html" class="is-active">Get Started</a></li>
+        <li><a href="methodology.html">methodology</a></li>
+        <li><a href="personas.html">personas</a></li>
+        <li><a href="case-study.html">case study</a></li>
+        <li><a href="getting-started.html" class="is-active">get started</a></li>
+        <li><a href="https://github.com/persona-spec/personaspec.dev">github</a></li>
       </ul>
-
-      <a href="https://github.com/persona-spec/personaspec.dev" class="button button-secondary nav__cta">GitHub</a>
     </div>
   </nav>
 
-  <!-- Page Header -->
   <header class="page-header">
-    <div class="container">
-      <h1 class="page-header__title"><span class="gradient-text">Get Started</span></h1>
-      <p class="page-header__subtitle">
-        Install the npm package, run your first test, and explore the full API reference.
-      </p>
-    </div>
+    <h1 class="page-header__title">Get Started</h1>
+    <p class="page-header__subtitle">
+      Install the npm package, run your first test, and explore the full API reference.
+    </p>
   </header>
 
-  <!-- Docs Layout -->
   <div class="docs-layout">
-    <!-- Sidebar -->
     <aside class="docs-sidebar">
       <p class="docs-sidebar__title">On This Page</p>
       <ul class="docs-sidebar__nav">
-        <li><a href="#quick-start" class="docs-sidebar__link">Quick Start</a></li>
+        <li><a href="#quick-start" class="docs-sidebar__link is-active">Quick Start</a></li>
         <li><a href="#writing-tests" class="docs-sidebar__link">Writing Tests</a></li>
         <li><a href="#cli-reference" class="docs-sidebar__link">CLI Reference</a></li>
         <li><a href="#api-reference" class="docs-sidebar__link">API Reference</a></li>
@@ -73,7 +53,6 @@
       </ul>
     </aside>
 
-    <!-- Main Content -->
     <main class="docs-content">
       <!-- Quick Start -->
       <section class="docs-section" id="quick-start">
@@ -83,8 +62,8 @@
         <h4>1. Install the package</h4>
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Terminal</span>
-            <span class="code-block__language">bash</span>
+            <span>Terminal</span>
+            <span>bash</span>
           </div>
           <div class="code-block__content">
             <pre><code>npm install personaspec @playwright/test
@@ -95,8 +74,8 @@ npx playwright install chromium</code></pre>
         <h4>2. Initialize your project</h4>
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Terminal</span>
-            <span class="code-block__language">bash</span>
+            <span>Terminal</span>
+            <span>bash</span>
           </div>
           <div class="code-block__content">
             <pre><code>npx personaspec init</code></pre>
@@ -107,8 +86,8 @@ npx playwright install chromium</code></pre>
         <h4>3. Run your first test</h4>
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Terminal</span>
-            <span class="code-block__language">bash</span>
+            <span>Terminal</span>
+            <span>bash</span>
           </div>
           <div class="code-block__content">
             <pre><code>npx playwright test</code></pre>
@@ -118,18 +97,18 @@ npx playwright install chromium</code></pre>
         <h4>4. Generate a report</h4>
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Terminal</span>
-            <span class="code-block__language">bash</span>
+            <span>Terminal</span>
+            <span>bash</span>
           </div>
           <div class="code-block__content">
             <pre><code>npx personaspec report test-results/alex-observations.json</code></pre>
           </div>
         </div>
 
-        <div class="callout callout--tip">
-          <p class="callout__title"><i class="fa-solid fa-sparkles"></i> AI Analysis (Optional)</p>
+        <div class="callout">
+          <p class="callout__title">AI Analysis (Optional)</p>
           <p>Get AI-powered UX insights by running:</p>
-          <div class="code-block" style="margin-top: var(--space-3); margin-bottom: 0;">
+          <div class="code-block" style="margin-top: 12px; margin-bottom: 0;">
             <div class="code-block__content">
               <pre><code>ANTHROPIC_API_KEY=sk-ant-... npx personaspec analyze test-results/alex-observations.json</code></pre>
             </div>
@@ -147,30 +126,30 @@ npx playwright install chromium</code></pre>
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">tests/personas/dev-dana.spec.ts</span>
-            <span class="code-block__language">TypeScript</span>
+            <span>tests/personas/dev-dana.spec.ts</span>
+            <span>TypeScript</span>
           </div>
           <div class="code-block__content">
-            <pre><code><span class="token-keyword">import</span> { test } <span class="token-keyword">from</span> <span class="token-string">'@playwright/test'</span>;
-<span class="token-keyword">import</span> { ObservationCollector, definePersona } <span class="token-keyword">from</span> <span class="token-string">'personaspec'</span>;
+            <pre><code><span class="keyword">import</span> { test } <span class="keyword">from</span> <span class="string">'@playwright/test'</span>;
+<span class="keyword">import</span> { ObservationCollector, definePersona } <span class="keyword">from</span> <span class="string">'personaspec'</span>;
 
-<span class="token-keyword">const</span> persona = <span class="token-function">definePersona</span>({
-  name: <span class="token-string">'Dana'</span>,
-  role: <span class="token-string">'Developer Evaluating'</span>,
-  background: <span class="token-string">'Senior frontend dev, skeptical of new tools, has 15 minutes'</span>,
+<span class="keyword">const</span> persona = <span class="function">definePersona</span>({
+  name: <span class="string">'Dana'</span>,
+  role: <span class="string">'Developer Evaluating'</span>,
+  background: <span class="string">'Senior frontend dev, skeptical of new tools, has 15 minutes'</span>,
   goals: [
-    <span class="token-string">'Understand if worth the learning curve'</span>,
-    <span class="token-string">'Find runnable code examples'</span>,
-    <span class="token-string">'Assess implementation effort'</span>,
+    <span class="string">'Understand if worth the learning curve'</span>,
+    <span class="string">'Find runnable code examples'</span>,
+    <span class="string">'Assess implementation effort'</span>,
   ],
   behaviors: [
-    <span class="token-string">'Skims headings, jumps to code'</span>,
-    <span class="token-string">'Looks for quickstart guides'</span>,
+    <span class="string">'Skims headings, jumps to code'</span>,
+    <span class="string">'Looks for quickstart guides'</span>,
   ],
 });
 
-<span class="token-keyword">const</span> collector = <span class="token-keyword">new</span> <span class="token-function">ObservationCollector</span>({
-  outputDir: <span class="token-string">'./test-results'</span>,
+<span class="keyword">const</span> collector = <span class="keyword">new</span> <span class="function">ObservationCollector</span>({
+  outputDir: <span class="string">'./test-results'</span>,
   persona,
 });</code></pre>
           </div>
@@ -191,48 +170,48 @@ npx playwright install chromium</code></pre>
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Task Test Example</span>
-            <span class="code-block__language">TypeScript</span>
+            <span>Task Test Example</span>
+            <span>TypeScript</span>
           </div>
           <div class="code-block__content">
-            <pre><code>test.<span class="token-function">describe</span>.<span class="token-function">configure</span>({ mode: <span class="token-string">'serial'</span> });
+            <pre><code>test.describe.<span class="function">configure</span>({ mode: <span class="string">'serial'</span> });
 
-test.<span class="token-function">describe</span>(<span class="token-string">`${persona.name} - ${persona.role}`</span>, () => {
-  test.<span class="token-function">afterAll</span>(<span class="token-keyword">async</span> () => {
-    <span class="token-keyword">await</span> collector.<span class="token-function">save</span>();
+test.<span class="function">describe</span>(<span class="string">`${persona.name} - ${persona.role}`</span>, () => {
+  test.<span class="function">afterAll</span>(<span class="keyword">async</span> () => {
+    <span class="keyword">await</span> collector.<span class="function">save</span>();
   });
 
-  test(<span class="token-string">'find code examples quickly'</span>, <span class="token-keyword">async</span> ({ page }) => {
-    <span class="token-comment">// 1. Start timing</span>
-    collector.<span class="token-function">startTask</span>();
+  <span class="function">test</span>(<span class="string">'find code examples quickly'</span>, <span class="keyword">async</span> ({ page }) => {
+    <span class="comment">// 1. Start timing</span>
+    collector.<span class="function">startTask</span>();
 
-    <span class="token-comment">// 2. Initialize success as false</span>
-    <span class="token-keyword">let</span> success = <span class="token-keyword">false</span>;
+    <span class="comment">// 2. Initialize success as false</span>
+    <span class="keyword">let</span> success = <span class="keyword">false</span>;
 
-    <span class="token-comment">// 3. Navigate and screenshot</span>
-    <span class="token-keyword">await</span> page.<span class="token-function">goto</span>(<span class="token-string">'https://example.com'</span>);
-    collector.<span class="token-function">trackPageLoad</span>();
-    <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'homepage'</span>,
-      <span class="token-string">'Dana lands on homepage, scanning for code'</span>);
+    <span class="comment">// 3. Navigate and screenshot</span>
+    <span class="keyword">await</span> page.<span class="function">goto</span>(<span class="string">'https://example.com'</span>);
+    collector.<span class="function">trackPageLoad</span>();
+    <span class="keyword">await</span> collector.<span class="function">screenshot</span>(page, <span class="string">'homepage'</span>,
+      <span class="string">'Dana lands on homepage, scanning for code'</span>);
 
-    <span class="token-comment">// 4. Attempt the task</span>
-    <span class="token-keyword">const</span> codeBlock = page.<span class="token-function">locator</span>(<span class="token-string">'pre code'</span>).<span class="token-function">first</span>();
+    <span class="comment">// 4. Attempt the task</span>
+    <span class="keyword">const</span> codeBlock = page.<span class="function">locator</span>(<span class="string">'pre code'</span>).<span class="function">first</span>();
 
-    <span class="token-comment">// 5. Evaluate and observe</span>
-    <span class="token-keyword">if</span> (<span class="token-keyword">await</span> codeBlock.<span class="token-function">isVisible</span>({ timeout: <span class="token-number">5000</span> })) {
-      success = <span class="token-keyword">true</span>;
-      collector.<span class="token-function">observe</span>(<span class="token-string">'success'</span>, <span class="token-string">'Code visible on homepage'</span>, <span class="token-string">'Homepage'</span>);
-    } <span class="token-keyword">else</span> {
-      collector.<span class="token-function">observe</span>(<span class="token-string">'frustration'</span>, <span class="token-string">'No code examples found'</span>, <span class="token-string">'Homepage'</span>);
+    <span class="comment">// 5. Evaluate and observe</span>
+    <span class="keyword">if</span> (<span class="keyword">await</span> codeBlock.<span class="function">isVisible</span>({ timeout: <span class="number">5000</span> })) {
+      success = <span class="keyword">true</span>;
+      collector.<span class="function">observe</span>(<span class="string">'success'</span>, <span class="string">'Code visible on homepage'</span>, <span class="string">'Homepage'</span>);
+    } <span class="keyword">else</span> {
+      collector.<span class="function">observe</span>(<span class="string">'frustration'</span>, <span class="string">'No code examples found'</span>, <span class="string">'Homepage'</span>);
     }
 
-    <span class="token-comment">// 6. Result screenshot</span>
-    <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">'code-search-result'</span>,
-      <span class="token-string">'After searching for code examples'</span>);
+    <span class="comment">// 6. Result screenshot</span>
+    <span class="keyword">await</span> collector.<span class="function">screenshot</span>(page, <span class="string">'code-search-result'</span>,
+      <span class="string">'After searching for code examples'</span>);
 
-    <span class="token-comment">// 7. Record the task</span>
-    collector.<span class="token-function">recordTask</span>(<span class="token-string">'find code examples quickly'</span>, success,
-      success ? <span class="token-string">'Found on homepage'</span> : <span class="token-string">'Code not visible'</span>);
+    <span class="comment">// 7. Record the task</span>
+    collector.<span class="function">recordTask</span>(<span class="string">'find code examples quickly'</span>, success,
+      success ? <span class="string">'Found on homepage'</span> : <span class="string">'Code not visible'</span>);
   });
 });</code></pre>
           </div>
@@ -243,32 +222,32 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Free Exploration Test</span>
-            <span class="code-block__language">TypeScript</span>
+            <span>Free Exploration Test</span>
+            <span>TypeScript</span>
           </div>
           <div class="code-block__content">
-            <pre><code>test(<span class="token-string">'free exploration'</span>, <span class="token-keyword">async</span> ({ page }) => {
-  collector.<span class="token-function">startTask</span>();
+            <pre><code><span class="function">test</span>(<span class="string">'free exploration'</span>, <span class="keyword">async</span> ({ page }) => {
+  collector.<span class="function">startTask</span>();
 
-  <span class="token-keyword">await</span> page.<span class="token-function">goto</span>(<span class="token-string">'https://example.com'</span>);
-  collector.<span class="token-function">trackPageLoad</span>();
+  <span class="keyword">await</span> page.<span class="function">goto</span>(<span class="string">'https://example.com'</span>);
+  collector.<span class="function">trackPageLoad</span>();
 
-  <span class="token-comment">// Browse naturally based on persona behaviors</span>
-  <span class="token-keyword">const</span> links = <span class="token-keyword">await</span> page.<span class="token-function">locator</span>(<span class="token-string">'nav a'</span>).<span class="token-function">all</span>();
-  <span class="token-keyword">for</span> (<span class="token-keyword">const</span> link <span class="token-keyword">of</span> links.<span class="token-function">slice</span>(<span class="token-number">0</span>, <span class="token-number">3</span>)) {
-    <span class="token-keyword">try</span> {
-      <span class="token-keyword">await</span> link.<span class="token-function">click</span>();
-      collector.<span class="token-function">trackClick</span>();
-      collector.<span class="token-function">trackPageLoad</span>();
-      <span class="token-keyword">await</span> collector.<span class="token-function">screenshot</span>(page, <span class="token-string">`explore-${<span class="token-keyword">await</span> link.<span class="token-function">textContent</span>()}`</span>,
-        <span class="token-string">'Exploring navigation'</span>);
-    } <span class="token-keyword">catch</span> (e) {
-      collector.<span class="token-function">observe</span>(<span class="token-string">'note'</span>, <span class="token-string">'Navigation click failed'</span>, page.<span class="token-function">url</span>());
+  <span class="comment">// Browse naturally based on persona behaviors</span>
+  <span class="keyword">const</span> links = <span class="keyword">await</span> page.<span class="function">locator</span>(<span class="string">'nav a'</span>).<span class="function">all</span>();
+  <span class="keyword">for</span> (<span class="keyword">const</span> link <span class="keyword">of</span> links.<span class="function">slice</span>(<span class="number">0</span>, <span class="number">3</span>)) {
+    <span class="keyword">try</span> {
+      <span class="keyword">await</span> link.<span class="function">click</span>();
+      collector.<span class="function">trackClick</span>();
+      collector.<span class="function">trackPageLoad</span>();
+      <span class="keyword">await</span> collector.<span class="function">screenshot</span>(page, <span class="string">`explore-${<span class="keyword">await</span> link.<span class="function">textContent</span>()}`</span>,
+        <span class="string">'Exploring navigation'</span>);
+    } <span class="keyword">catch</span> (e) {
+      collector.<span class="function">observe</span>(<span class="string">'note'</span>, <span class="string">'Navigation click failed'</span>, page.<span class="function">url</span>());
     }
   }
 
-  <span class="token-comment">// Free exploration always "succeeds" - observations are the value</span>
-  collector.<span class="token-function">recordTask</span>(<span class="token-string">'free exploration'</span>, <span class="token-keyword">true</span>, <span class="token-string">'Browsed site naturally'</span>);
+  <span class="comment">// Free exploration always "succeeds" - observations are the value</span>
+  collector.<span class="function">recordTask</span>(<span class="string">'free exploration'</span>, <span class="keyword">true</span>, <span class="string">'Browsed site naturally'</span>);
 });</code></pre>
           </div>
         </div>
@@ -284,22 +263,22 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Terminal</span>
-            <span class="code-block__language">bash</span>
+            <span>Terminal</span>
+            <span>bash</span>
           </div>
           <div class="code-block__content">
             <pre><code>npx personaspec init [options]
 
-<span class="token-comment"># Options:</span>
+<span class="comment"># Options:</span>
   --force    Overwrite existing files</code></pre>
           </div>
         </div>
 
         <p><strong>Creates:</strong></p>
         <ul class="feature-list">
-          <li><i class="fa-solid fa-check"></i> <code>playwright.config.ts</code> - Configured for serial persona tests</li>
-          <li><i class="fa-solid fa-check"></i> <code>tests/personas/first-visitor.spec.ts</code> - Example test file</li>
-          <li><i class="fa-solid fa-check"></i> <code>tests/utils/observation-collector.ts</code> - Re-export wrapper</li>
+          <li><code>playwright.config.ts</code> - Configured for serial persona tests</li>
+          <li><code>tests/personas/first-visitor.spec.ts</code> - Example test file</li>
+          <li><code>tests/utils/observation-collector.ts</code> - Re-export wrapper</li>
         </ul>
 
         <h4><code>personaspec report</code></h4>
@@ -307,13 +286,13 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Terminal</span>
-            <span class="code-block__language">bash</span>
+            <span>Terminal</span>
+            <span>bash</span>
           </div>
           <div class="code-block__content">
             <pre><code>npx personaspec report &lt;results.json&gt; [options]
 
-<span class="token-comment"># Options:</span>
+<span class="comment"># Options:</span>
   --output &lt;file&gt;    Output filename (default: persona-report.html)</code></pre>
           </div>
         </div>
@@ -323,13 +302,13 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Terminal</span>
-            <span class="code-block__language">bash</span>
+            <span>Terminal</span>
+            <span>bash</span>
           </div>
           <div class="code-block__content">
             <pre><code>npx personaspec analyze &lt;results.json&gt; [options]
 
-<span class="token-comment"># Options:</span>
+<span class="comment"># Options:</span>
   --api-key &lt;key&gt;          Anthropic API key (or set ANTHROPIC_API_KEY env var)
   --output &lt;file&gt;          Output filename (default: analysis-report.md)
   --model &lt;model&gt;          Claude model (default: claude-sonnet-4-20250514)
@@ -337,10 +316,10 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
           </div>
         </div>
 
-        <div class="callout callout--info">
-          <p class="callout__title"><i class="fa-solid fa-key"></i> API Key Setup</p>
+        <div class="callout">
+          <p class="callout__title">API Key Setup</p>
           <p>Set your Anthropic API key as an environment variable to avoid passing it each time:</p>
-          <div class="code-block" style="margin-top: var(--space-3); margin-bottom: 0;">
+          <div class="code-block" style="margin-top: 12px; margin-bottom: 0;">
             <div class="code-block__content">
               <pre><code>export ANTHROPIC_API_KEY=sk-ant-...</code></pre>
             </div>
@@ -357,21 +336,21 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Constructor</span>
-            <span class="code-block__language">TypeScript</span>
+            <span>Constructor</span>
+            <span>TypeScript</span>
           </div>
           <div class="code-block__content">
-            <pre><code><span class="token-keyword">new</span> <span class="token-function">ObservationCollector</span>({
-  outputDir: <span class="token-keyword">string</span>,           <span class="token-comment">// Where to save results</span>
-  persona: PersonaDefinition,   <span class="token-comment">// From definePersona()</span>
-  includeBase64?: <span class="token-keyword">boolean</span>,     <span class="token-comment">// Include base64 screenshots (default: true)</span>
-  screenshotFormat?: <span class="token-string">'png'</span> | <span class="token-string">'jpeg'</span>,  <span class="token-comment">// Screenshot format (default: 'png')</span>
+            <pre><code><span class="keyword">new</span> <span class="function">ObservationCollector</span>({
+  outputDir: <span class="keyword">string</span>,           <span class="comment">// Where to save results</span>
+  persona: PersonaDefinition,   <span class="comment">// From definePersona()</span>
+  includeBase64?: <span class="keyword">boolean</span>,     <span class="comment">// Include base64 screenshots (default: true)</span>
+  screenshotFormat?: <span class="string">'png'</span> | <span class="string">'jpeg'</span>,  <span class="comment">// Screenshot format (default: 'png')</span>
 })</code></pre>
           </div>
         </div>
 
         <h5>Methods</h5>
-        <table class="docs-table">
+        <table class="feedback-table">
           <thead>
             <tr>
               <th>Method</th>
@@ -431,16 +410,16 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Signature</span>
-            <span class="code-block__language">TypeScript</span>
+            <span>Signature</span>
+            <span>TypeScript</span>
           </div>
           <div class="code-block__content">
-            <pre><code><span class="token-function">definePersona</span>({
-  name: <span class="token-keyword">string</span>,        <span class="token-comment">// Required - persona name</span>
-  role: <span class="token-keyword">string</span>,        <span class="token-comment">// Required - user role/type</span>
-  background: <span class="token-keyword">string</span>,  <span class="token-comment">// Required - context and experience</span>
-  goals: <span class="token-keyword">string</span>[],     <span class="token-comment">// Required - at least one goal</span>
-  behaviors: <span class="token-keyword">string</span>[], <span class="token-comment">// Required - at least one behavior</span>
+            <pre><code><span class="function">definePersona</span>({
+  name: <span class="keyword">string</span>,        <span class="comment">// Required - persona name</span>
+  role: <span class="keyword">string</span>,        <span class="comment">// Required - user role/type</span>
+  background: <span class="keyword">string</span>,  <span class="comment">// Required - context and experience</span>
+  goals: <span class="keyword">string</span>[],     <span class="comment">// Required - at least one goal</span>
+  behaviors: <span class="keyword">string</span>[], <span class="comment">// Required - at least one behavior</span>
 }): PersonaDefinition</code></pre>
           </div>
         </div>
@@ -448,7 +427,7 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
         <h4>Observation Types</h4>
         <p>Use these consistently across all tests:</p>
 
-        <table class="docs-table">
+        <table class="feedback-table">
           <thead>
             <tr>
               <th>Type</th>
@@ -457,19 +436,19 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
           </thead>
           <tbody>
             <tr>
-              <td><span class="observation-badge observation-badge--success">success</span></td>
+              <td><span class="feedback-table__type feedback-table__type--success">&#10003; success</span></td>
               <td>Goal achieved smoothly, good UX discovered</td>
             </tr>
             <tr>
-              <td><span class="observation-badge observation-badge--note">note</span></td>
+              <td><span class="feedback-table__type feedback-table__type--note">&#9675; note</span></td>
               <td>Neutral observation, suggestion for improvement</td>
             </tr>
             <tr>
-              <td><span class="observation-badge observation-badge--confusion">confusion</span></td>
+              <td><span class="feedback-table__type feedback-table__type--confusion">! confusion</span></td>
               <td>Unclear what to do next, feedback ambiguous</td>
             </tr>
             <tr>
-              <td><span class="observation-badge observation-badge--frustration">frustration</span></td>
+              <td><span class="feedback-table__type feedback-table__type--frustration">&#10007; frustration</span></td>
               <td>Goal blocked, feature missing, error encountered</td>
             </tr>
           </tbody>
@@ -483,24 +462,24 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">Using Templates</span>
-            <span class="code-block__language">TypeScript</span>
+            <span>Using Templates</span>
+            <span>TypeScript</span>
           </div>
           <div class="code-block__content">
-            <pre><code><span class="token-keyword">import</span> { personaTemplates } <span class="token-keyword">from</span> <span class="token-string">'personaspec'</span>;
+            <pre><code><span class="keyword">import</span> { personaTemplates } <span class="keyword">from</span> <span class="string">'personaspec'</span>;
 
-<span class="token-comment">// Use default template</span>
-<span class="token-keyword">const</span> visitor = personaTemplates.<span class="token-function">firstTimeVisitor</span>();
+<span class="comment">// Use default template</span>
+<span class="keyword">const</span> visitor = personaTemplates.<span class="function">firstTimeVisitor</span>();
 
-<span class="token-comment">// Customize the template</span>
-<span class="token-keyword">const</span> custom = personaTemplates.<span class="token-function">firstTimeVisitor</span>({
-  name: <span class="token-string">'Jordan'</span>,
-  goals: [<span class="token-string">'Find pricing'</span>, <span class="token-string">'Compare with competitors'</span>],
+<span class="comment">// Customize the template</span>
+<span class="keyword">const</span> custom = personaTemplates.<span class="function">firstTimeVisitor</span>({
+  name: <span class="string">'Jordan'</span>,
+  goals: [<span class="string">'Find pricing'</span>, <span class="string">'Compare with competitors'</span>],
 });</code></pre>
           </div>
         </div>
 
-        <table class="docs-table">
+        <table class="feedback-table">
           <thead>
             <tr>
               <th>Template</th>
@@ -547,7 +526,7 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
           </tbody>
         </table>
 
-        <p style="margin-top: var(--space-4);">
+        <p style="margin-top: 24px;">
           See the <a href="personas.html">Personas page</a> for detailed descriptions of each template.
         </p>
       </section>
@@ -559,45 +538,45 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
 
         <div class="code-block">
           <div class="code-block__header">
-            <span class="code-block__filename">alex-observations.json</span>
-            <span class="code-block__language">JSON</span>
+            <span>alex-observations.json</span>
+            <span>JSON</span>
           </div>
           <div class="code-block__content">
             <pre><code>{
-  <span class="token-string">"persona"</span>: <span class="token-string">"Alex - First-Time Visitor"</span>,
-  <span class="token-string">"background"</span>: <span class="token-string">"New to the site with no prior context..."</span>,
-  <span class="token-string">"goals"</span>: [<span class="token-string">"Understand what this does within 10 seconds"</span>],
-  <span class="token-string">"behaviors"</span>: [<span class="token-string">"Skims headings before reading"</span>],
-  <span class="token-string">"session"</span>: {
-    <span class="token-string">"startTime"</span>: <span class="token-string">"2024-01-15T10:30:00Z"</span>,
-    <span class="token-string">"endTime"</span>: <span class="token-string">"2024-01-15T10:32:45Z"</span>,
-    <span class="token-string">"pagesVisited"</span>: <span class="token-number">4</span>,
-    <span class="token-string">"clickCount"</span>: <span class="token-number">5</span>,
-    <span class="token-string">"backNavCount"</span>: <span class="token-number">1</span>,
-    <span class="token-string">"consoleErrors"</span>: []
+  <span class="string">"persona"</span>: <span class="string">"Alex - First-Time Visitor"</span>,
+  <span class="string">"background"</span>: <span class="string">"New to the site with no prior context..."</span>,
+  <span class="string">"goals"</span>: [<span class="string">"Understand what this does within 10 seconds"</span>],
+  <span class="string">"behaviors"</span>: [<span class="string">"Skims headings before reading"</span>],
+  <span class="string">"session"</span>: {
+    <span class="string">"startTime"</span>: <span class="string">"2024-01-15T10:30:00Z"</span>,
+    <span class="string">"endTime"</span>: <span class="string">"2024-01-15T10:32:45Z"</span>,
+    <span class="string">"pagesVisited"</span>: <span class="number">4</span>,
+    <span class="string">"clickCount"</span>: <span class="number">5</span>,
+    <span class="string">"backNavCount"</span>: <span class="number">1</span>,
+    <span class="string">"consoleErrors"</span>: []
   },
-  <span class="token-string">"tasks"</span>: [
+  <span class="string">"tasks"</span>: [
     {
-      <span class="token-string">"name"</span>: <span class="token-string">"understand site purpose"</span>,
-      <span class="token-string">"success"</span>: <span class="token-keyword">true</span>,
-      <span class="token-string">"duration"</span>: <span class="token-number">4500</span>,
-      <span class="token-string">"notes"</span>: <span class="token-string">"Clear headline"</span>
+      <span class="string">"name"</span>: <span class="string">"understand site purpose"</span>,
+      <span class="string">"success"</span>: <span class="keyword">true</span>,
+      <span class="string">"duration"</span>: <span class="number">4500</span>,
+      <span class="string">"notes"</span>: <span class="string">"Clear headline"</span>
     }
   ],
-  <span class="token-string">"observations"</span>: [
+  <span class="string">"observations"</span>: [
     {
-      <span class="token-string">"type"</span>: <span class="token-string">"success"</span>,
-      <span class="token-string">"description"</span>: <span class="token-string">"Value prop clear in hero"</span>,
-      <span class="token-string">"location"</span>: <span class="token-string">"Homepage hero"</span>,
-      <span class="token-string">"timestamp"</span>: <span class="token-string">"2024-01-15T10:30:15Z"</span>
+      <span class="string">"type"</span>: <span class="string">"success"</span>,
+      <span class="string">"description"</span>: <span class="string">"Value prop clear in hero"</span>,
+      <span class="string">"location"</span>: <span class="string">"Homepage hero"</span>,
+      <span class="string">"timestamp"</span>: <span class="string">"2024-01-15T10:30:15Z"</span>
     }
   ],
-  <span class="token-string">"screenshots"</span>: [
+  <span class="string">"screenshots"</span>: [
     {
-      <span class="token-string">"name"</span>: <span class="token-string">"homepage-initial"</span>,
-      <span class="token-string">"context"</span>: <span class="token-string">"First view of homepage"</span>,
-      <span class="token-string">"url"</span>: <span class="token-string">"https://example.com/"</span>,
-      <span class="token-string">"base64"</span>: <span class="token-string">"iVBORw0KGgo..."</span>
+      <span class="string">"name"</span>: <span class="string">"homepage-initial"</span>,
+      <span class="string">"context"</span>: <span class="string">"First view of homepage"</span>,
+      <span class="string">"url"</span>: <span class="string">"https://example.com/"</span>,
+      <span class="string">"base64"</span>: <span class="string">"iVBORw0KGgo..."</span>
     }
   ]
 }</code></pre>
@@ -606,51 +585,53 @@ test.<span class="token-function">describe</span>(<span class="token-string">`${
       </section>
 
       <!-- CTA -->
-      <div class="callout callout--info" style="margin-top: var(--space-12);">
-        <p class="callout__title"><i class="fa-solid fa-eye"></i> See It In Action</p>
-        <p style="margin-bottom: var(--space-4);">
+      <div class="callout" style="margin-top: 60px;">
+        <p class="callout__title">See It In Action</p>
+        <p style="margin-bottom: 16px;">
           View real test results from 6 personas tested against a live site.
         </p>
-        <a href="case-study.html" class="button button-primary">View Case Study</a>
+        <a href="case-study.html" class="btn btn--primary">View Case Study</a>
       </div>
     </main>
   </div>
 
-  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <p class="footer__logo gradient-text">PersonaSpec</p>
-          <p class="footer__tagline">
-            A methodology for E2E testing that puts users first.
-          </p>
-          <p class="footer__license">MIT License</p>
-        </div>
-
-        <nav class="footer__nav">
-          <h4 class="footer__nav-title">Docs</h4>
-          <ul class="footer__nav-list">
-            <li><a href="methodology.html">Methodology</a></li>
-            <li><a href="personas.html">Personas</a></li>
-            <li><a href="case-study.html">Case Study</a></li>
-            <li><a href="getting-started.html">Get Started</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__nav">
-          <h4 class="footer__nav-title">GitHub</h4>
-          <ul class="footer__nav-list">
-            <li><a href="https://github.com/persona-spec/personaspec.dev">Repository</a></li>
-            <li><a href="https://github.com/persona-spec/personaspec.dev/issues">Issues</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+    personaspec is MIT licensed
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/main.js"></script>
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        links.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', links.classList.contains('is-open'));
+      });
+    }
+
+    // Sidebar active state based on scroll
+    const sections = document.querySelectorAll('.docs-section');
+    const sidebarLinks = document.querySelectorAll('.docs-sidebar__link');
+
+    const observerOptions = {
+      rootMargin: '-100px 0px -70% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          sidebarLinks.forEach(link => {
+            link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+  </script>
 
 </body>
 </html>

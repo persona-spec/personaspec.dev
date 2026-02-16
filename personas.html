@@ -7,131 +7,481 @@
 
   <title>Personas - PersonaSpec</title>
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
   <!-- Styles -->
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages/personas.css">
+  <link rel="stylesheet" href="css/v3/core.css">
+  <link rel="stylesheet" href="css/v3/components.css">
+  <link rel="stylesheet" href="css/v3/docs.css">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <style>
+    /* Persona-specific styles */
+
+    /* Avatar colors */
+    .avatar--visitor { background: linear-gradient(135deg, #7C5CFF 0%, #5C7CFF 100%); }
+    .avatar--researcher { background: linear-gradient(135deg, #FF7C5C 0%, #FF5C7C 100%); }
+    .avatar--auditor { background: linear-gradient(135deg, #5CFFB4 0%, #5CB4FF 100%); }
+    .avatar--browser { background: linear-gradient(135deg, #FFC75C 0%, #FFAA5C 100%); }
+    .avatar--designer { background: linear-gradient(135deg, #F472B6 0%, #A855F7 100%); }
+    .avatar--journalist { background: linear-gradient(135deg, #60A5FA 0%, #34D399 100%); }
+    .avatar--mobile { background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%); }
+    .avatar--skeptic { background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%); }
+    .avatar--support { background: linear-gradient(135deg, #EF4444 0%, #F97316 100%); }
+    .avatar--privacy { background: linear-gradient(135deg, #10B981 0%, #3B82F6 100%); }
+
+    /* Quick nav grid */
+    .persona-nav {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--content-padding) 60px;
+    }
+
+    .persona-nav__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .persona-nav__item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .persona-nav__item:hover {
+      border-color: var(--amber);
+    }
+
+    .persona-nav__avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .persona-nav__info {
+      min-width: 0;
+    }
+
+    .persona-nav__name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .persona-nav__role {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Persona detail sections */
+    .persona-detail {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 60px var(--content-padding);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .persona-detail:last-of-type {
+      border-bottom: none;
+    }
+
+    .persona-detail__inner {
+      max-width: 900px;
+    }
+
+    .persona-detail__header {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .persona-detail__avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .persona-detail__title-group {
+      flex: 1;
+    }
+
+    .persona-detail__name {
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .persona-detail__role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-sm);
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .persona-detail__quote {
+      font-style: italic;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .persona-detail__background {
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 700px;
+    }
+
+    .persona-detail__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    /* Info cards */
+    .persona-info-card {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .persona-info-card__title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .persona-info-card--catches .persona-info-card__title {
+      color: var(--amber);
+    }
+
+    .persona-info-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .persona-info-card li {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      padding-left: 12px;
+      border-left: 2px solid var(--border);
+    }
+
+    .persona-info-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Tasks section */
+    .persona-tasks {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    .persona-tasks__title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .persona-tasks__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 8px;
+    }
+
+    .persona-tasks__list li {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* Meta example section */
+    .meta-example {
+      background: var(--amber);
+      color: var(--text-dark);
+      padding: 80px var(--content-padding);
+    }
+
+    .meta-example__inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .meta-example__eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+
+    .meta-example__title {
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .meta-example__description {
+      opacity: 0.8;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    .meta-example__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .meta-persona-card {
+      background: rgba(0,0,0,0.1);
+      padding: 24px;
+    }
+
+    .meta-persona-card__avatar {
+      width: 48px;
+      height: 48px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .meta-persona-card__name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-lg);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .meta-persona-card__role {
+      font-size: var(--text-sm);
+      opacity: 0.7;
+      margin-bottom: 12px;
+    }
+
+    .meta-persona-card__goal {
+      font-style: italic;
+      font-size: var(--text-sm);
+      opacity: 0.8;
+      margin: 0;
+    }
+
+    /* CTA section */
+    .personas-cta {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 80px var(--content-padding);
+      text-align: center;
+    }
+
+    .personas-cta__title {
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .personas-cta__text {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .personas-cta__note {
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .personas-cta__note code {
+      color: var(--amber);
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .persona-detail__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-example__grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .persona-nav__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .persona-detail__header {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .persona-nav__grid {
+        grid-template-columns: 1fr;
+      }
+
+      .persona-tasks__list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="index.html" class="nav__logo gradient-text">PersonaSpec</a>
-
-      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">personaspec</a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation">
         <span class="nav__toggle-icon"></span>
       </button>
-
       <ul class="nav__links" id="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="methodology.html">Methodology</a></li>
-        <li><a href="personas.html" class="is-active">Personas</a></li>
-        <li><a href="case-study.html">Case Study</a></li>
-        <li><a href="getting-started.html">Get Started</a></li>
+        <li><a href="methodology.html">methodology</a></li>
+        <li><a href="personas.html" class="is-active">personas</a></li>
+        <li><a href="case-study.html">case study</a></li>
+        <li><a href="getting-started.html">get started</a></li>
+        <li><a href="https://github.com/persona-spec/personaspec.dev">github</a></li>
       </ul>
-
-      <a href="https://github.com/persona-spec/personaspec.dev" class="button button-secondary nav__cta">GitHub</a>
     </div>
   </nav>
 
-  <!-- Page Header -->
   <header class="page-header">
-    <div class="container">
-      <h1 class="page-header__title">Example <span class="gradient-text">Personas</span></h1>
-      <p class="page-header__subtitle">
-        Each persona catches different issues in your app. Use these as starting points for your own tests.
-      </p>
-    </div>
+    <h1 class="page-header__title">Example Personas</h1>
+    <p class="page-header__subtitle">
+      Each persona catches different issues in your app. Use these as starting points for your own tests.
+    </p>
   </header>
 
   <!-- Quick Nav -->
   <section class="persona-nav">
-    <div class="container">
-      <div class="persona-nav__grid">
-        <a href="#visitor" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--visitor">FV</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">First-Time Visitor</p>
-            <p class="persona-nav__role">New User</p>
-          </div>
-        </a>
-        <a href="#researcher" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--researcher">PR</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">Power User</p>
-            <p class="persona-nav__role">Researcher</p>
-          </div>
-        </a>
-        <a href="#auditor" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--auditor">AA</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">A11y Auditor</p>
-            <p class="persona-nav__role">Accessibility Tester</p>
-          </div>
-        </a>
-        <a href="#browser" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--browser">CB</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">Casual Browser</p>
-            <p class="persona-nav__role">Moderate Engagement</p>
-          </div>
-        </a>
-        <a href="#designer" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--designer">UX</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">UI/UX Designer</p>
-            <p class="persona-nav__role">Design Reviewer</p>
-          </div>
-        </a>
-        <a href="#journalist" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--journalist">JF</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">Journalist</p>
-            <p class="persona-nav__role">Fact-Checker</p>
-          </div>
-        </a>
-        <a href="#mobile" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--mobile">MF</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">Mobile-First User</p>
-            <p class="persona-nav__role">Commuter</p>
-          </div>
-        </a>
-        <a href="#skeptic" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--skeptic">SE</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">Skeptical Evaluator</p>
-            <p class="persona-nav__role">Comparison Shopper</p>
-          </div>
-        </a>
-        <a href="#support" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--support">SS</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">Support Seeker</p>
-            <p class="persona-nav__role">Frustrated User</p>
-          </div>
-        </a>
-        <a href="#privacy" class="persona-nav__item">
-          <div class="persona-nav__avatar persona-nav__avatar--privacy">PA</div>
-          <div class="persona-nav__info">
-            <p class="persona-nav__name">Privacy Advocate</p>
-            <p class="persona-nav__role">Security-Conscious</p>
-          </div>
-        </a>
-      </div>
+    <div class="persona-nav__grid">
+      <a href="#visitor" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--visitor">FV</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">First-Time Visitor</p>
+          <p class="persona-nav__role">New User</p>
+        </div>
+      </a>
+      <a href="#researcher" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--researcher">PR</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">Power User</p>
+          <p class="persona-nav__role">Researcher</p>
+        </div>
+      </a>
+      <a href="#auditor" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--auditor">AA</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">A11y Auditor</p>
+          <p class="persona-nav__role">Accessibility Tester</p>
+        </div>
+      </a>
+      <a href="#browser" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--browser">CB</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">Casual Browser</p>
+          <p class="persona-nav__role">Moderate Engagement</p>
+        </div>
+      </a>
+      <a href="#designer" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--designer">UX</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">UI/UX Designer</p>
+          <p class="persona-nav__role">Design Reviewer</p>
+        </div>
+      </a>
+      <a href="#journalist" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--journalist">JF</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">Journalist</p>
+          <p class="persona-nav__role">Fact-Checker</p>
+        </div>
+      </a>
+      <a href="#mobile" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--mobile">MF</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">Mobile-First User</p>
+          <p class="persona-nav__role">Commuter</p>
+        </div>
+      </a>
+      <a href="#skeptic" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--skeptic">SE</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">Skeptical Evaluator</p>
+          <p class="persona-nav__role">Comparison Shopper</p>
+        </div>
+      </a>
+      <a href="#support" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--support">SS</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">Support Seeker</p>
+          <p class="persona-nav__role">Frustrated User</p>
+        </div>
+      </a>
+      <a href="#privacy" class="persona-nav__item">
+        <div class="persona-nav__avatar avatar--privacy">PA</div>
+        <div class="persona-nav__info">
+          <p class="persona-nav__name">Privacy Advocate</p>
+          <p class="persona-nav__role">Security-Conscious</p>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -139,7 +489,7 @@
   <section class="persona-detail" id="visitor">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--visitor">FV</div>
+        <div class="persona-detail__avatar avatar--visitor">FV</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">First-Time Visitor</h2>
           <p class="persona-detail__role">New User</p>
@@ -153,7 +503,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Understand the site's purpose quickly</li>
             <li>Find help or about information</li>
@@ -162,7 +512,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Scans headlines and hero sections first</li>
             <li>Looks for familiar navigation patterns</li>
@@ -171,7 +521,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Confusing onboarding flows</li>
             <li>Unclear value propositions</li>
@@ -181,16 +531,14 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Understand what this site does within 10 seconds</li>
-            <li>Find the About or Help page</li>
-            <li>Browse without a specific goal</li>
-            <li>Locate the main call-to-action</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Understand what this site does within 10 seconds</li>
+          <li>Find the About or Help page</li>
+          <li>Browse without a specific goal</li>
+          <li>Locate the main call-to-action</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -199,7 +547,7 @@
   <section class="persona-detail" id="researcher">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--researcher">PR</div>
+        <div class="persona-detail__avatar avatar--researcher">PR</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">Power User / Researcher</h2>
           <p class="persona-detail__role">Researcher</p>
@@ -213,7 +561,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Execute complex searches quickly</li>
             <li>Find specific records or data points</li>
@@ -222,7 +570,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Uses advanced search operators</li>
             <li>Expects keyboard navigation</li>
@@ -231,7 +579,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Missing power features</li>
             <li>Slow or inefficient workflows</li>
@@ -241,17 +589,15 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Find records matching multiple criteria</li>
-            <li>Filter results by date range</li>
-            <li>Export search results to CSV</li>
-            <li>Navigate entirely with keyboard</li>
-            <li>Find the API documentation</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Find records matching multiple criteria</li>
+          <li>Filter results by date range</li>
+          <li>Export search results to CSV</li>
+          <li>Navigate entirely with keyboard</li>
+          <li>Find the API documentation</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -260,7 +606,7 @@
   <section class="persona-detail" id="auditor">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--auditor">AA</div>
+        <div class="persona-detail__avatar avatar--auditor">AA</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">Accessibility Auditor</h2>
           <p class="persona-detail__role">Accessibility Tester</p>
@@ -274,7 +620,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Verify keyboard navigation works</li>
             <li>Check screen reader compatibility</li>
@@ -283,7 +629,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Tabs through all interactive elements</li>
             <li>Checks heading hierarchy with tools</li>
@@ -292,7 +638,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Missing focus indicators</li>
             <li>Poor heading hierarchy</li>
@@ -302,17 +648,15 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Tab through entire page without mouse</li>
-            <li>Check heading hierarchy structure</li>
-            <li>Verify all images have alt text</li>
-            <li>Complete form using only keyboard</li>
-            <li>Check focus visibility on all elements</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Tab through entire page without mouse</li>
+          <li>Check heading hierarchy structure</li>
+          <li>Verify all images have alt text</li>
+          <li>Complete form using only keyboard</li>
+          <li>Check focus visibility on all elements</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -321,7 +665,7 @@
   <section class="persona-detail" id="browser">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--browser">CB</div>
+        <div class="persona-detail__avatar avatar--browser">CB</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">Casual Browser</h2>
           <p class="persona-detail__role">Moderate Engagement</p>
@@ -335,7 +679,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Browse content without pressure</li>
             <li>Filter to find interesting items</li>
@@ -344,7 +688,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Scrolls and scans content</li>
             <li>Uses filters when available</li>
@@ -353,7 +697,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Overwhelming content density</li>
             <li>Poor filtering options</li>
@@ -363,16 +707,14 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Browse categories without a specific goal</li>
-            <li>Use filters to narrow results</li>
-            <li>Find related or recommended content</li>
-            <li>Explore navigation structure</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Browse categories without a specific goal</li>
+          <li>Use filters to narrow results</li>
+          <li>Find related or recommended content</li>
+          <li>Explore navigation structure</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -381,7 +723,7 @@
   <section class="persona-detail" id="designer">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--designer">UX</div>
+        <div class="persona-detail__avatar avatar--designer">UX</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">UI/UX Designer</h2>
           <p class="persona-detail__role">Design Reviewer</p>
@@ -395,7 +737,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Check visual hierarchy effectiveness</li>
             <li>Verify spacing consistency</li>
@@ -404,7 +746,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Resizes browser to test responsiveness</li>
             <li>Zooms in to check pixel details</li>
@@ -413,7 +755,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Inconsistent spacing</li>
             <li>Responsive layout bugs</li>
@@ -423,17 +765,15 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Evaluate typography consistency</li>
-            <li>Test at mobile, tablet, and desktop</li>
-            <li>Check spacing between similar elements</li>
-            <li>Verify button styles are consistent</li>
-            <li>Assess color usage across pages</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Evaluate typography consistency</li>
+          <li>Test at mobile, tablet, and desktop</li>
+          <li>Check spacing between similar elements</li>
+          <li>Verify button styles are consistent</li>
+          <li>Assess color usage across pages</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -442,7 +782,7 @@
   <section class="persona-detail" id="journalist">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--journalist">JF</div>
+        <div class="persona-detail__avatar avatar--journalist">JF</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">Journalist / Fact-Checker</h2>
           <p class="persona-detail__role">Fact-Checker</p>
@@ -456,7 +796,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Find exact quotes and citations</li>
             <li>Verify dates and metadata</li>
@@ -465,7 +805,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Uses exact phrase searches</li>
             <li>Checks timestamps and attributions</li>
@@ -474,7 +814,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Missing source attribution</li>
             <li>Unclear or missing dates</li>
@@ -484,17 +824,15 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Search for an exact phrase</li>
-            <li>Verify the date of a specific item</li>
-            <li>Find the original source of data</li>
-            <li>Check who created or modified content</li>
-            <li>Export citation information</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Search for an exact phrase</li>
+          <li>Verify the date of a specific item</li>
+          <li>Find the original source of data</li>
+          <li>Check who created or modified content</li>
+          <li>Export citation information</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -503,7 +841,7 @@
   <section class="persona-detail" id="mobile">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--mobile">MF</div>
+        <div class="persona-detail__avatar avatar--mobile">MF</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">Mobile-First User</h2>
           <p class="persona-detail__role">Commuter</p>
@@ -517,7 +855,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Complete tasks using only touch</li>
             <li>Navigate comfortably with one thumb</li>
@@ -526,7 +864,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Swipes, taps, and uses native gestures</li>
             <li>Gets frustrated by tiny tap targets</li>
@@ -535,7 +873,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Touch targets too small</li>
             <li>Horizontal scrolling required</li>
@@ -545,17 +883,15 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Complete the signup flow on mobile</li>
-            <li>Navigate the menu with one hand</li>
-            <li>Fill out a form on phone keyboard</li>
-            <li>Find and use search on mobile</li>
-            <li>Read long content comfortably</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Complete the signup flow on mobile</li>
+          <li>Navigate the menu with one hand</li>
+          <li>Fill out a form on phone keyboard</li>
+          <li>Find and use search on mobile</li>
+          <li>Read long content comfortably</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -564,7 +900,7 @@
   <section class="persona-detail" id="skeptic">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--skeptic">SE</div>
+        <div class="persona-detail__avatar avatar--skeptic">SE</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">Skeptical Evaluator</h2>
           <p class="persona-detail__role">Comparison Shopper</p>
@@ -578,7 +914,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Find clear, complete pricing</li>
             <li>Understand limitations and restrictions</li>
@@ -587,7 +923,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Scrolls to footer for hidden info</li>
             <li>Searches for "pricing" and "limits"</li>
@@ -596,7 +932,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Hidden fees or unclear pricing</li>
             <li>Missing feature comparisons</li>
@@ -606,17 +942,15 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Find pricing and all costs</li>
-            <li>Identify what's NOT included</li>
-            <li>Find reviews or testimonials</li>
-            <li>Locate terms or refund policy</li>
-            <li>Compare to alternatives</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Find pricing and all costs</li>
+          <li>Identify what's NOT included</li>
+          <li>Find reviews or testimonials</li>
+          <li>Locate terms or refund policy</li>
+          <li>Compare to alternatives</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -625,7 +959,7 @@
   <section class="persona-detail" id="support">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--support">SS</div>
+        <div class="persona-detail__avatar avatar--support">SS</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">Support Seeker</h2>
           <p class="persona-detail__role">Frustrated User</p>
@@ -639,7 +973,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Find contact information quickly</li>
             <li>Get answers from FAQ or docs</li>
@@ -648,7 +982,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Searches "help", "contact", "support"</li>
             <li>Looks for chat or phone numbers</li>
@@ -657,7 +991,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Hidden contact information</li>
             <li>Unhelpful error messages</li>
@@ -667,17 +1001,15 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Find a way to contact support</li>
-            <li>Search help for a specific error</li>
-            <li>Find FAQ or help documentation</li>
-            <li>Report a bug or problem</li>
-            <li>Check status of existing issue</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Find a way to contact support</li>
+          <li>Search help for a specific error</li>
+          <li>Find FAQ or help documentation</li>
+          <li>Report a bug or problem</li>
+          <li>Check status of existing issue</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -686,7 +1018,7 @@
   <section class="persona-detail" id="privacy">
     <div class="persona-detail__inner">
       <div class="persona-detail__header">
-        <div class="persona-detail__avatar persona-detail__avatar--privacy">PA</div>
+        <div class="persona-detail__avatar avatar--privacy">PA</div>
         <div class="persona-detail__title-group">
           <h2 class="persona-detail__name">Privacy Advocate</h2>
           <p class="persona-detail__role">Security-Conscious User</p>
@@ -700,7 +1032,7 @@
 
       <div class="persona-detail__grid">
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bullseye"></i> Goals</p>
+          <p class="persona-info-card__title">Goals</p>
           <ul>
             <li>Understand what data is collected</li>
             <li>Find privacy policy and controls</li>
@@ -709,7 +1041,7 @@
           </ul>
         </div>
         <div class="persona-info-card">
-          <p class="persona-info-card__title"><i class="fa-solid fa-hand-pointer"></i> Behaviors</p>
+          <p class="persona-info-card__title">Behaviors</p>
           <ul>
             <li>Reads cookie banners carefully</li>
             <li>Looks for granular privacy settings</li>
@@ -718,7 +1050,7 @@
           </ul>
         </div>
         <div class="persona-info-card persona-info-card--catches">
-          <p class="persona-info-card__title"><i class="fa-solid fa-bug"></i> Catches</p>
+          <p class="persona-info-card__title">Catches</p>
           <ul>
             <li>Broken with ad blockers</li>
             <li>Missing or vague privacy policy</li>
@@ -728,17 +1060,15 @@
         </div>
       </div>
 
-      <div class="persona-detail__bottom">
-        <div class="persona-tasks">
-          <p class="persona-tasks__title"><i class="fa-solid fa-list-check"></i> Example Tasks</p>
-          <ul class="persona-tasks__list">
-            <li>Find and read the privacy policy</li>
-            <li>Use site with ad blocker enabled</li>
-            <li>Decline non-essential cookies</li>
-            <li>Find data deletion options</li>
-            <li>Complete task without account</li>
-          </ul>
-        </div>
+      <div class="persona-tasks">
+        <p class="persona-tasks__title">Example Tasks</p>
+        <ul class="persona-tasks__list">
+          <li>Find and read the privacy policy</li>
+          <li>Use site with ad blocker enabled</li>
+          <li>Decline non-essential cookies</li>
+          <li>Find data deletion options</li>
+          <li>Complete task without account</li>
+        </ul>
       </div>
     </div>
   </section>
@@ -746,13 +1076,11 @@
   <!-- Meta Example: Testing PersonaSpec with PersonaSpec -->
   <section class="meta-example">
     <div class="meta-example__inner">
-      <div class="meta-example__header">
-        <p class="meta-example__eyebrow">Meta Example</p>
-        <h2 class="meta-example__title">Testing PersonaSpec with PersonaSpec</h2>
-        <p class="meta-example__description">
-          We use our own methodology to test this site. Here are three personas that evaluate personaspec.dev itself.
-        </p>
-      </div>
+      <p class="meta-example__eyebrow">Meta Example</p>
+      <h2 class="meta-example__title">Testing PersonaSpec with PersonaSpec</h2>
+      <p class="meta-example__description">
+        We use our own methodology to test this site. Here are three personas that evaluate personaspec.dev itself.
+      </p>
 
       <div class="meta-example__grid">
         <div class="meta-persona-card">
@@ -781,54 +1109,32 @@
 
   <!-- CTA Section -->
   <section class="personas-cta">
-    <div class="container">
-      <h2 class="personas-cta__title">Create Your Own Personas</h2>
-      <p class="personas-cta__text">
-        These examples are starting points. The best personas are specific to your product and users.
-      </p>
-      <p class="personas-cta__note">
-        These templates are available via <code>personaTemplates</code> in the npm package.
-        <a href="getting-started.html#persona-templates" class="link link-arrow">View API reference</a>
-      </p>
-      <a href="getting-started.html" class="button button-primary">Get Started</a>
-    </div>
+    <h2 class="personas-cta__title">Create Your Own Personas</h2>
+    <p class="personas-cta__text">
+      These examples are starting points. The best personas are specific to your product and users.
+    </p>
+    <p class="personas-cta__note">
+      These templates are available via <code>personaTemplates</code> in the npm package.
+      <a href="getting-started.html#persona-templates">View API reference</a>
+    </p>
+    <a href="getting-started.html" class="btn btn--primary">Get Started</a>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <p class="footer__logo gradient-text">PersonaSpec</p>
-          <p class="footer__tagline">
-            A methodology for E2E testing that puts users first.
-          </p>
-          <p class="footer__license">MIT License</p>
-        </div>
-
-        <nav class="footer__nav">
-          <h4 class="footer__nav-title">Docs</h4>
-          <ul class="footer__nav-list">
-            <li><a href="methodology.html">Methodology</a></li>
-            <li><a href="personas.html">Personas</a></li>
-            <li><a href="case-study.html">Case Study</a></li>
-            <li><a href="getting-started.html">Get Started</a></li>
-          </ul>
-        </nav>
-
-        <nav class="footer__nav">
-          <h4 class="footer__nav-title">GitHub</h4>
-          <ul class="footer__nav-list">
-            <li><a href="https://github.com/persona-spec/personaspec.dev">Repository</a></li>
-            <li><a href="https://github.com/persona-spec/personaspec.dev/issues">Issues</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+    personaspec is MIT licensed
   </footer>
 
-  <!-- Scripts -->
-  <script src="js/main.js"></script>
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const links = document.getElementById('nav-links');
+    if (toggle && links) {
+      toggle.addEventListener('click', () => {
+        links.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', links.classList.contains('is-open'));
+      });
+    }
+  </script>
 
 </body>
 </html>
