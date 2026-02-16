@@ -1,0 +1,18 @@
+{
+  "name": "openaccesspolicies-persona-tests",
+  "version": "1.0.0",
+  "description": "Persona-driven tests for openaccesspolicies.org",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:carlos": "npx playwright test tests/personas/carlos-startup-cto.spec.ts",
+    "test:priya": "npx playwright test tests/personas/priya-healthcare-compliance.spec.ts",
+    "test:michael": "npx playwright test tests/personas/michael-external-auditor.spec.ts",
+    "test:sarah": "npx playwright test tests/personas/sarah-security-engineer.spec.ts",
+    "test:david": "npx playwright test tests/personas/david-vp-mobile.spec.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "personaspec": "file:../packages/personaspec"
+  }
+}

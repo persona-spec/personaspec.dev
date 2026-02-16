@@ -18,6 +18,77 @@
   <style>
     /* Case study specific styles */
 
+    /* Behavioral Realism badges section */
+    .persona-fidelity {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 20px;
+      margin-top: 24px;
+    }
+
+    .persona-fidelity__title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: #A78BFA;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .persona-fidelity__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .persona-fidelity__item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .persona-fidelity__label {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .persona-fidelity__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-sm);
+      color: var(--text);
+    }
+
+    .persona-preset-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: rgba(167, 139, 250, 0.2);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      color: #A78BFA;
+    }
+
+    .persona-preset-badge--emotional {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: var(--amber);
+    }
+
+    .persona-preset-badge--cognition {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: rgba(34, 197, 94, 0.3);
+      color: var(--success);
+    }
+
+    @media (max-width: 600px) {
+      .persona-fidelity__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Summary stats row */
     .summary-stats {
       display: flex;
@@ -428,7 +499,7 @@
   <header class="page-header">
     <h1 class="page-header__title">Case Study</h1>
     <p class="page-header__subtitle">
-      6 personas tested Open Access Policies - a real compliance template site
+      8 personas with Behavioral Realism tested Open Access Policies
     </p>
   </header>
 
@@ -436,7 +507,7 @@
     <div class="case-intro">
       <p>
         We tested <a href="https://openaccesspolicies.org" target="_blank" rel="noopener">openaccesspolicies.org</a> - a site offering free security policy templates for SOC2, HIPAA, and HITRUST compliance.
-        Six domain-specific personas, each with distinct goals, tested the site simultaneously.
+        Eight personas with full Behavioral Realism attributes tested the site, each simulating realistic user behavior across desktop, mobile, and tablet.
       </p>
     </div>
 
@@ -444,19 +515,19 @@
     <div class="summary-stats">
       <div class="stat">
         <div class="stat__label">Personas Tested</div>
-        <div class="stat__value">6</div>
+        <div class="stat__value">8</div>
       </div>
       <div class="stat">
         <div class="stat__label">Observations</div>
-        <div class="stat__value">58</div>
+        <div class="stat__value">68</div>
       </div>
       <div class="stat">
         <div class="stat__label">Success Rate</div>
-        <div class="stat__value">71%</div>
+        <div class="stat__value">100%</div>
       </div>
       <div class="stat">
         <div class="stat__label">Screenshots</div>
-        <div class="stat__value">47</div>
+        <div class="stat__value">56</div>
       </div>
     </div>
 
@@ -480,7 +551,19 @@
       </button>
       <button class="persona-tab" data-persona="david">
         <span class="persona-tab__avatar" style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);">DV</span>
-        <span>David</span>
+        <span>David (Mobile)</span>
+      </button>
+      <button class="persona-tab" data-persona="jordan">
+        <span class="persona-tab__avatar" style="background: linear-gradient(135deg, #5CFFB4 0%, #5CB4FF 100%);">JA</span>
+        <span>Jordan (A11y)</span>
+      </button>
+      <button class="persona-tab" data-persona="taylor">
+        <span class="persona-tab__avatar" style="background: linear-gradient(135deg, #FFC75C 0%, #FFAA5C 100%);">TG</span>
+        <span>Taylor (Beginner)</span>
+      </button>
+      <button class="persona-tab" data-persona="robert">
+        <span class="persona-tab__avatar" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%);">RB</span>
+        <span>Robert (Tablet)</span>
       </button>
     </div>
 
@@ -504,6 +587,7 @@
               <li>Find the right policy set for SOC2 quickly</li>
               <li>Get to the GitHub repo to assess templates</li>
               <li>Determine customization effort required</li>
+              <li>Evaluate template quality and completeness</li>
             </ul>
           </div>
           <div>
@@ -515,13 +599,34 @@
             </ul>
           </div>
         </div>
+        <div class="persona-fidelity">
+          <p class="persona-fidelity__title">Behavioral Realism</p>
+          <div class="persona-fidelity__grid">
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Interaction</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge">impatient</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Emotional</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">volatile / urgent</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Cognition</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">scanner</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Prior Experience</span>
+              <span class="persona-fidelity__value">Vanta, Drata, Secureframe</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="session-stats">
         <div class="session-stats__item">
           <div class="session-stats__icon">&#128196;</div>
           <div>
-            <div class="session-stats__label">Pages Visited</div>
+            <div class="session-stats__label">Tasks</div>
             <div class="session-stats__value">5</div>
           </div>
         </div>
@@ -529,14 +634,14 @@
           <div class="session-stats__icon">&#128065;</div>
           <div>
             <div class="session-stats__label">Observations</div>
-            <div class="session-stats__value">10</div>
+            <div class="session-stats__value">9</div>
           </div>
         </div>
         <div class="session-stats__item">
           <div class="session-stats__icon">&#128247;</div>
           <div>
             <div class="session-stats__label">Screenshots</div>
-            <div class="session-stats__value">9</div>
+            <div class="session-stats__value">7</div>
           </div>
         </div>
       </div>
@@ -554,22 +659,22 @@
           <tr>
             <td>Find SOC2 policies from homepage</td>
             <td class="tasks-table__success">Success</td>
-            <td>Clear navigation to policies page</td>
+            <td>SOC2 content visible on homepage; Clear policies navigation</td>
           </tr>
           <tr>
             <td>Get to GitHub repo quickly</td>
             <td class="tasks-table__success">Success</td>
-            <td>GitHub links prominent in navigation</td>
+            <td>GitHub link found in navigation</td>
           </tr>
           <tr>
             <td>Assess customization effort</td>
             <td class="tasks-table__success">Success</td>
-            <td>Getting started guide explains process</td>
+            <td>Found customization instructions; Step-by-step guide available</td>
           </tr>
           <tr>
             <td>Evaluate template quality</td>
             <td class="tasks-table__success">Success</td>
-            <td>Found quality indicators on about page</td>
+            <td>Author credentials; Real-world validation; Open source</td>
           </tr>
         </tbody>
       </table>
@@ -579,19 +684,19 @@
         <div class="findings-list">
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>SOC2 option clearly visible in navigation</span>
+            <span>SOC2 mentioned on homepage - immediately relevant</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>GitHub links prominent and easy to find</span>
+            <span>Clear navigation to policies section</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>Clear getting started instructions with step-by-step guide</span>
+            <span>GitHub link visible and accessible</span>
           </div>
           <div class="finding-item">
-            <span class="finding-item__badge observation-badge observation-badge--note">note</span>
-            <span>Could show estimated time to implement</span>
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Step-by-step customization process documented</span>
           </div>
         </div>
       </div>
@@ -599,7 +704,7 @@
       <div class="persona-insight">
         <div class="persona-insight__icon">&#128161;</div>
         <div class="persona-insight__content">
-          <strong>Carlos's Verdict:</strong> "I can get my team started on this today." His impatience was satisfied - the fast path from landing page to GitHub repo took under 60 seconds.
+          <strong>Carlos's Verdict:</strong> "I can get my team started on this today." His impatience was satisfied - 9 observations, all positive. GitHub repo found in under 3 seconds.
         </div>
       </div>
     </div>
@@ -621,10 +726,10 @@
           <div>
             <h4>Goals</h4>
             <ul>
-              <li>Understand the difference between HIPAA and HITRUST offerings</li>
-              <li>Find control mapping documents for audit preparation</li>
-              <li>Assess if templates are audit-ready</li>
-              <li>Find contact information for questions</li>
+              <li>Find healthcare-specific policy options</li>
+              <li>Understand HIPAA vs HITRUST difference</li>
+              <li>Find control mapping documents</li>
+              <li>Assess audit-readiness of templates</li>
             </ul>
           </div>
           <div>
@@ -637,14 +742,35 @@
             </ul>
           </div>
         </div>
+        <div class="persona-fidelity">
+          <p class="persona-fidelity__title">Behavioral Realism</p>
+          <div class="persona-fidelity__grid">
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Interaction</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge">careful</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Emotional</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">calm / patient</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Cognition</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">careful</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Prior Experience</span>
+              <span class="persona-fidelity__value">HITRUST CSF, CMS HIPAA guidance</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="session-stats">
         <div class="session-stats__item">
           <div class="session-stats__icon">&#128196;</div>
           <div>
-            <div class="session-stats__label">Pages Visited</div>
-            <div class="session-stats__value">6</div>
+            <div class="session-stats__label">Tasks</div>
+            <div class="session-stats__value">5</div>
           </div>
         </div>
         <div class="session-stats__item">
@@ -658,7 +784,7 @@
           <div class="session-stats__icon">&#128247;</div>
           <div>
             <div class="session-stats__label">Screenshots</div>
-            <div class="session-stats__value">10</div>
+            <div class="session-stats__value">7</div>
           </div>
         </div>
       </div>
@@ -676,22 +802,22 @@
           <tr>
             <td>Find healthcare-specific policy options</td>
             <td class="tasks-table__success">Success</td>
-            <td>Healthcare/HIPAA content visible from homepage</td>
+            <td>HIPAA content visible; HITRUST content visible</td>
           </tr>
           <tr>
             <td>Understand HIPAA vs HITRUST difference</td>
             <td class="tasks-table__success">Success</td>
-            <td>Both options presented on policies page</td>
+            <td>Both frameworks represented; Comparison available</td>
           </tr>
           <tr>
             <td>Find control mapping documents</td>
             <td class="tasks-table__success">Success</td>
-            <td>Control mapping information available on auditors page</td>
+            <td>Control mappings available; GitHub source available</td>
           </tr>
           <tr>
             <td>Assess audit-readiness of templates</td>
             <td class="tasks-table__success">Success</td>
-            <td>Multiple credibility signals found</td>
+            <td>Author credentials; Audit experience; Production use</td>
           </tr>
         </tbody>
       </table>
@@ -701,19 +827,19 @@
         <div class="findings-list">
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>Healthcare/HIPAA content visible from homepage</span>
+            <span>HIPAA mentioned - healthcare relevance clear</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>Both HIPAA and HITRUST options are presented</span>
+            <span>HITRUST mentioned - comprehensive healthcare coverage</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>Author has security credentials - builds trust</span>
+            <span>Control mapping documentation referenced</span>
           </div>
           <div class="finding-item">
-            <span class="finding-item__badge observation-badge observation-badge--note">note</span>
-            <span>Would benefit from side-by-side comparison table</span>
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Professional credentials visible - builds trust</span>
           </div>
         </div>
       </div>
@@ -721,7 +847,7 @@
       <div class="persona-insight">
         <div class="persona-insight__icon">&#128161;</div>
         <div class="persona-insight__content">
-          <strong>Priya's Verdict:</strong> "I have enough to present to leadership." Found the healthcare options she needed, though a HIPAA vs HITRUST comparison table would make her presentation easier.
+          <strong>Priya's Verdict:</strong> "I have enough to present to leadership." All 11 observations positive. Found HIPAA and HITRUST options with clear control mappings for audit preparation.
         </div>
       </div>
     </div>
@@ -743,9 +869,9 @@
           <div>
             <h4>Goals</h4>
             <ul>
-              <li>Verify control coverage claims are accurate</li>
+              <li>Verify SOC2 control coverage claims</li>
               <li>Find control mapping documentation</li>
-              <li>Assess template quality and completeness</li>
+              <li>Assess template quality indicators</li>
               <li>Check maintenance and version history</li>
             </ul>
           </div>
@@ -759,14 +885,35 @@
             </ul>
           </div>
         </div>
+        <div class="persona-fidelity">
+          <p class="persona-fidelity__title">Behavioral Realism</p>
+          <div class="persona-fidelity__grid">
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Interaction</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge">normal</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Emotional</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">skeptical / patient</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Cognition</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">balanced</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Prior Experience</span>
+              <span class="persona-fidelity__value">AICPA TSC, SOC2 Academy, Big 4</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="session-stats">
         <div class="session-stats__item">
           <div class="session-stats__icon">&#128196;</div>
           <div>
-            <div class="session-stats__label">Pages Visited</div>
-            <div class="session-stats__value">4</div>
+            <div class="session-stats__label">Tasks</div>
+            <div class="session-stats__value">5</div>
           </div>
         </div>
         <div class="session-stats__item">
@@ -796,24 +943,24 @@
         </thead>
         <tbody>
           <tr>
-            <td>Verify SOC2 control coverage claims</td>
+            <td>Verify SOC2 control coverage</td>
             <td class="tasks-table__success">Success</td>
-            <td>TSC coverage details visible</td>
+            <td>SOC2 section present on policies page</td>
           </tr>
           <tr>
             <td>Find control mapping documentation</td>
             <td class="tasks-table__success">Success</td>
-            <td>GitHub links present for mappings</td>
+            <td>Control mappings mentioned; GitHub available</td>
           </tr>
           <tr>
-            <td>Assess template quality indicators</td>
+            <td>Assess template quality</td>
             <td class="tasks-table__success">Success</td>
-            <td>CISO credentials, production use mentioned</td>
+            <td>CISO/security credentials; Production use mentioned</td>
           </tr>
           <tr>
-            <td>Check maintenance and version history</td>
+            <td>Check maintenance history</td>
             <td class="tasks-table__success">Success</td>
-            <td>GitHub available for version history verification</td>
+            <td>GitHub link available; Version info mentioned</td>
           </tr>
         </tbody>
       </table>
@@ -823,19 +970,19 @@
         <div class="findings-list">
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>Detailed TSC coverage information visible</span>
+            <span>SOC2 policies section exists</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>GitHub links available for version history verification</span>
+            <span>Control mapping documentation referenced</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>Strong quality indicators: CISO credentials, production use</span>
+            <span>Author has security credentials</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--note">note</span>
-            <span>No testimonials - harder to verify real-world use</span>
+            <span>No testimonials visible - would strengthen credibility</span>
           </div>
         </div>
       </div>
@@ -843,7 +990,7 @@
       <div class="persona-insight">
         <div class="persona-insight__icon">&#128161;</div>
         <div class="persona-insight__content">
-          <strong>Michael's Verdict:</strong> "The templates meet our baseline requirements." His skepticism was addressed by the author's CISO credentials and detailed control mappings. He'd still verify via GitHub commit history.
+          <strong>Michael's Verdict:</strong> "The templates meet our baseline requirements." His skepticism was addressed by the author's CISO credentials and GitHub availability for version history verification. 9 success observations, 1 note.
         </div>
       </div>
     </div>
@@ -866,9 +1013,9 @@
             <h4>Goals</h4>
             <ul>
               <li>Get to the GitHub repo quickly</li>
-              <li>Understand the file/folder structure</li>
-              <li>Find customization guidance</li>
-              <li>Verify the license allows modification</li>
+              <li>Navigate to specific policy repository</li>
+              <li>Find getting started / setup instructions</li>
+              <li>Verify license allows modification</li>
             </ul>
           </div>
           <div>
@@ -877,8 +1024,29 @@
               <li>Jumps to GitHub immediately</li>
               <li>Reads READMEs before anything else</li>
               <li>Checks commit history for activity</li>
-              <li>Prefers CLI/code over UI navigation</li>
+              <li>Expects keyboard shortcuts (Cmd+K search)</li>
             </ul>
+          </div>
+        </div>
+        <div class="persona-fidelity">
+          <p class="persona-fidelity__title">Behavioral Realism</p>
+          <div class="persona-fidelity__grid">
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Interaction</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge">expert</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Emotional</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">calm / trusting</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Cognition</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">expert</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Prior Experience</span>
+              <span class="persona-fidelity__value">GitHub, Docusaurus, ReadTheDocs</span>
+            </div>
           </div>
         </div>
       </div>
@@ -887,7 +1055,7 @@
         <div class="session-stats__item">
           <div class="session-stats__icon">&#128196;</div>
           <div>
-            <div class="session-stats__label">Pages Visited</div>
+            <div class="session-stats__label">Tasks</div>
             <div class="session-stats__value">5</div>
           </div>
         </div>
@@ -895,7 +1063,7 @@
           <div class="session-stats__icon">&#128065;</div>
           <div>
             <div class="session-stats__label">Observations</div>
-            <div class="session-stats__value">11</div>
+            <div class="session-stats__value">7</div>
           </div>
         </div>
         <div class="session-stats__item">
@@ -920,22 +1088,22 @@
           <tr>
             <td>Find GitHub link from homepage</td>
             <td class="tasks-table__success">Success</td>
-            <td>GitHub link in navigation - easy access</td>
+            <td>GitHub link found in navigation</td>
           </tr>
           <tr>
             <td>Navigate to specific policy repo</td>
             <td class="tasks-table__success">Success</td>
-            <td>Policy repo links found on policies page</td>
+            <td>SOC2 repo link found; 1 GitHub link present</td>
           </tr>
           <tr>
-            <td>Find getting started / setup instructions</td>
+            <td>Find setup instructions</td>
             <td class="tasks-table__success">Success</td>
-            <td>Good dev instructions with code blocks</td>
+            <td>Code examples found on getting started page</td>
           </tr>
           <tr>
-            <td>Verify license for modification</td>
+            <td>Verify license</td>
             <td class="tasks-table__success">Success</td>
-            <td>Open license visible in footer</td>
+            <td>Open license mentioned</td>
           </tr>
         </tbody>
       </table>
@@ -945,19 +1113,19 @@
         <div class="findings-list">
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>GitHub link in navigation - easy access</span>
+            <span>GitHub link visible and accessible</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>Good dev instructions: clone, fork, step-by-step</span>
+            <span>Direct link to SOC2 policy repo</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>Code blocks with examples on getting started page</span>
+            <span>Code blocks with examples present</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--frustration">frustration</span>
-            <span>No search functionality - developers might expect Cmd+K</span>
+            <span>No search functionality - developers expect Cmd+K</span>
           </div>
         </div>
       </div>
@@ -965,7 +1133,7 @@
       <div class="persona-insight persona-insight--warning">
         <div class="persona-insight__icon">&#9888;</div>
         <div class="persona-insight__content">
-          <strong>Sarah's Verdict:</strong> "Good dev experience, but where's the search?" The only frustration across all 58 observations - she expected Cmd+K search that modern docs sites have. A real improvement opportunity.
+          <strong>Sarah's Verdict:</strong> "Good dev experience, but where's the search?" The only frustration across all 45 observations - she expected Cmd+K search that modern docs sites have. A real improvement opportunity.
         </div>
       </div>
     </div>
@@ -1003,6 +1171,27 @@
             </ul>
           </div>
         </div>
+        <div class="persona-fidelity">
+          <p class="persona-fidelity__title">Behavioral Realism</p>
+          <div class="persona-fidelity__grid">
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Interaction</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge">impatient</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Emotional</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">neutral / moderate</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Cognition</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">scanner</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Context</span>
+              <span class="persona-fidelity__value">Mobile (393x727), High distraction</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="session-stats">
@@ -1010,7 +1199,7 @@
           <div class="session-stats__icon">&#128241;</div>
           <div>
             <div class="session-stats__label">Viewport</div>
-            <div class="session-stats__value">393x851</div>
+            <div class="session-stats__value">393x727</div>
           </div>
         </div>
         <div class="session-stats__item">
@@ -1040,24 +1229,24 @@
         </thead>
         <tbody>
           <tr>
-            <td>Page loads and is readable on mobile</td>
+            <td>Page loads and is readable</td>
             <td class="tasks-table__success">Success</td>
-            <td>No horizontal scrolling required, headline readable</td>
+            <td>No horizontal scroll; Headline readable</td>
           </tr>
           <tr>
-            <td>Navigation is accessible</td>
+            <td>Navigation accessible</td>
             <td class="tasks-table__success">Success</td>
-            <td>Navigation links visible on mobile</td>
+            <td>Nav links visible</td>
           </tr>
           <tr>
-            <td>Can scroll and read key content</td>
+            <td>Scroll and read content</td>
             <td class="tasks-table__success">Success</td>
-            <td>Content readable while scrolling</td>
+            <td>Content readable on scroll; SOC2 visible</td>
           </tr>
           <tr>
-            <td>Quick assessment of legitimacy</td>
+            <td>Quick legitimacy assessment</td>
             <td class="tasks-table__success">Success</td>
-            <td>Site appears legitimate - open source, free, GitHub</td>
+            <td>GitHub presence; Security credentials; Professional branding</td>
           </tr>
         </tbody>
       </table>
@@ -1067,7 +1256,7 @@
         <div class="findings-list">
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
-            <span>No horizontal scrolling required - mobile-friendly layout</span>
+            <span>No horizontal scrolling required - mobile-friendly</span>
           </div>
           <div class="finding-item">
             <span class="finding-item__badge observation-badge observation-badge--success">success</span>
@@ -1078,8 +1267,8 @@
             <span>Site appears legitimate on quick mobile scan</span>
           </div>
           <div class="finding-item">
-            <span class="finding-item__badge observation-badge observation-badge--note">note</span>
-            <span>Some tap targets may be small for mobile touch</span>
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Touch targets appear adequately sized</span>
           </div>
         </div>
       </div>
@@ -1087,7 +1276,446 @@
       <div class="persona-insight">
         <div class="persona-insight__icon">&#128161;</div>
         <div class="persona-insight__content">
-          <strong>David's Verdict:</strong> "Looks legit, bookmarking for the team." Quick mobile scan during his commute showed a professional site with clear trust signals. Good enough to share with his team for deeper evaluation.
+          <strong>David's Verdict:</strong> "Looks legit, bookmarking for the team." Quick mobile scan during his commute showed a professional site with clear trust signals. All 8 observations positive - excellent mobile experience.
+        </div>
+      </div>
+    </div>
+
+    <!-- Persona 6: Jordan - Accessibility Auditor -->
+    <div class="persona-section" id="persona-jordan">
+      <div class="persona-showcase">
+        <div class="persona-showcase__header">
+          <div class="persona-showcase__avatar" style="background: linear-gradient(135deg, #5CFFB4 0%, #5CB4FF 100%);">JA</div>
+          <div class="persona-showcase__info">
+            <h2 class="persona-showcase__name">Jordan</h2>
+            <p class="persona-showcase__role">Accessibility Auditor</p>
+            <p class="persona-showcase__background">
+              Testing for WCAG 2.1 AA compliance. Uses keyboard navigation and checks screen reader compatibility. Evaluating whether this compliance site is itself accessible.
+            </p>
+          </div>
+        </div>
+        <div class="persona-showcase__details">
+          <div>
+            <h4>Goals</h4>
+            <ul>
+              <li>Navigate entire site using only keyboard</li>
+              <li>Verify visible focus states on all elements</li>
+              <li>Check heading hierarchy is logical</li>
+              <li>Test at 200% zoom level</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Behaviors</h4>
+            <ul>
+              <li>Uses Tab key exclusively for navigation</li>
+              <li>Never uses mouse/trackpad</li>
+              <li>Checks focus visibility on every element</li>
+              <li>Tests with browser zoom at 200%</li>
+            </ul>
+          </div>
+        </div>
+        <div class="persona-fidelity">
+          <p class="persona-fidelity__title">Behavioral Realism</p>
+          <div class="persona-fidelity__grid">
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Interaction</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge">careful</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Emotional</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">neutral / methodical</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Cognition</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">learner</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Prior Experience</span>
+              <span class="persona-fidelity__value">GOV.UK, WebAIM, Deque</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="session-stats">
+        <div class="session-stats__item">
+          <div class="session-stats__icon">&#9000;</div>
+          <div>
+            <div class="session-stats__label">Input Mode</div>
+            <div class="session-stats__value">Keyboard</div>
+          </div>
+        </div>
+        <div class="session-stats__item">
+          <div class="session-stats__icon">&#128065;</div>
+          <div>
+            <div class="session-stats__label">Observations</div>
+            <div class="session-stats__value">7</div>
+          </div>
+        </div>
+        <div class="session-stats__item">
+          <div class="session-stats__icon">&#128247;</div>
+          <div>
+            <div class="session-stats__label">Screenshots</div>
+            <div class="session-stats__value">7</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section__title" style="margin-bottom: 16px;">Tasks Completed</h3>
+      <table class="tasks-table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Result</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Keyboard navigation test</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Focus visible on 100% of elements</td>
+          </tr>
+          <tr>
+            <td>Check heading hierarchy</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Good hierarchy: 1 H1, 10 total headings</td>
+          </tr>
+          <tr>
+            <td>Verify image alt text</td>
+            <td class="tasks-table__success">Success</td>
+            <td>No images (CSS-based design)</td>
+          </tr>
+          <tr>
+            <td>Test 200% zoom</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Good 200% zoom support</td>
+          </tr>
+          <tr>
+            <td>Check landmarks and skip links</td>
+            <td class="tasks-table__success">Success</td>
+            <td>4 landmarks found; Skip link found</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="findings-section">
+        <h3 class="findings-section__title">Accessibility Observations</h3>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Good focus visibility on all interactive elements</span>
+          </div>
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Logical heading hierarchy - accessible structure</span>
+          </div>
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>CSS-first design - no image accessibility issues</span>
+          </div>
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Skip link and ARIA landmarks present</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-insight">
+        <div class="persona-insight__icon">&#128161;</div>
+        <div class="persona-insight__content">
+          <strong>Jordan's Verdict:</strong> "This compliance site practices what it preaches." All 7 observations positive. Good WCAG compliance - keyboard navigation works, focus visible, heading hierarchy logical.
+        </div>
+      </div>
+    </div>
+
+    <!-- Persona 7: Taylor - Junior GRC Analyst -->
+    <div class="persona-section" id="persona-taylor">
+      <div class="persona-showcase">
+        <div class="persona-showcase__header">
+          <div class="persona-showcase__avatar" style="background: linear-gradient(135deg, #FFC75C 0%, #FFAA5C 100%);">TG</div>
+          <div class="persona-showcase__info">
+            <h2 class="persona-showcase__name">Taylor</h2>
+            <p class="persona-showcase__role">Junior GRC Analyst</p>
+            <p class="persona-showcase__background">
+              Fresh out of college, 3 months into first GRC role. Boss said "figure out SOC2" with no further guidance. Doesn't know compliance jargon yet. Needs education, not just templates.
+            </p>
+          </div>
+        </div>
+        <div class="persona-showcase__details">
+          <div>
+            <h4>Goals</h4>
+            <ul>
+              <li>Understand what SOC2 actually is</li>
+              <li>Learn the terminology (TSC, controls)</li>
+              <li>Find a clear starting point for beginners</li>
+              <li>Determine if this is the right resource</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Behaviors</h4>
+            <ul>
+              <li>Reads everything carefully, multiple times</li>
+              <li>Looks up unfamiliar terms</li>
+              <li>Seeks help when confused</li>
+              <li>Easily overwhelmed by jargon</li>
+            </ul>
+          </div>
+        </div>
+        <div class="persona-fidelity">
+          <p class="persona-fidelity__title">Behavioral Realism</p>
+          <div class="persona-fidelity__grid">
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Interaction</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge">exploratory</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Emotional</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">anxious / moderate</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Cognition</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">learner</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Prior Experience</span>
+              <span class="persona-fidelity__value">None - first compliance project</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="session-stats">
+        <div class="session-stats__item">
+          <div class="session-stats__icon">&#128218;</div>
+          <div>
+            <div class="session-stats__label">Learning Mode</div>
+            <div class="session-stats__value">Exploratory</div>
+          </div>
+        </div>
+        <div class="session-stats__item">
+          <div class="session-stats__icon">&#128065;</div>
+          <div>
+            <div class="session-stats__label">Observations</div>
+            <div class="session-stats__value">8</div>
+          </div>
+        </div>
+        <div class="session-stats__item">
+          <div class="session-stats__icon">&#128247;</div>
+          <div>
+            <div class="session-stats__label">Screenshots</div>
+            <div class="session-stats__value">7</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section__title" style="margin-bottom: 16px;">Tasks Completed</h3>
+      <table class="tasks-table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Result</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Understand site offering</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Terms used but not fully explained for beginners</td>
+          </tr>
+          <tr>
+            <td>Find beginner starting point</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Step-by-step guide found</td>
+          </tr>
+          <tr>
+            <td>Find educational content</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Limited but present</td>
+          </tr>
+          <tr>
+            <td>Check for glossary</td>
+            <td class="tasks-table__success">Success</td>
+            <td>No glossary found - room for improvement</td>
+          </tr>
+          <tr>
+            <td>Evaluate beginner appropriateness</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Moderate beginner support (score: 3/6)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="findings-section">
+        <h3 class="findings-section__title">Beginner Experience Observations</h3>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Clear "Getting Started" entry point found</span>
+          </div>
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Step-by-step instructions help beginners follow along</span>
+          </div>
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--note">note</span>
+            <span>No glossary or term definitions visible</span>
+          </div>
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--note">note</span>
+            <span>Technical jargon may confuse beginners</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-insight">
+        <div class="persona-insight__icon">&#128161;</div>
+        <div class="persona-insight__content">
+          <strong>Taylor's Verdict:</strong> "I can figure this out, but it assumes I know more than I do." Site provides enough guidance for motivated beginners, but would benefit from a glossary and "What is SOC2?" explainer.
+        </div>
+      </div>
+    </div>
+
+    <!-- Persona 8: Robert - Board Member (Tablet) -->
+    <div class="persona-section" id="persona-robert">
+      <div class="persona-showcase">
+        <div class="persona-showcase__header">
+          <div class="persona-showcase__avatar" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%);">RB</div>
+          <div class="persona-showcase__info">
+            <h2 class="persona-showcase__name">Robert</h2>
+            <p class="persona-showcase__role">Board Member (Tablet)</p>
+            <p class="persona-showcase__background">
+              Board member at a SaaS company. Portfolio company CEO mentioned using "open source compliance templates." Robert has 3 minutes during a meeting break to assess legitimacy.
+            </p>
+          </div>
+        </div>
+        <div class="persona-showcase__details">
+          <div>
+            <h4>Goals</h4>
+            <ul>
+              <li>Quick legitimacy check in under 3 minutes</li>
+              <li>Find trust signals (credentials, credibility)</li>
+              <li>Determine if appropriate for enterprise</li>
+              <li>Decide: red flag or acceptable?</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Behaviors</h4>
+            <ul>
+              <li>Skims headlines only - no deep reading</li>
+              <li>Looks for logos, credentials, social proof</li>
+              <li>Makes snap judgments on appearance</li>
+              <li>Will close tab if anything looks sketchy</li>
+            </ul>
+          </div>
+        </div>
+        <div class="persona-fidelity">
+          <p class="persona-fidelity__title">Behavioral Realism</p>
+          <div class="persona-fidelity__grid">
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Interaction</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge">impatient</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Emotional</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">skeptical / urgent</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Cognition</span>
+              <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">scanner</span></span>
+            </div>
+            <div class="persona-fidelity__item">
+              <span class="persona-fidelity__label">Context</span>
+              <span class="persona-fidelity__value">iPad (768x1024), 3 min max</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="session-stats">
+        <div class="session-stats__item">
+          <div class="session-stats__icon">&#128241;</div>
+          <div>
+            <div class="session-stats__label">Device</div>
+            <div class="session-stats__value">iPad</div>
+          </div>
+        </div>
+        <div class="session-stats__item">
+          <div class="session-stats__icon">&#128065;</div>
+          <div>
+            <div class="session-stats__label">Observations</div>
+            <div class="session-stats__value">8</div>
+          </div>
+        </div>
+        <div class="session-stats__item">
+          <div class="session-stats__icon">&#128247;</div>
+          <div>
+            <div class="session-stats__label">Screenshots</div>
+            <div class="session-stats__value">6</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section__title" style="margin-bottom: 16px;">Tasks Completed</h3>
+      <table class="tasks-table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Result</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>First impression check</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Looks legitimate (score: 4/5)</td>
+          </tr>
+          <tr>
+            <td>Find credibility info</td>
+            <td class="tasks-table__success">Success</td>
+            <td>CISO credentials visible; Production use mentioned</td>
+          </tr>
+          <tr>
+            <td>Enterprise appropriateness</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Enterprise-appropriate (3/4 signals)</td>
+          </tr>
+          <tr>
+            <td>Tablet UX check</td>
+            <td class="tasks-table__success">Success</td>
+            <td>Good tablet layout; Good tap targets</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="findings-section">
+        <h3 class="findings-section__title">Executive Due Diligence Observations</h3>
+        <div class="findings-list">
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Transparent about being open source - builds trust</span>
+          </div>
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>GitHub presence - claims are verifiable</span>
+          </div>
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>CISO credentials visible - credible source</span>
+          </div>
+          <div class="finding-item">
+            <span class="finding-item__badge observation-badge observation-badge--success">success</span>
+            <span>Clean tablet rendering - professional appearance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="persona-insight">
+        <div class="persona-insight__icon">&#128161;</div>
+        <div class="persona-insight__content">
+          <strong>Robert's Verdict:</strong> "APPROVED - looks legitimate." 3-minute assessment complete. 8 trust signals found, 0 red flags. Appropriate for portfolio company to use as starting point.
         </div>
       </div>
     </div>
@@ -1097,9 +1725,9 @@
   <section class="github-section">
     <h3>View the Actual Test Code</h3>
     <p>
-      All 6 persona tests are open source. See how we defined each persona and structured the tests.
+      All 8 persona tests with full Behavioral Realism attributes are open source. See how we defined each persona.
     </p>
-    <a href="https://github.com/open-access-policies/open-access-policies.github.io/tree/main/tests/personas"
+    <a href="https://github.com/persona-spec/personaspec.dev/tree/main/openaccesspolicies/tests/personas"
        target="_blank"
        rel="noopener"
        class="btn btn--secondary">
