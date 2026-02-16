@@ -48,6 +48,7 @@
         <li><a href="#writing-tests" class="docs-sidebar__link">Writing Tests</a></li>
         <li><a href="#cli-reference" class="docs-sidebar__link">CLI Reference</a></li>
         <li><a href="#api-reference" class="docs-sidebar__link">API Reference</a></li>
+        <li><a href="#presets-reference" class="docs-sidebar__link">Presets Reference</a></li>
         <li><a href="#persona-templates" class="docs-sidebar__link">Persona Templates</a></li>
         <li><a href="#output-format" class="docs-sidebar__link">Output Format</a></li>
       </ul>
@@ -151,6 +152,62 @@ npx playwright install chromium</code></pre>
 <span class="keyword">const</span> collector = <span class="keyword">new</span> <span class="function">ObservationCollector</span>({
   outputDir: <span class="string">'./test-results'</span>,
   persona,
+});</code></pre>
+          </div>
+        </div>
+
+        <h4>Focus Group Fidelity (Optional)</h4>
+        <p>For human-realistic testing, add interaction patterns, emotional state, and cognitive profiles using built-in presets:</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span>tests/personas/marcus-frustrated.spec.ts</span>
+            <span>TypeScript</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code><span class="keyword">import</span> {
+  definePersona,
+  interactionPatternDefaults,
+  emotionalBaselineDefaults,
+  cognitionDefaults,
+} <span class="keyword">from</span> <span class="string">'personaspec'</span>;
+
+<span class="keyword">const</span> persona = <span class="function">definePersona</span>({
+  name: <span class="string">'Marcus'</span>,
+  role: <span class="string">'Frustrated Customer'</span>,
+  background: <span class="string">'Has been trying to resolve an issue for days...'</span>,
+  goals: [<span class="string">'Get immediate help'</span>, <span class="string">'Talk to a real person'</span>],
+  behaviors: [<span class="string">'Impatient with slow responses'</span>, <span class="string">'Will abandon if frustrated'</span>],
+
+  <span class="comment">// Human-scale timing (even impatient users don't click 100x/sec)</span>
+  interactionPatterns: interactionPatternDefaults.impatient,
+
+  <span class="comment">// Emotional state</span>
+  emotionalBaseline: {
+    frustrationLevel: <span class="number">60</span>,           <span class="comment">// Already frustrated</span>
+    frustrationEscalation: <span class="string">'volatile'</span>,
+    trustLevel: <span class="string">'skeptical'</span>,
+    urgency: <span class="string">'urgent'</span>,
+  },
+
+  <span class="comment">// How they process information</span>
+  cognition: cognitionDefaults.scanner,
+
+  <span class="comment">// What they compare against</span>
+  priorExperience: {
+    referenceProducts: [<span class="string">'Zendesk'</span>, <span class="string">'Intercom'</span>],
+    expectedPatterns: [<span class="string">'Live chat indicator'</span>, <span class="string">'Response time estimate'</span>],
+    delighters: [<span class="string">'Instant response'</span>, <span class="string">'No queue'</span>],
+    petPeeves: [<span class="string">'Long wait times'</span>, <span class="string">'Generic responses'</span>],
+  },
+
+  <span class="comment">// Session context</span>
+  sessionContext: {
+    isReturning: <span class="keyword">true</span>,
+    priorActivity: <span class="string">'Failed email attempts'</span>,
+    distractionLevel: <span class="string">'low'</span>,
+    timeContext: <span class="string">'midday-busy'</span>,
+  },
 });</code></pre>
           </div>
         </div>
@@ -415,11 +472,19 @@ test.<span class="function">describe</span>(<span class="string">`${persona.name
           </div>
           <div class="code-block__content">
             <pre><code><span class="function">definePersona</span>({
-  name: <span class="keyword">string</span>,        <span class="comment">// Required - persona name</span>
-  role: <span class="keyword">string</span>,        <span class="comment">// Required - user role/type</span>
-  background: <span class="keyword">string</span>,  <span class="comment">// Required - context and experience</span>
-  goals: <span class="keyword">string</span>[],     <span class="comment">// Required - at least one goal</span>
-  behaviors: <span class="keyword">string</span>[], <span class="comment">// Required - at least one behavior</span>
+  <span class="comment">// Required - Core attributes</span>
+  name: <span class="keyword">string</span>,
+  role: <span class="keyword">string</span>,
+  background: <span class="keyword">string</span>,
+  goals: <span class="keyword">string</span>[],
+  behaviors: <span class="keyword">string</span>[],
+
+  <span class="comment">// Optional - Focus Group Fidelity attributes</span>
+  interactionPatterns?: InteractionPatterns,
+  emotionalBaseline?: EmotionalBaseline,
+  cognition?: CognitionProfile,
+  priorExperience?: PriorExperience,
+  sessionContext?: SessionContext,
 }): PersonaDefinition</code></pre>
           </div>
         </div>
@@ -453,6 +518,168 @@ test.<span class="function">describe</span>(<span class="string">`${persona.name
             </tr>
           </tbody>
         </table>
+      </section>
+
+      <!-- Presets Reference -->
+      <section class="docs-section" id="presets-reference">
+        <h2 class="docs-section__title">Presets Reference</h2>
+        <p>PersonaSpec provides preset configurations for Focus Group Fidelity attributes. Use these as starting points.</p>
+
+        <h4><code>interactionPatternDefaults</code></h4>
+        <p>Human-scale timing presets for different user types:</p>
+
+        <table class="feedback-table">
+          <thead>
+            <tr>
+              <th>Preset</th>
+              <th>Scan Time</th>
+              <th>Retry Delay</th>
+              <th>Best For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>careful</code></td>
+              <td>3-8 sec</td>
+              <td>5-10 sec</td>
+              <td>First-time visitors, hesitant users</td>
+            </tr>
+            <tr>
+              <td><code>normal</code></td>
+              <td>1.5-4 sec</td>
+              <td>3-6 sec</td>
+              <td>Average users, returning customers</td>
+            </tr>
+            <tr>
+              <td><code>impatient</code></td>
+              <td>0.5-2 sec</td>
+              <td>2-4 sec</td>
+              <td>Frustrated customers, time-pressured users</td>
+            </tr>
+            <tr>
+              <td><code>exploratory</code></td>
+              <td>2-5 sec</td>
+              <td>3-8 sec</td>
+              <td>Users learning a new interface</td>
+            </tr>
+            <tr>
+              <td><code>expert</code></td>
+              <td>0.2-1 sec</td>
+              <td>1.5-3 sec</td>
+              <td>Power users who know the interface</td>
+            </tr>
+            <tr>
+              <td><code>monitoring</code></td>
+              <td>1-3 sec</td>
+              <td>5-15 sec</td>
+              <td>Supervisors, periodic checkers</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4><code>emotionalBaselineDefaults</code></h4>
+        <p>Starting emotional states for different scenarios:</p>
+
+        <table class="feedback-table">
+          <thead>
+            <tr>
+              <th>Preset</th>
+              <th>Frustration</th>
+              <th>Escalation</th>
+              <th>Trust</th>
+              <th>Urgency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>calm</code></td>
+              <td>10</td>
+              <td>patient</td>
+              <td>trusting</td>
+              <td>relaxed</td>
+            </tr>
+            <tr>
+              <td><code>neutral</code></td>
+              <td>30</td>
+              <td>moderate</td>
+              <td>neutral</td>
+              <td>moderate</td>
+            </tr>
+            <tr>
+              <td><code>frustrated</code></td>
+              <td>60</td>
+              <td>volatile</td>
+              <td>skeptical</td>
+              <td>urgent</td>
+            </tr>
+            <tr>
+              <td><code>crisis</code></td>
+              <td>80</td>
+              <td>volatile</td>
+              <td>skeptical</td>
+              <td>crisis</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4><code>cognitionDefaults</code></h4>
+        <p>How different user types process information:</p>
+
+        <table class="feedback-table">
+          <thead>
+            <tr>
+              <th>Preset</th>
+              <th>Reading</th>
+              <th>Decision Style</th>
+              <th>Focus</th>
+              <th>Scan Pattern</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>careful</code></td>
+              <td>slow</td>
+              <td>deliberate</td>
+              <td>15 min</td>
+              <td>F-pattern</td>
+            </tr>
+            <tr>
+              <td><code>balanced</code></td>
+              <td>average</td>
+              <td>balanced</td>
+              <td>10 min</td>
+              <td>F-pattern</td>
+            </tr>
+            <tr>
+              <td><code>scanner</code></td>
+              <td>scanner</td>
+              <td>impulsive</td>
+              <td>5 min</td>
+              <td>center-first</td>
+            </tr>
+            <tr>
+              <td><code>expert</code></td>
+              <td>fast</td>
+              <td>impulsive</td>
+              <td>60 min</td>
+              <td>F-pattern</td>
+            </tr>
+            <tr>
+              <td><code>learner</code></td>
+              <td>average</td>
+              <td>deliberate</td>
+              <td>20 min</td>
+              <td>Z-pattern</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <p class="callout__title">Mix and Match</p>
+          <p>
+            You can combine presets or override individual properties. For example, use <code>interactionPatternDefaults.impatient</code> but set a custom <code>maxRetries</code>.
+          </p>
+        </div>
       </section>
 
       <!-- Persona Templates -->

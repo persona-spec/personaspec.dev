@@ -207,6 +207,77 @@
       margin-bottom: 0;
     }
 
+    /* Fidelity badges section */
+    .persona-fidelity {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .persona-fidelity__title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: #A78BFA;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .persona-fidelity__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .persona-fidelity__item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .persona-fidelity__label {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .persona-fidelity__value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-sm);
+      color: var(--text);
+    }
+
+    .persona-preset-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: rgba(167, 139, 250, 0.2);
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: var(--text-xs);
+      color: #A78BFA;
+    }
+
+    .persona-preset-badge--emotional {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.3);
+      color: var(--amber);
+    }
+
+    .persona-preset-badge--cognition {
+      background: rgba(34, 197, 94, 0.2);
+      border-color: rgba(34, 197, 94, 0.3);
+      color: var(--success);
+    }
+
+    @media (max-width: 600px) {
+      .persona-fidelity__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Tasks section */
     .persona-tasks {
       background: var(--bg-raised);
@@ -531,6 +602,28 @@
         </div>
       </div>
 
+      <div class="persona-fidelity">
+        <p class="persona-fidelity__title">Focus Group Fidelity</p>
+        <div class="persona-fidelity__grid">
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Interaction</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge">careful</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Emotional State</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">calm</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Cognition</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">careful</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Session</span>
+            <span class="persona-fidelity__value">New visitor, low distraction</span>
+          </div>
+        </div>
+      </div>
+
       <div class="persona-tasks">
         <p class="persona-tasks__title">Example Tasks</p>
         <ul class="persona-tasks__list">
@@ -586,6 +679,28 @@
             <li>Poor search functionality</li>
             <li>Missing export options</li>
           </ul>
+        </div>
+      </div>
+
+      <div class="persona-fidelity">
+        <p class="persona-fidelity__title">Focus Group Fidelity</p>
+        <div class="persona-fidelity__grid">
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Interaction</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge">expert</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Emotional State</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">calm</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Cognition</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">expert</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Session</span>
+            <span class="persona-fidelity__value">Returning user, focused</span>
+          </div>
         </div>
       </div>
 
@@ -883,6 +998,28 @@
         </div>
       </div>
 
+      <div class="persona-fidelity">
+        <p class="persona-fidelity__title">Focus Group Fidelity</p>
+        <div class="persona-fidelity__grid">
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Interaction</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge">impatient</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Emotional State</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">neutral</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Cognition</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">scanner</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Session</span>
+            <span class="persona-fidelity__value">High distraction, midday</span>
+          </div>
+        </div>
+      </div>
+
       <div class="persona-tasks">
         <p class="persona-tasks__title">Example Tasks</p>
         <ul class="persona-tasks__list">
@@ -942,6 +1079,28 @@
         </div>
       </div>
 
+      <div class="persona-fidelity">
+        <p class="persona-fidelity__title">Focus Group Fidelity</p>
+        <div class="persona-fidelity__grid">
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Interaction</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge">normal</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Emotional State</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">skeptical</span> (40%)</span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Cognition</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">balanced</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Pet Peeves</span>
+            <span class="persona-fidelity__value">Hidden pricing, fake testimonials</span>
+          </div>
+        </div>
+      </div>
+
       <div class="persona-tasks">
         <p class="persona-tasks__title">Example Tasks</p>
         <ul class="persona-tasks__list">
@@ -998,6 +1157,28 @@
             <li>FAQs that miss real issues</li>
             <li>No clear escalation path</li>
           </ul>
+        </div>
+      </div>
+
+      <div class="persona-fidelity">
+        <p class="persona-fidelity__title">Focus Group Fidelity</p>
+        <div class="persona-fidelity__grid">
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Interaction</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge">impatient</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Emotional State</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--emotional">frustrated</span> (60%)</span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Cognition</span>
+            <span class="persona-fidelity__value"><span class="persona-preset-badge persona-preset-badge--cognition">scanner</span></span>
+          </div>
+          <div class="persona-fidelity__item">
+            <span class="persona-fidelity__label">Prior Experience</span>
+            <span class="persona-fidelity__value">Zendesk, Intercom</span>
+          </div>
         </div>
       </div>
 
@@ -1088,6 +1269,9 @@
           <h3 class="meta-persona-card__name">Dave the Dev</h3>
           <p class="meta-persona-card__role">Developer Evaluating</p>
           <p class="meta-persona-card__goal">"I have 15 minutes. Is this worth adopting?"</p>
+          <p style="font-size: var(--text-xs); opacity: 0.7; margin-top: 8px;">
+            <strong>Fidelity:</strong> impatient + scanner + skeptical
+          </p>
         </div>
 
         <div class="meta-persona-card">
@@ -1095,6 +1279,9 @@
           <h3 class="meta-persona-card__name">QA Quinn</h3>
           <p class="meta-persona-card__role">QA Lead Researching</p>
           <p class="meta-persona-card__goal">"What does this catch that Cypress doesn't?"</p>
+          <p style="font-size: var(--text-xs); opacity: 0.7; margin-top: 8px;">
+            <strong>Fidelity:</strong> normal + balanced + compares to Playwright
+          </p>
         </div>
 
         <div class="meta-persona-card">
@@ -1102,6 +1289,9 @@
           <h3 class="meta-persona-card__name">HN Harper</h3>
           <p class="meta-persona-card__role">First-Time Visitor</p>
           <p class="meta-persona-card__goal">"Is this relevant to my work?"</p>
+          <p style="font-size: var(--text-xs); opacity: 0.7; margin-top: 8px;">
+            <strong>Fidelity:</strong> careful + calm + F-pattern scan
+          </p>
         </div>
       </div>
     </div>

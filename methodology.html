@@ -46,6 +46,7 @@
       <ul class="docs-sidebar__nav">
         <li><a href="#core-idea" class="docs-sidebar__link">The Core Idea</a></li>
         <li><a href="#persona-definition" class="docs-sidebar__link">Persona Definition</a></li>
+        <li><a href="#focus-group-fidelity" class="docs-sidebar__link">Focus Group Fidelity</a></li>
         <li><a href="#test-structure" class="docs-sidebar__link">Test Structure</a></li>
         <li><a href="#task-tests" class="docs-sidebar__link">Task Tests</a></li>
         <li><a href="#free-exploration" class="docs-sidebar__link">Free Exploration</a></li>
@@ -80,8 +81,9 @@
       <!-- Persona Definition -->
       <section class="docs-section" id="persona-definition">
         <h2 class="docs-section__title">The Persona Definition</h2>
-        <p>Every persona has four essential attributes:</p>
+        <p>Every persona has five core attributes, plus optional Focus Group Fidelity attributes for human-realistic testing:</p>
 
+        <h4>Core Attributes</h4>
         <ul class="attribute-list">
           <li class="attribute-list__item">
             <span class="attribute-list__number">1</span>
@@ -112,6 +114,156 @@
             </div>
           </li>
         </ul>
+
+        <h4>Focus Group Fidelity Attributes</h4>
+        <p>These optional attributes enable human-scale timing and emotional journey tracking:</p>
+
+        <ul class="attribute-list">
+          <li class="attribute-list__item">
+            <span class="attribute-list__number">5</span>
+            <div class="attribute-list__content">
+              <h5>Interaction Patterns</h5>
+              <p>Human-scale timing: scan time (1-8 seconds), retry delays (2-10 seconds), max retries, reading pace, typing speed. Even frustrated users don't click 100x/second.</p>
+            </div>
+          </li>
+          <li class="attribute-list__item">
+            <span class="attribute-list__number">6</span>
+            <div class="attribute-list__content">
+              <h5>Emotional Baseline</h5>
+              <p>Starting frustration level (0-100), frustration escalation style (volatile/moderate/patient), trust level, and urgency. Marcus starts at 60 frustration after failed email attempts.</p>
+            </div>
+          </li>
+          <li class="attribute-list__item">
+            <span class="attribute-list__number">7</span>
+            <div class="attribute-list__content">
+              <h5>Cognition</h5>
+              <p>How they process information: reading speed, decision style (impulsive/deliberate), focus duration, uncertainty response, and visual scan pattern (F-pattern, center-first, etc.).</p>
+            </div>
+          </li>
+          <li class="attribute-list__item">
+            <span class="attribute-list__number">8</span>
+            <div class="attribute-list__content">
+              <h5>Prior Experience</h5>
+              <p>Products they compare you against (e.g., "Zendesk", "Intercom"), patterns they expect, things that delight them, and pet peeves that trigger instant frustration.</p>
+            </div>
+          </li>
+          <li class="attribute-list__item">
+            <span class="attribute-list__number">9</span>
+            <div class="attribute-list__content">
+              <h5>Session Context</h5>
+              <p>Whether they're a returning user, what happened before this session, distraction level, and time of day (morning-fresh vs evening-tired).</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Focus Group Fidelity -->
+      <section class="docs-section" id="focus-group-fidelity">
+        <h2 class="docs-section__title">Focus Group Fidelity</h2>
+        <p>
+          Traditional E2E tests often produce false positives - issues that appear in automated tests but wouldn't occur with real human users. Focus Group Fidelity addresses five critical testing flaws:
+        </p>
+
+        <h4>The Five Flaws</h4>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Flaw</th>
+              <th>Problem</th>
+              <th>Solution</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Psychology without Physics</strong></td>
+              <td>Tests define frustration thresholds but click at machine speed, finding errors no human would trigger</td>
+              <td><code>interactionPatterns</code> - Human-scale timing with realistic delays</td>
+            </tr>
+            <tr>
+              <td><strong>Finding without Noticing</strong></td>
+              <td>Tests find elements instantly that take humans 3+ seconds to visually locate</td>
+              <td><code>cognition.scanPattern</code> - Simulate how users actually scan pages</td>
+            </tr>
+            <tr>
+              <td><strong>Frustration without History</strong></td>
+              <td>Each test starts fresh, but Marcus arrives already at 60% frustration from failed emails</td>
+              <td><code>emotionalBaseline</code> - Starting emotional state and escalation patterns</td>
+            </tr>
+            <tr>
+              <td><strong>Context without Comparison</strong></td>
+              <td>Tests evaluate in isolation, but users compare to Zendesk, Intercom, etc.</td>
+              <td><code>priorExperience</code> - Reference products and expected patterns</td>
+            </tr>
+            <tr>
+              <td><strong>Tasks without Sessions</strong></td>
+              <td>Tests forget what happened earlier, but users remember being frustrated 5 minutes ago</td>
+              <td><code>sessionContext</code> - Prior activity and returning user state</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Human-Scale Timing</h4>
+        <p>
+          Even the most impatient user clicks retry every 2-4 seconds, not 100 times per second. The <code>interactionPatterns</code> attribute enforces realistic timing:
+        </p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span>Interaction Pattern Presets</span>
+            <span>TypeScript</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code><span class="keyword">import</span> { interactionPatternDefaults } <span class="keyword">from</span> <span class="string">'personaspec'</span>;
+
+<span class="comment">// Impatient but still human - faster but not machine-speed</span>
+interactionPatternDefaults.impatient = {
+  scanTime: { min: <span class="number">500</span>, max: <span class="number">2000</span> },    <span class="comment">// 0.5-2 sec to scan</span>
+  retryDelay: { min: <span class="number">2000</span>, max: <span class="number">4000</span> }, <span class="comment">// 2-4 sec between retries!</span>
+  maxRetries: <span class="number">3</span>,
+  readingPace: <span class="number">2000</span>,                    <span class="comment">// 2 sec per 100 words</span>
+  typingSpeed: <span class="number">300</span>,                     <span class="comment">// 300 chars/minute</span>
+};</code></pre>
+          </div>
+        </div>
+
+        <h4>Emotional Journey Tracking</h4>
+        <p>
+          Frustration compounds over time. A user who starts frustrated and encounters three small issues may abandon, while a calm user would continue. The <code>emotionalBaseline</code> attribute tracks this journey:
+        </p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span>Frustration Escalation</span>
+            <span>TypeScript</span>
+          </div>
+          <div class="code-block__content">
+            <pre><code><span class="keyword">const</span> marcus = definePersona({
+  name: <span class="string">'Marcus'</span>,
+  role: <span class="string">'Frustrated Customer'</span>,
+  <span class="comment">// ... core attributes ...</span>
+
+  emotionalBaseline: {
+    frustrationLevel: <span class="number">60</span>,           <span class="comment">// Already frustrated from email</span>
+    frustrationEscalation: <span class="string">'volatile'</span>, <span class="comment">// Compounds quickly</span>
+    trustLevel: <span class="string">'skeptical'</span>,         <span class="comment">// Doubts the company cares</span>
+    urgency: <span class="string">'urgent'</span>,               <span class="comment">// Needs resolution now</span>
+  },
+
+  sessionContext: {
+    isReturning: <span class="keyword">true</span>,
+    priorActivity: <span class="string">'Failed email support attempts'</span>,
+    distractionLevel: <span class="string">'low'</span>,        <span class="comment">// Focused on getting help</span>
+  },
+});</code></pre>
+          </div>
+        </div>
+
+        <div class="callout callout--tip">
+          <p class="callout__title">Observations Include Emotional Context</p>
+          <p>
+            When you record observations, the collector can track the persona's emotional state at that moment. This helps AI analysis understand why certain issues matter more for certain personas.
+          </p>
+        </div>
       </section>
 
       <!-- Test Structure -->
@@ -230,6 +382,7 @@
         <h2 class="docs-section__title">Observation Types</h2>
         <p>Use these consistently across all tests:</p>
 
+        <h4>Core Types</h4>
         <table class="docs-table">
           <thead>
             <tr>
@@ -256,6 +409,77 @@
             </tr>
           </tbody>
         </table>
+
+        <h4>Focus Group Fidelity Types</h4>
+        <p>Additional observation types for richer emotional and discovery tracking:</p>
+
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>When to Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="observation-badge observation-badge--success">noticed</span></td>
+              <td>Element entered visual attention (after realistic scan time)</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--note">overlooked</span></td>
+              <td>Element on screen but not noticed by this persona's scan pattern</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--success">relief</span></td>
+              <td>Tension released - found what they needed, problem resolved</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--success">delight</span></td>
+              <td>Exceeded expectations - pleasantly surprised</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--frustration">disappointment</span></td>
+              <td>Failed to meet expectations set by marketing or prior experience</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4>Comparative Types</h4>
+        <p>Types for tracking how the experience compares to the persona's reference products:</p>
+
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>When to Use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="observation-badge observation-badge--success">better-than-expected</span></td>
+              <td>Compares favorably to reference products (e.g., faster than Zendesk)</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--frustration">worse-than-expected</span></td>
+              <td>Compares unfavorably to what they're used to</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--note">familiar-pattern</span></td>
+              <td>Recognized expected UX pattern from prior experience</td>
+            </tr>
+            <tr>
+              <td><span class="observation-badge observation-badge--confusion">unexpected-pattern</span></td>
+              <td>Pattern violated expectations from reference products</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <p class="callout__title">Human-Realistic Flag</p>
+          <p>
+            Each observation can include a <code>humanRealistic</code> flag in its context. When set to <code>true</code>, it indicates the observation would occur under realistic human timing. When <code>false</code>, the issue was found through machine-speed testing and may be a false positive.
+          </p>
+        </div>
       </section>
 
       <!-- Vision Model Analysis -->
