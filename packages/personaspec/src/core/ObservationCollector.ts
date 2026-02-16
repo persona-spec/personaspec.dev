@@ -6,10 +6,13 @@ import type {
   Observation,
   ObservationType,
   ObservationSeverity,
+  ObservationContext,
   PersonaTestResults,
   Screenshot,
   SessionMetrics,
   TaskResult,
+  TestMode,
+  EmotionalJourneyEntry,
 } from './types.js';
 
 /**
@@ -25,32 +28,58 @@ import type {
  *     background: 'New to the site',
  *     goals: ['Understand the product'],
  *     behaviors: ['Skims headings'],
+ *     interactionPatterns: interactionPatternDefaults.careful,
  *   }),
+ *   mode: 'validation', // Enforce human-scale timing
  * });
  *
  * // In your test
+ * await collector.beforeAction('click'); // Enforces timing in validation mode
  * await collector.screenshot(page, 'homepage', 'First view of the site');
  * collector.observe('success', 'Clear headline', 'Homepage hero');
  * collector.recordTask('Understand purpose', true, 'Headline was clear');
+ * collector.afterAction(); // Record timing for next action
  *
  * // After all tests
  * await collector.save();
  * ```
  */
 export class ObservationCollector {
-  private config: Required<CollectorConfig>;
+  private config: Required<Pick<CollectorConfig, 'outputDir' | 'persona' | 'includeBase64' | 'screenshotFormat'>> & {
+    mode: TestMode;
+  };
   private observations: Observation[] = [];
   private screenshots: Screenshot[] = [];
   private tasks: TaskResult[] = [];
   private metrics: SessionMetrics;
   private currentTaskStart?: number;
 
+  // Timing and emotional state tracking
+  private lastActionTime: number = Date.now();
+  private currentFrustration: number;
+  private currentConfidence: number = 100;
+  private actionSequence: string[] = [];
+  private emotionalJourney: EmotionalJourneyEntry[] = [];
+
   constructor(config: CollectorConfig) {
     this.config = {
       includeBase64: true,
       screenshotFormat: 'png',
+      mode: 'exploration',
       ...config,
     };
+
+    // Initialize emotional state from persona baseline
+    this.currentFrustration = config.persona.emotionalBaseline?.frustrationLevel ?? 30;
+    this.currentConfidence = 100 - this.currentFrustration;
+
+    // Record initial emotional state
+    this.emotionalJourney.push({
+      timestamp: new Date().toISOString(),
+      frustration: this.currentFrustration,
+      confidence: this.currentConfidence,
+      trigger: 'session-start',
+    });
 
     this.metrics = {
       startTime: new Date().toISOString(),
@@ -59,6 +88,110 @@ export class ObservationCollector {
       searchCount: 0,
       backNavCount: 0,
       consoleErrors: [],
+      emotionalJourney: this.emotionalJourney,
+    };
+  }
+
+  /**
+   * Enforce human-scale delay before action (validation mode only).
+   * In exploration mode, this is a no-op.
+   *
+   * @param actionType - The type of action about to be performed
+   */
+  async beforeAction(actionType: 'click' | 'type' | 'navigate' | 'scroll' | 'retry'): Promise<void> {
+    if (this.config.mode !== 'validation') {
+      this.actionSequence.push(actionType);
+      return;
+    }
+
+    const patterns = this.config.persona.interactionPatterns;
+    if (!patterns) {
+      this.actionSequence.push(actionType);
+      return;
+    }
+
+    const elapsed = Date.now() - this.lastActionTime;
+
+    let minDelay: number;
+    if (actionType === 'retry') {
+      minDelay = patterns.retryDelay?.min ?? 2000;
+    } else {
+      minDelay = patterns.scanTime?.min ?? 1000;
+    }
+
+    if (elapsed < minDelay) {
+      await this.delay(minDelay - elapsed);
+    }
+
+    this.actionSequence.push(actionType);
+  }
+
+  /**
+   * Record action completion and update timing.
+   * Call this after each user action to maintain accurate timing.
+   */
+  afterAction(): void {
+    this.lastActionTime = Date.now();
+  }
+
+  /**
+   * Process an outcome and update emotional state.
+   * Frustration compounds on failures based on persona's escalation rate.
+   *
+   * @param success - Whether the action succeeded
+   * @param significance - How significant this outcome is
+   * @param trigger - What caused this outcome
+   */
+  processOutcome(
+    success: boolean,
+    significance: 'minor' | 'moderate' | 'major',
+    trigger?: string
+  ): void {
+    const escalation = this.config.persona.emotionalBaseline?.frustrationEscalation ?? 'moderate';
+    const rate = { volatile: 2, moderate: 1, patient: 0.5 }[escalation];
+    const significanceMultiplier = { minor: 1, moderate: 2, major: 3 }[significance];
+
+    if (!success) {
+      // Frustration COMPOUNDS - each failure hurts more
+      const increase = 15 * significanceMultiplier * rate;
+      this.currentFrustration = Math.min(100, this.currentFrustration + increase);
+      this.currentConfidence = Math.max(0, this.currentConfidence - increase * 0.5);
+    } else {
+      // Success provides relief
+      const relief = 5 * significanceMultiplier;
+      this.currentFrustration = Math.max(0, this.currentFrustration - relief);
+      this.currentConfidence = Math.min(100, this.currentConfidence + relief * 0.5);
+    }
+
+    // Record emotional state change
+    this.emotionalJourney.push({
+      timestamp: new Date().toISOString(),
+      frustration: this.currentFrustration,
+      confidence: this.currentConfidence,
+      trigger: trigger ?? (success ? 'success' : 'failure'),
+    });
+
+    // Check abandonment threshold
+    if (this.currentFrustration > 80) {
+      this.observe(
+        'frustration',
+        'Persona would likely abandon at this point',
+        'Overall',
+        {
+          severity: 'critical',
+          recommendation: 'Critical friction point - user likely to give up',
+        }
+      );
+    }
+  }
+
+  /**
+   * Get current emotional state.
+   */
+  getEmotionalState(): { frustration: number; confidence: number } {
+    return {
+      frustration: this.currentFrustration,
+      confidence: this.currentConfidence,
     };
   }
 
@@ -106,23 +239,49 @@ export class ObservationCollector {
   /**
    * Record an observation during testing.
    *
-   * @param type - One of: 'success', 'note', 'confusion', 'frustration'
+   * @param type - Observation type (success, note, confusion, frustration, etc.)
    * @param description - What was observed
    * @param location - Where in the app (e.g., "Homepage hero", "Settings page")
-   * @param options - Optional severity and recommendation
+   * @param options - Optional severity, recommendation, and context overrides
    */
   observe(
     type: ObservationType,
     description: string,
     location: string,
-    options?: { severity?: ObservationSeverity; recommendation?: string }
+    options?: {
+      severity?: ObservationSeverity;
+      recommendation?: string;
+      context?: Partial<ObservationContext>;
+    }
   ): void {
+    const timeSinceLastAction = Date.now() - this.lastActionTime;
+    const patterns = this.config.persona.interactionPatterns;
+
+    // Determine if this observation is human-realistic
+    const humanRealistic =
+      this.config.mode === 'validation' ||
+      (patterns && timeSinceLastAction >= (patterns.scanTime?.min ?? 0));
+
+    const context: ObservationContext = {
+      triggerSequence: [...this.actionSequence],
+      timeSinceLastAction,
+      humanRealistic,
+      source: 'programmatic',
+      emotionalState: {
+        frustration: this.currentFrustration,
+        confidence: this.currentConfidence,
+      },
+      ...options?.context,
+    };
+
     this.observations.push({
       type,
       description,
       location,
       timestamp: new Date().toISOString(),
-      ...options,
+      severity: options?.severity,
+      recommendation: options?.recommendation,
+      context,
     });
   }
 
@@ -147,6 +306,10 @@ export class ObservationCollector {
     const result: TaskResult = { name, success, duration, notes };
     this.tasks.push(result);
     this.currentTaskStart = undefined;
+
+    // Update emotional state based on task outcome
+    this.processOutcome(success, 'moderate', `task: ${name}`);
+
     return result;
   }
 
@@ -155,6 +318,8 @@ export class ObservationCollector {
    */
   trackPageLoad(): void {
     this.metrics.pagesVisited++;
+    this.actionSequence.push('navigate');
+    this.afterAction();
   }
 
   /**
@@ -169,6 +334,7 @@ export class ObservationCollector {
    */
   trackSearch(): void {
     this.metrics.searchCount++;
+    this.actionSequence.push('search');
   }
 
   /**
@@ -176,6 +342,9 @@ export class ObservationCollector {
    */
   trackBackNav(): void {
     this.metrics.backNavCount++;
+    this.actionSequence.push('back');
+    // Back navigation suggests confusion
+    this.processOutcome(false, 'minor', 'back-navigation');
   }
 
   /**
@@ -195,6 +364,7 @@ export class ObservationCollector {
   async save(): Promise<string> {
     this.metrics.endTime = new Date().toISOString();
     this.metrics.screenshotsCaptured = this.screenshots.length;
+    this.metrics.emotionalJourney = this.emotionalJourney;
 
     const results: PersonaTestResults = {
       persona: `${this.config.persona.name} - ${this.config.persona.role}`,
@@ -205,6 +375,8 @@ export class ObservationCollector {
       tasks: this.tasks,
       observations: this.observations,
       screenshots: this.screenshots,
+      personaDefinition: this.config.persona,
+      testMode: this.config.mode,
     };
 
     const safeName = this.config.persona.name.toLowerCase().replace(/\s+/g, '-');
@@ -228,7 +400,7 @@ export class ObservationCollector {
    * Get current metrics (useful for debugging or mid-test assertions).
    */
   getMetrics(): SessionMetrics {
-    return { ...this.metrics };
+    return { ...this.metrics, emotionalJourney: [...this.emotionalJourney] };
   }
 
   /**
@@ -246,6 +418,13 @@ export class ObservationCollector {
   }
 
   /**
+   * Get the current test mode.
+   */
+  getMode(): TestMode {
+    return this.config.mode;
+  }
+
+  /**
    * Reset the collector for a new test run (keeps persona, clears data).
    */
   reset(): void {
@@ -253,6 +432,20 @@ export class ObservationCollector {
     this.screenshots = [];
     this.tasks = [];
     this.currentTaskStart = undefined;
+    this.lastActionTime = Date.now();
+    this.actionSequence = [];
+
+    // Reset emotional state to baseline
+    this.currentFrustration = this.config.persona.emotionalBaseline?.frustrationLevel ?? 30;
+    this.currentConfidence = 100 - this.currentFrustration;
+
+    this.emotionalJourney = [{
+      timestamp: new Date().toISOString(),
+      frustration: this.currentFrustration,
+      confidence: this.currentConfidence,
+      trigger: 'session-reset',
+    }];
+
     this.metrics = {
       startTime: new Date().toISOString(),
       pagesVisited: 0,
@@ -260,6 +453,15 @@ export class ObservationCollector {
       searchCount: 0,
       backNavCount: 0,
       consoleErrors: [],
+      emotionalJourney: this.emotionalJourney,
     };
+  }
+
+  /**
+   * Delay execution for the specified duration.
+   * Used internally to enforce human-scale timing.
+   */
+  private delay(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }

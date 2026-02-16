@@ -1,4 +1,202 @@
-import type { PersonaDefinition } from './types.js';
+import type {
+  PersonaDefinition,
+  InteractionPatterns,
+  EmotionalBaseline,
+  CognitionProfile,
+  PriorExperience,
+  SessionContext,
+} from './types.js';
+
+/**
+ * Default interaction patterns for common persona types.
+ * Use these as starting points when defining personas.
+ *
+ * IMPORTANT: Even frustrated/impatient users don't click at machine speed.
+ * These values represent realistic human interaction timing.
+ */
+export const interactionPatternDefaults = {
+  /**
+   * Patient, methodical user - reads carefully, hesitant to act.
+   * Examples: Sarah (first-time visitor), Alex (IT administrator)
+   */
+  careful: {
+    scanTime: { min: 3000, max: 8000 },
+    retryDelay: { min: 5000, max: 10000 },
+    maxRetries: 2,
+    readingPace: 4000,
+    typingSpeed: 150,
+  } satisfies InteractionPatterns,
+
+  /**
+   * Average user - moderate pacing.
+   * Examples: Emma (returning customer)
+   */
+  normal: {
+    scanTime: { min: 1500, max: 4000 },
+    retryDelay: { min: 3000, max: 6000 },
+    maxRetries: 3,
+    readingPace: 3000,
+    typingSpeed: 200,
+  } satisfies InteractionPatterns,
+
+  /**
+   * Impatient but still human - faster but not machine-speed.
+   * Examples: Marcus (frustrated customer)
+   *
+   * Key insight: Even Marcus clicks retry every 2-4 seconds, not 100x/second!
+   */
+  impatient: {
+    scanTime: { min: 500, max: 2000 },
+    retryDelay: { min: 2000, max: 4000 }, // Still 2-4 seconds between retries!
+    maxRetries: 3,
+    readingPace: 2000,
+    typingSpeed: 300,
+  } satisfies InteractionPatterns,
+
+  /**
+   * User learning a new interface - click, wait, observe, click again.
+   * Examples: Priya (new support agent)
+   */
+  exploratory: {
+    scanTime: { min: 2000, max: 5000 },
+    retryDelay: { min: 3000, max: 8000 },
+    maxRetries: 5, // More patient when learning
+    readingPace: 3500,
+    typingSpeed: 150,
+  } satisfies InteractionPatterns,
+
+  /**
+   * Power user who knows the interface - fast but controlled.
+   * Examples: David (power agent)
+   *
+   * Note: Fast means keyboard shortcuts, not API flooding!
+   */
+  expert: {
+    scanTime: { min: 200, max: 1000 },
+    retryDelay: { min: 1500, max: 3000 },
+    maxRetries: 4,
+    readingPace: 1500,
+    typingSpeed: 400,
+  } satisfies InteractionPatterns,
+
+  /**
+   * Periodic checker - long intervals between sessions.
+   * Examples: Linda (team supervisor)
+   */
+  monitoring: {
+    scanTime: { min: 1000, max: 3000 },
+    retryDelay: { min: 5000, max: 15000 },
+    maxRetries: 2,
+    readingPace: 2500,
+    typingSpeed: 200,
+  } satisfies InteractionPatterns,
+} as const;
+
+/**
+ * Default emotional baselines for common persona states.
+ */
+export const emotionalBaselineDefaults = {
+  /**
+   * Calm, patient user with low frustration threshold.
+   */
+  calm: {
+    frustrationLevel: 10,
+    frustrationEscalation: 'patient',
+    trustLevel: 'trusting',
+    urgency: 'relaxed',
+  } satisfies EmotionalBaseline,
+
+  /**
+   * Neutral starting point - moderate everything.
+   */
+  neutral: {
+    frustrationLevel: 30,
+    frustrationEscalation: 'moderate',
+    trustLevel: 'neutral',
+    urgency: 'moderate',
+  } satisfies EmotionalBaseline,
+
+  /**
+   * Already frustrated - volatile escalation.
+   * Example: Marcus arriving after failed email attempts
+   */
+  frustrated: {
+    frustrationLevel: 60,
+    frustrationEscalation: 'volatile',
+    trustLevel: 'skeptical',
+    urgency: 'urgent',
+  } satisfies EmotionalBaseline,
+
+  /**
+   * In crisis mode - maximum urgency.
+   */
+  crisis: {
+    frustrationLevel: 80,
+    frustrationEscalation: 'volatile',
+    trustLevel: 'skeptical',
+    urgency: 'crisis',
+  } satisfies EmotionalBaseline,
+} as const;
+
+/**
+ * Default cognition profiles for common user types.
+ */
+export const cognitionDefaults = {
+  /**
+   * Slow, careful reader who seeks help when confused.
+   */
+  careful: {
+    readingSpeed: 'slow',
+    decisionStyle: 'deliberate',
+    focusDuration: 15,
+    uncertaintyResponse: 'seek-help',
+    scanPattern: 'f-pattern',
+  } satisfies CognitionProfile,
+
+  /**
+   * Average reader with balanced decision-making.
+   */
+  balanced: {
+    readingSpeed: 'average',
+    decisionStyle: 'balanced',
+    focusDuration: 10,
+    uncertaintyResponse: 'explore',
+    scanPattern: 'f-pattern',
+  } satisfies CognitionProfile,
+
+  /**
+   * Scanner who acts impulsively and abandons when confused.
+   */
+  scanner: {
+    readingSpeed: 'scanner',
+    decisionStyle: 'impulsive',
+    focusDuration: 5,
+    uncertaintyResponse: 'abandon',
+    scanPattern: 'center-first',
+  } satisfies CognitionProfile,
+
+  /**
+   * Fast reader who guesses when unsure.
+   */
+  expert: {
+    readingSpeed: 'fast',
+    decisionStyle: 'impulsive',
+    focusDuration: 60,
+    uncertaintyResponse: 'guess',
+    scanPattern: 'f-pattern',
+  } satisfies CognitionProfile,
+
+  /**
+   * Methodical learner who explores deliberately.
+   */
+  learner: {
+    readingSpeed: 'average',
+    decisionStyle: 'deliberate',
+    focusDuration: 20,
+    uncertaintyResponse: 'explore',
+    scanPattern: 'z-pattern',
+  } satisfies CognitionProfile,
+} as const;
 
 /**
  * Create a well-formed persona definition with validation.
@@ -11,6 +209,8 @@ import type { PersonaDefinition } from './types.js';
  *   background: 'PM at a Series A startup, has 10 min between meetings',
  *   goals: ['Determine if the product delivers on its promise'],
  *   behaviors: ['Skims content quickly', 'Looks for social proof'],
+ *   interactionPatterns: interactionPatternDefaults.impatient,
+ *   emotionalBaseline: emotionalBaselineDefaults.neutral,
  * });
  * ```
  */
@@ -20,6 +220,11 @@ export function definePersona(config: {
   background: string;
   goals: string[];
   behaviors: string[];
+  interactionPatterns?: InteractionPatterns;
+  emotionalBaseline?: EmotionalBaseline;
+  cognition?: CognitionProfile;
+  priorExperience?: PriorExperience;
+  sessionContext?: SessionContext;
 }): PersonaDefinition {
   if (!config.name?.trim()) {
     throw new Error('Persona must have a name');
@@ -43,6 +248,11 @@ export function definePersona(config: {
     background: config.background.trim(),
     goals: config.goals.map((g) => g.trim()),
     behaviors: config.behaviors.map((b) => b.trim()),
+    interactionPatterns: config.interactionPatterns,
+    emotionalBaseline: config.emotionalBaseline,
+    cognition: config.cognition,
+    priorExperience: config.priorExperience,
+    sessionContext: config.sessionContext,
   };
 }
 
@@ -82,6 +292,14 @@ export const personaTemplates = {
         'Quick to leave if confused or overwhelmed',
         'Scrolls to get a sense of page length',
       ],
+      interactionPatterns: interactionPatternDefaults.careful,
+      emotionalBaseline: emotionalBaselineDefaults.calm,
+      cognition: cognitionDefaults.careful,
+      sessionContext: {
+        isReturning: false,
+        distractionLevel: 'low',
+        timeContext: 'midday-busy',
+      },
       ...customization,
     }),
 
@@ -106,6 +324,14 @@ export const personaTemplates = {
         'Expects instant feedback on actions',
         'Gets frustrated by unnecessary confirmations',
       ],
+      interactionPatterns: interactionPatternDefaults.expert,
+      emotionalBaseline: emotionalBaselineDefaults.calm,
+      cognition: cognitionDefaults.expert,
+      sessionContext: {
+        isReturning: true,
+        distractionLevel: 'low',
+        timeContext: 'morning-fresh',
+      },
       ...customization,
     }),
 
@@ -131,6 +357,14 @@ export const personaTemplates = {
         'Verifies all images have meaningful alt text',
         'Tests with browser extensions like axe or WAVE',
       ],
+      interactionPatterns: interactionPatternDefaults.careful,
+      emotionalBaseline: emotionalBaselineDefaults.neutral,
+      cognition: cognitionDefaults.learner,
+      sessionContext: {
+        isReturning: false,
+        distractionLevel: 'none',
+        timeContext: 'morning-fresh',
+      },
       ...customization,
     }),
 
@@ -155,6 +389,14 @@ export const personaTemplates = {
         'Notices subtle color and typography inconsistencies',
         'Tests hover states and micro-interactions',
       ],
+      interactionPatterns: interactionPatternDefaults.exploratory,
+      emotionalBaseline: emotionalBaselineDefaults.neutral,
+      cognition: cognitionDefaults.learner,
+      sessionContext: {
+        isReturning: true,
+        distractionLevel: 'low',
+        timeContext: 'morning-fresh',
+      },
       ...customization,
     }),
 
@@ -179,6 +421,25 @@ export const personaTemplates = {
         'Searches for reviews and comparisons externally',
         'Tests claims by trying the product immediately',
       ],
+      interactionPatterns: interactionPatternDefaults.normal,
+      emotionalBaseline: {
+        frustrationLevel: 40,
+        frustrationEscalation: 'moderate',
+        trustLevel: 'skeptical',
+        urgency: 'moderate',
+      },
+      cognition: cognitionDefaults.balanced,
+      priorExperience: {
+        referenceProducts: ['Competitor A', 'Competitor B'],
+        expectedPatterns: ['Clear pricing', 'Social proof', 'Free trial'],
+        delighters: ['Transparent limitations', 'Real customer stories'],
+        petPeeves: ['Hidden pricing', 'Fake testimonials', 'Aggressive sales tactics'],
+      },
+      sessionContext: {
+        isReturning: false,
+        distractionLevel: 'moderate',
+        timeContext: 'midday-busy',
+      },
       ...customization,
     }),
 
@@ -202,6 +463,21 @@ export const personaTemplates = {
         'Prefers self-service over waiting for support',
         'Gets more frustrated if help is hard to find',
       ],
+      interactionPatterns: interactionPatternDefaults.impatient,
+      emotionalBaseline: emotionalBaselineDefaults.frustrated,
+      cognition: cognitionDefaults.scanner,
+      priorExperience: {
+        referenceProducts: ['Zendesk', 'Intercom', 'Apple Support'],
+        expectedPatterns: ['Visible help button', 'Search docs', 'Live chat option'],
+        delighters: ['Instant answers', 'Response time estimates'],
+        petPeeves: ['Hidden contact info', 'Long wait times', 'Form-only support'],
+      },
+      sessionContext: {
+        isReturning: true,
+        priorActivity: 'Encountered an error',
+        distractionLevel: 'moderate',
+        timeContext: 'midday-busy',
+      },
       ...customization,
     }),
 
@@ -226,6 +502,53 @@ export const personaTemplates = {
         'Abandons if horizontal scrolling required',
         'Uses autofill for forms whenever possible',
       ],
+      interactionPatterns: interactionPatternDefaults.impatient,
+      emotionalBaseline: emotionalBaselineDefaults.neutral,
+      cognition: cognitionDefaults.scanner,
+      sessionContext: {
+        isReturning: false,
+        distractionLevel: 'high',
+        timeContext: 'midday-busy',
+      },
+      ...customization,
+    }),
+
+  /**
+   * A frustrated customer arriving after failed attempts elsewhere.
+   * Example: Marcus who tried email support first.
+   */
+  frustratedCustomer: (customization?: Partial<PersonaDefinition>): PersonaDefinition =>
+    definePersona({
+      name: 'Marcus',
+      role: 'Frustrated Customer',
+      background: 'Has already tried email support without success. Patience is running low.',
+      goals: [
+        'Get immediate help without waiting',
+        'Talk to a human, not a bot',
+        'Resolve issue quickly and completely',
+        'Confirm the company actually cares',
+      ],
+      behaviors: [
+        'Expects near-instant responses',
+        'Will abandon if forced through hoops',
+        'Looks for live chat or phone number first',
+        'Skeptical of automated responses',
+      ],
+      interactionPatterns: interactionPatternDefaults.impatient,
+      emotionalBaseline: emotionalBaselineDefaults.frustrated,
+      cognition: cognitionDefaults.scanner,
+      priorExperience: {
+        referenceProducts: ['Zendesk', 'Intercom'],
+        expectedPatterns: ['Quick response', 'Human available', 'Clear escalation path'],
+        delighters: ['Proactive acknowledgment', 'Immediate human connection'],
+        petPeeves: ['Bot loops', 'Long wait times', 'Having to repeat information'],
+      },
+      sessionContext: {
+        isReturning: true,
+        priorActivity: 'Failed email support attempts',
+        distractionLevel: 'low',
+        timeContext: 'midday-busy',
+      },
       ...customization,
     }),
 };
