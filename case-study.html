@@ -477,11 +477,14 @@
       }
     }
 
+    /* Tight top section variant */
+    .section--tight-top {
+      padding-top: 40px;
+    }
+
     /* Persona Spectrum Visualization */
     .spectrum-container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 0 var(--content-padding) 60px;
+      margin-bottom: 48px;
     }
 
     .spectrum-metric {
@@ -719,87 +722,7 @@
     </p>
   </header>
 
-  <!-- Persona Spectrum Visualization -->
-  <div class="spectrum-container" id="spectrum">
-    <div class="spectrum-metric">
-      <div class="spectrum-metric__label">Sorting by</div>
-      <div class="spectrum-metric__title is-visible" id="metric-title">Time Available</div>
-    </div>
-
-    <div class="spectrum-track">
-      <div class="spectrum-track__line"></div>
-
-      <div class="persona-node" id="node-carlos" style="left: 50%;">
-        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);">C</div>
-        <div class="persona-node__name">Carlos</div>
-      </div>
-
-      <div class="persona-node" id="node-priya" style="left: 50%;">
-        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);">P</div>
-        <div class="persona-node__name">Priya</div>
-      </div>
-
-      <div class="persona-node" id="node-michael" style="left: 50%;">
-        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);">M</div>
-        <div class="persona-node__name">Michael</div>
-      </div>
-
-      <div class="persona-node" id="node-sarah" style="left: 50%;">
-        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);">S</div>
-        <div class="persona-node__name">Sarah</div>
-      </div>
-
-      <div class="persona-node" id="node-david" style="left: 50%;">
-        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);">D</div>
-        <div class="persona-node__name">David</div>
-      </div>
-
-      <div class="persona-node" id="node-jordan" style="left: 50%;">
-        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #5CFFB4 0%, #5CB4FF 100%);">J</div>
-        <div class="persona-node__name">Jordan</div>
-      </div>
-
-      <div class="persona-node" id="node-taylor" style="left: 50%;">
-        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #FFC75C 0%, #FF9F5C 100%);">T</div>
-        <div class="persona-node__name">Taylor</div>
-      </div>
-
-      <div class="persona-node" id="node-robert" style="left: 50%;">
-        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%);">R</div>
-        <div class="persona-node__name">Robert</div>
-      </div>
-    </div>
-
-    <div class="spectrum-axis">
-      <div class="spectrum-axis__label spectrum-axis__label--left is-visible" id="axis-left">3 minutes</div>
-      <div class="spectrum-axis__label spectrum-axis__label--right is-visible" id="axis-right">Unlimited</div>
-    </div>
-
-    <div class="spectrum-metrics" id="metric-buttons">
-      <button class="spectrum-metric-btn is-active" data-index="0">
-        Time Available
-        <span class="spectrum-progress"></span>
-      </button>
-      <button class="spectrum-metric-btn" data-index="1">
-        Expertise
-        <span class="spectrum-progress"></span>
-      </button>
-      <button class="spectrum-metric-btn" data-index="2">
-        Trust Level
-        <span class="spectrum-progress"></span>
-      </button>
-      <button class="spectrum-metric-btn" data-index="3">
-        Patience
-        <span class="spectrum-progress"></span>
-      </button>
-      <button class="spectrum-metric-btn" data-index="4">
-        Decision Style
-        <span class="spectrum-progress"></span>
-      </button>
-    </div>
-  </div>
-
-  <section class="section">
+  <section class="section section--tight-top">
     <div class="case-intro">
       <p>
         We tested <a href="https://openaccesspolicies.org" target="_blank" rel="noopener">openaccesspolicies.org</a> - a site offering free security policy templates for SOC2, HIPAA, and HITRUST compliance.
@@ -824,6 +747,86 @@
       <div class="stat">
         <div class="stat__label">Screenshots</div>
         <div class="stat__value">56</div>
+      </div>
+    </div>
+
+    <!-- Persona Spectrum Visualization -->
+    <div class="spectrum-container" id="spectrum">
+      <div class="spectrum-metric">
+        <div class="spectrum-metric__label">Sorting by</div>
+        <div class="spectrum-metric__title is-visible" id="metric-title">Time Available</div>
+      </div>
+
+      <div class="spectrum-track">
+        <div class="spectrum-track__line"></div>
+
+        <div class="persona-node" id="node-carlos" style="left: 50%;">
+          <div class="persona-node__avatar" style="background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);">C</div>
+          <div class="persona-node__name">Carlos</div>
+        </div>
+
+        <div class="persona-node" id="node-priya" style="left: 50%;">
+          <div class="persona-node__avatar" style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);">P</div>
+          <div class="persona-node__name">Priya</div>
+        </div>
+
+        <div class="persona-node" id="node-michael" style="left: 50%;">
+          <div class="persona-node__avatar" style="background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);">M</div>
+          <div class="persona-node__name">Michael</div>
+        </div>
+
+        <div class="persona-node" id="node-sarah" style="left: 50%;">
+          <div class="persona-node__avatar" style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);">S</div>
+          <div class="persona-node__name">Sarah</div>
+        </div>
+
+        <div class="persona-node" id="node-david" style="left: 50%;">
+          <div class="persona-node__avatar" style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);">D</div>
+          <div class="persona-node__name">David</div>
+        </div>
+
+        <div class="persona-node" id="node-jordan" style="left: 50%;">
+          <div class="persona-node__avatar" style="background: linear-gradient(135deg, #5CFFB4 0%, #5CB4FF 100%);">J</div>
+          <div class="persona-node__name">Jordan</div>
+        </div>
+
+        <div class="persona-node" id="node-taylor" style="left: 50%;">
+          <div class="persona-node__avatar" style="background: linear-gradient(135deg, #FFC75C 0%, #FF9F5C 100%);">T</div>
+          <div class="persona-node__name">Taylor</div>
+        </div>
+
+        <div class="persona-node" id="node-robert" style="left: 50%;">
+          <div class="persona-node__avatar" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%);">R</div>
+          <div class="persona-node__name">Robert</div>
+        </div>
+      </div>
+
+      <div class="spectrum-axis">
+        <div class="spectrum-axis__label spectrum-axis__label--left is-visible" id="axis-left">3 minutes</div>
+        <div class="spectrum-axis__label spectrum-axis__label--right is-visible" id="axis-right">Unlimited</div>
+      </div>
+
+      <div class="spectrum-metrics" id="metric-buttons">
+        <button class="spectrum-metric-btn is-active" data-index="0">
+          Time Available
+          <span class="spectrum-progress"></span>
+        </button>
+        <button class="spectrum-metric-btn" data-index="1">
+          Expertise
+          <span class="spectrum-progress"></span>
+        </button>
+        <button class="spectrum-metric-btn" data-index="2">
+          Trust Level
+          <span class="spectrum-progress"></span>
+        </button>
+        <button class="spectrum-metric-btn" data-index="3">
+          Patience
+          <span class="spectrum-progress"></span>
+        </button>
+        <button class="spectrum-metric-btn" data-index="4">
+          Decision Style
+          <span class="spectrum-progress"></span>
+        </button>
       </div>
     </div>
 
