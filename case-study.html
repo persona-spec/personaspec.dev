@@ -476,6 +476,222 @@
         align-items: stretch;
       }
     }
+
+    /* Persona Spectrum Visualization */
+    .spectrum-container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--content-padding) 60px;
+    }
+
+    .spectrum-metric {
+      text-align: center;
+      margin-bottom: 32px;
+      min-height: 60px;
+    }
+
+    .spectrum-metric__label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .spectrum-metric__title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .spectrum-metric__title.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .spectrum-track {
+      position: relative;
+      height: 100px;
+      margin-bottom: 16px;
+    }
+
+    .spectrum-track__line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--border) 0%, var(--amber) 50%, var(--border) 100%);
+      transform: translateY(-50%);
+    }
+
+    .spectrum-track__line::before,
+    .spectrum-track__line::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      background: var(--border);
+      border-radius: 50%;
+      transform: translateY(-50%);
+    }
+
+    .spectrum-track__line::before { left: 0; }
+    .spectrum-track__line::after { right: 0; }
+
+    .spectrum-axis {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 32px;
+    }
+
+    .spectrum-axis__label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .spectrum-axis__label.is-visible {
+      opacity: 1;
+    }
+
+    .persona-node {
+      position: absolute;
+      top: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transform: translate(-50%, -50%);
+      transition: left 1.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+      cursor: pointer;
+    }
+
+    .persona-node:hover .persona-node__avatar {
+      transform: scale(1.15);
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3);
+    }
+
+    .persona-node__avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: white;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 2px solid var(--bg-base);
+    }
+
+    .persona-node__name {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .spectrum-metrics {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .spectrum-metric-btn {
+      position: relative;
+      background: none;
+      border: none;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 8px 0;
+      transition: color 0.4s ease;
+    }
+
+    .spectrum-metric-btn:hover {
+      color: var(--text);
+    }
+
+    .spectrum-metric-btn.is-active {
+      color: var(--amber);
+    }
+
+    .spectrum-metric-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--amber);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .spectrum-metric-btn.is-active::after {
+      transform: scaleX(1);
+    }
+
+    .spectrum-progress {
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      height: 1px;
+      background: var(--amber);
+      opacity: 0.4;
+      width: 0%;
+    }
+
+    .spectrum-metric-btn.is-active .spectrum-progress {
+      animation: progress-fill 6s linear forwards;
+    }
+
+    @keyframes progress-fill {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    .spectrum-container:hover .spectrum-progress {
+      animation-play-state: paused;
+    }
+
+    @media (max-width: 600px) {
+      .spectrum-track {
+        height: 120px;
+      }
+
+      .persona-node__avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 10px;
+      }
+
+      .persona-node__name {
+        font-size: 9px;
+      }
+
+      .spectrum-metrics {
+        gap: 12px;
+      }
+
+      .spectrum-metric-btn {
+        font-size: 10px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -502,6 +718,86 @@
       8 personas with Behavioral Realism tested Open Access Policies
     </p>
   </header>
+
+  <!-- Persona Spectrum Visualization -->
+  <div class="spectrum-container" id="spectrum">
+    <div class="spectrum-metric">
+      <div class="spectrum-metric__label">Sorting by</div>
+      <div class="spectrum-metric__title is-visible" id="metric-title">Time Available</div>
+    </div>
+
+    <div class="spectrum-track">
+      <div class="spectrum-track__line"></div>
+
+      <div class="persona-node" id="node-carlos" style="left: 50%;">
+        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);">C</div>
+        <div class="persona-node__name">Carlos</div>
+      </div>
+
+      <div class="persona-node" id="node-priya" style="left: 50%;">
+        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);">P</div>
+        <div class="persona-node__name">Priya</div>
+      </div>
+
+      <div class="persona-node" id="node-michael" style="left: 50%;">
+        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%);">M</div>
+        <div class="persona-node__name">Michael</div>
+      </div>
+
+      <div class="persona-node" id="node-sarah" style="left: 50%;">
+        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);">S</div>
+        <div class="persona-node__name">Sarah</div>
+      </div>
+
+      <div class="persona-node" id="node-david" style="left: 50%;">
+        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);">D</div>
+        <div class="persona-node__name">David</div>
+      </div>
+
+      <div class="persona-node" id="node-jordan" style="left: 50%;">
+        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #5CFFB4 0%, #5CB4FF 100%);">J</div>
+        <div class="persona-node__name">Jordan</div>
+      </div>
+
+      <div class="persona-node" id="node-taylor" style="left: 50%;">
+        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #FFC75C 0%, #FF9F5C 100%);">T</div>
+        <div class="persona-node__name">Taylor</div>
+      </div>
+
+      <div class="persona-node" id="node-robert" style="left: 50%;">
+        <div class="persona-node__avatar" style="background: linear-gradient(135deg, #64748b 0%, #475569 100%);">R</div>
+        <div class="persona-node__name">Robert</div>
+      </div>
+    </div>
+
+    <div class="spectrum-axis">
+      <div class="spectrum-axis__label spectrum-axis__label--left is-visible" id="axis-left">3 minutes</div>
+      <div class="spectrum-axis__label spectrum-axis__label--right is-visible" id="axis-right">Unlimited</div>
+    </div>
+
+    <div class="spectrum-metrics" id="metric-buttons">
+      <button class="spectrum-metric-btn is-active" data-index="0">
+        Time Available
+        <span class="spectrum-progress"></span>
+      </button>
+      <button class="spectrum-metric-btn" data-index="1">
+        Expertise
+        <span class="spectrum-progress"></span>
+      </button>
+      <button class="spectrum-metric-btn" data-index="2">
+        Trust Level
+        <span class="spectrum-progress"></span>
+      </button>
+      <button class="spectrum-metric-btn" data-index="3">
+        Patience
+        <span class="spectrum-progress"></span>
+      </button>
+      <button class="spectrum-metric-btn" data-index="4">
+        Decision Style
+        <span class="spectrum-progress"></span>
+      </button>
+    </div>
+  </div>
 
   <section class="section">
     <div class="case-intro">
@@ -1776,6 +2072,120 @@
         document.getElementById('persona-' + persona).classList.add('is-active');
       });
     });
+
+    // Persona Spectrum Visualization
+    const spectrumMetrics = [
+      {
+        title: "Time Available",
+        leftLabel: "3 minutes",
+        rightLabel: "Unlimited",
+        positions: {
+          robert: 5, carlos: 15, david: 25, sarah: 40,
+          michael: 60, priya: 75, jordan: 85, taylor: 95
+        }
+      },
+      {
+        title: "Expertise Level",
+        leftLabel: "Beginner",
+        rightLabel: "Expert",
+        positions: {
+          taylor: 8, david: 25, robert: 35, carlos: 50,
+          priya: 70, michael: 80, jordan: 85, sarah: 95
+        }
+      },
+      {
+        title: "Trust Level",
+        leftLabel: "Skeptical",
+        rightLabel: "Trusting",
+        positions: {
+          michael: 8, robert: 20, sarah: 35, priya: 45,
+          carlos: 55, jordan: 60, david: 70, taylor: 90
+        }
+      },
+      {
+        title: "Patience Level",
+        leftLabel: "Impatient",
+        rightLabel: "Methodical",
+        positions: {
+          carlos: 5, robert: 12, david: 20, sarah: 40,
+          michael: 60, taylor: 70, jordan: 85, priya: 92
+        }
+      },
+      {
+        title: "Decision Style",
+        leftLabel: "Impulsive",
+        rightLabel: "Deliberate",
+        positions: {
+          carlos: 10, robert: 18, david: 25, sarah: 45,
+          taylor: 55, michael: 70, jordan: 80, priya: 95
+        }
+      }
+    ];
+
+    let currentSpectrumIndex = 0;
+    let spectrumIntervalId = null;
+    const SPECTRUM_INTERVAL = 6000;
+
+    const metricTitle = document.getElementById('metric-title');
+    const axisLeft = document.getElementById('axis-left');
+    const axisRight = document.getElementById('axis-right');
+    const metricButtons = document.querySelectorAll('.spectrum-metric-btn');
+
+    function updateSpectrum(index, animate = true) {
+      const metric = spectrumMetrics[index];
+
+      metricTitle.classList.remove('is-visible');
+      axisLeft.classList.remove('is-visible');
+      axisRight.classList.remove('is-visible');
+
+      setTimeout(() => {
+        metricTitle.textContent = metric.title;
+        axisLeft.textContent = metric.leftLabel;
+        axisRight.textContent = metric.rightLabel;
+
+        metricTitle.classList.add('is-visible');
+        axisLeft.classList.add('is-visible');
+        axisRight.classList.add('is-visible');
+      }, animate ? 300 : 0);
+
+      Object.entries(metric.positions).forEach(([id, position]) => {
+        const node = document.getElementById('node-' + id);
+        if (node) {
+          node.style.left = position + '%';
+        }
+      });
+
+      metricButtons.forEach((btn, i) => {
+        btn.classList.toggle('is-active', i === index);
+      });
+
+      currentSpectrumIndex = index;
+    }
+
+    function nextSpectrumMetric() {
+      const nextIndex = (currentSpectrumIndex + 1) % spectrumMetrics.length;
+      updateSpectrum(nextIndex);
+    }
+
+    metricButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const index = parseInt(btn.dataset.index);
+        updateSpectrum(index);
+        clearInterval(spectrumIntervalId);
+        spectrumIntervalId = setInterval(nextSpectrumMetric, SPECTRUM_INTERVAL);
+      });
+    });
+
+    const spectrumContainer = document.getElementById('spectrum');
+    spectrumContainer.addEventListener('mouseenter', () => {
+      clearInterval(spectrumIntervalId);
+    });
+    spectrumContainer.addEventListener('mouseleave', () => {
+      spectrumIntervalId = setInterval(nextSpectrumMetric, SPECTRUM_INTERVAL);
+    });
+
+    updateSpectrum(0, false);
+    spectrumIntervalId = setInterval(nextSpectrumMetric, SPECTRUM_INTERVAL);
   </script>
 
 </body>
